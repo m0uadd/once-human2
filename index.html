@@ -1,210 +1,2307 @@
 ﻿<!DOCTYPE html>
-<html lang="fr">
+<html lang="fr-CH">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- ════ FIX #5 — PERF: Preload critical resources ════ -->
-    <link rel="preload" href="https://fonts.gstatic.com/s/orbitron/v31/yMJMMIlzdpvBhQQL_SC3X9yhF25-T1nyGy6BoWgz.woff2"
-        as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="https://www.oncehuman.game/pc/gw/20250418171534/img/kv20260112_1f38dace.jpg" as="image"
         fetchpriority="high">
-
-    <title>Once Human V3 — Joue GRATUIT + Pack OP Offert (Valeur 49,99€)</title>
+    <title>Once Human V3 — Pack OP Gratuit | FR · EN · DE · IT · RM</title>
     <meta name="description"
-        content="Télécharge Once Human V3 GRATUITEMENT. Pack Éveil Mutant exclusif offert aux 10 000 premiers. Survival post-apo #1 PC 2024. 4.8★ Steam. Aucune CB requise.">
-    <meta property="og:title" content="Once Human V3 — Pack OP Gratuit (Valeur 49,99€)">
-    <meta property="og:description"
-        content="Le survival qui te donne des pouvoirs de mutant. 2M+ joueurs. Télécharge maintenant.">
+        content="Télécharge Once Human V3 GRATUITEMENT. Pack Éveil Mutant (CHF 54.–) offert aux 10 000 premiers. 4.8★ Steam. 2M+ joueurs. Disponible en français, anglais, allemand, italien et romanche.">
     <meta property="og:image" content="https://www.oncehuman.game/pc/gw/20250418171534/img/kv20260112_1f38dace.jpg">
-    <meta name="theme-color" content="#8B00FF">
-
-    <!-- ════ FIX #5 — PERF: Fonts non-bloquantes ════ -->
+    <meta name="theme-color" content="#7B00FF">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet"
+    <link
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;600;700&display=swap"
-        media="print" onload="this.media='all'">
-    <noscript>
-        <link rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;600;700&display=swap">
-    </noscript>
-
-    <!-- GSAP async load -->
+        rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js" defer></script>
+    <style>
+        :root {
+            --p: #7B00FF;
+            --p2: #A044FF;
+            --s: #00E5FF;
+            --a: #00FF88;
+            --r: #FF2D55;
+            --bg: #07070F;
+            --bg2: #0E0E1C;
+            --bg3: #131325;
+            --card: rgba(255, 255, 255, .032);
+            --brd: rgba(123, 0, 255, .2);
+            --brd-s: rgba(0, 229, 255, .2);
+            --tx: #EEEEFF;
+            --tm: #7878AA;
+            --gp: 0 0 28px rgba(123, 0, 255, .65), 0 0 55px rgba(123, 0, 255, .2);
+            --gs: 0 0 28px rgba(0, 229, 255, .65), 0 0 55px rgba(0, 229, 255, .2);
+            --ga: 0 0 28px rgba(0, 255, 136, .65), 0 0 55px rgba(0, 255, 136, .2);
+            --grad: linear-gradient(135deg, #7B00FF 0%, #00E5FF 55%, #00FF88 100%);
+            --fo: 'Orbitron', monospace;
+            --fb: 'Rajdhani', sans-serif
+        }
 
-    <link rel="stylesheet" href="styles.css">
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
 
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--tx);
+            font-family: var(--fb);
+            font-size: 17px;
+            line-height: 1.65;
+            overflow-x: hidden
+        }
+
+        @media(pointer:fine) {
+            body {
+                cursor: none
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 3px
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg)
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--grad);
+            border-radius: 2px
+        }
+
+        #cur,
+        #curf {
+            position: fixed;
+            pointer-events: none;
+            z-index: 99999;
+            display: none
+        }
+
+        @media(pointer:fine) {
+
+            #cur,
+            #curf {
+                display: block
+            }
+        }
+
+        #cur {
+            width: 10px;
+            height: 10px;
+            background: var(--p2);
+            border-radius: 50%;
+            mix-blend-mode: screen;
+            box-shadow: var(--gp);
+            transition: transform .1s
+        }
+
+        #curf {
+            width: 38px;
+            height: 38px;
+            border: 1.5px solid rgba(123, 0, 255, .45);
+            border-radius: 50%;
+            z-index: 99998;
+            transition: all .16s
+        }
+
+        #pb {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: var(--grad);
+            z-index: 9999;
+            width: 0;
+            box-shadow: 0 0 10px var(--p)
+        }
+
+        #pc {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            opacity: .27
+        }
+
+        #cfc {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9998;
+            display: none
+        }
+
+        .noise {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            opacity: .02;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-size: 200px
+        }
+
+        /* ── LANG BAR (5 langs) ── */
+        #langbar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            background: rgba(7, 7, 15, .96);
+            backdrop-filter: blur(22px);
+            border: 1px solid var(--brd);
+            border-top: none;
+            border-right: none;
+            border-radius: 0 0 0 12px;
+            overflow: hidden
+        }
+
+        .lbtn {
+            padding: 9px 14px;
+            font-family: var(--fo);
+            font-size: .56rem;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--tm);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: all .25s;
+            white-space: nowrap
+        }
+
+        .lbtn:hover {
+            color: var(--tx);
+            background: rgba(123, 0, 255, .1)
+        }
+
+        .lbtn.active {
+            color: var(--tx);
+            background: rgba(123, 0, 255, .22);
+            box-shadow: inset 0 -2px 0 var(--p)
+        }
+
+        .lsep {
+            width: 1px;
+            height: 28px;
+            background: var(--brd);
+            flex-shrink: 0
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 18px 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all .4s
+        }
+
+        nav.sc {
+            background: rgba(7, 7, 15, .97);
+            backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--brd);
+            padding: 11px 60px
+        }
+
+        .logo {
+            font-family: var(--fo);
+            font-size: 1.2rem;
+            font-weight: 900;
+            background: var(--grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: .1em
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none
+        }
+
+        .nav-links a {
+            font-family: var(--fo);
+            font-size: .62rem;
+            letter-spacing: .17em;
+            text-transform: uppercase;
+            color: var(--tm);
+            text-decoration: none;
+            transition: color .25s;
+            cursor: none
+        }
+
+        .nav-links a:hover {
+            color: var(--s)
+        }
+
+        .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 20px;
+            font-family: var(--fo);
+            font-size: .66rem;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: #fff;
+            background: var(--grad);
+            border: none;
+            border-radius: 4px;
+            cursor: none;
+            box-shadow: var(--gp);
+            text-decoration: none;
+            transition: opacity .25s
+        }
+
+        .nav-cta:hover {
+            opacity: .85
+        }
+
+        @media(max-width:960px) {
+            .nav-links {
+                display: none
+            }
+
+            nav,
+            nav.sc {
+                padding: 11px 16px
+            }
+        }
+
+        /* ── STICKY ── */
+        #sbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 900;
+            background: rgba(7, 7, 15, .98);
+            backdrop-filter: blur(24px);
+            border-top: 1px solid rgba(123, 0, 255, .35);
+            padding: 11px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            transform: translateY(110%);
+            transition: transform .45s cubic-bezier(.25, .46, .45, .94);
+            box-shadow: 0 -5px 36px rgba(123, 0, 255, .18)
+        }
+
+        #sbar.show {
+            transform: translateY(0)
+        }
+
+        .stxt {
+            font-family: var(--fo);
+            font-size: .69rem;
+            letter-spacing: .07em;
+            color: var(--tm)
+        }
+
+        .stxt strong {
+            color: var(--a)
+        }
+
+        .scta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 11px 30px;
+            font-family: var(--fo);
+            font-size: .76rem;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: #fff;
+            background: var(--grad);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: var(--gp);
+            text-decoration: none;
+            animation: gpulse 2.4s ease-in-out infinite;
+            white-space: nowrap
+        }
+
+        @keyframes gpulse {
+
+            0%,
+            100% {
+                box-shadow: var(--gp)
+            }
+
+            50% {
+                box-shadow: var(--gp), var(--gs)
+            }
+        }
+
+        @media(max-width:700px) {
+            #sbar {
+                flex-direction: column;
+                gap: 9px;
+                padding: 13px 16px;
+                text-align: center
+            }
+        }
+
+        /* ── BUTTONS ── */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 44px;
+            font-family: var(--fo);
+            font-size: .88rem;
+            font-weight: 700;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: #fff;
+            background: var(--grad);
+            border: none;
+            border-radius: 4px;
+            cursor: none;
+            box-shadow: var(--gp);
+            text-decoration: none;
+            transition: all .3s;
+            animation: gpulse 2.6s ease-in-out infinite
+        }
+
+        .btn:hover {
+            transform: translateY(-2px) scale(1.02)
+        }
+
+        .btn.big {
+            font-size: 1.02rem;
+            padding: 19px 60px
+        }
+
+        .btn2 {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 13px 34px;
+            font-family: var(--fo);
+            font-size: .8rem;
+            font-weight: 600;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--s);
+            background: transparent;
+            border: 1.5px solid rgba(0, 229, 255, .45);
+            border-radius: 4px;
+            cursor: none;
+            transition: all .3s;
+            text-decoration: none
+        }
+
+        .btn2:hover {
+            background: rgba(0, 229, 255, .06);
+            border-color: var(--s);
+            box-shadow: var(--gs);
+            transform: translateY(-2px)
+        }
+
+        /* ── UTIL ── */
+        .orb {
+            font-family: var(--fo)
+        }
+
+        .gt {
+            background: var(--grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text
+        }
+
+        .tag {
+            display: inline-block;
+            font-family: var(--fo);
+            font-size: .57rem;
+            letter-spacing: .28em;
+            text-transform: uppercase;
+            color: var(--a);
+            padding: 5px 13px;
+            border: 1px solid rgba(0, 255, 136, .25);
+            border-radius: 2px;
+            margin-bottom: 18px
+        }
+
+        .sec {
+            position: relative;
+            z-index: 2
+        }
+
+        .inn {
+            max-width: 1160px;
+            margin: 0 auto
+        }
+
+        .sh {
+            text-align: center;
+            margin-bottom: 68px
+        }
+
+        .sh h2 {
+            font-family: var(--fo);
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: 900;
+            margin-bottom: 15px
+        }
+
+        .sh p {
+            font-size: .95rem;
+            color: var(--tm);
+            max-width: 490px;
+            margin: 0 auto;
+            line-height: 1.82
+        }
+
+        img {
+            background: var(--bg3);
+            display: block
+        }
+
+        /* ── HERO ── */
+        #hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            z-index: 1
+        }
+
+        .hbg {
+            position: absolute;
+            inset: 0;
+            z-index: 0
+        }
+
+        .hbg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 22%;
+            transform: scale(1.07);
+            will-change: transform
+        }
+
+        .hbg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 10% 55%, rgba(123, 0, 255, .44) 0%, transparent 50%),
+                radial-gradient(ellipse at 85% 15%, rgba(0, 229, 255, .22) 0%, transparent 48%),
+                linear-gradient(180deg, rgba(7, 7, 15, .15) 0%, rgba(7, 7, 15, .5) 48%, var(--bg) 100%)
+        }
+
+        .hgrid {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background-image: linear-gradient(rgba(123, 0, 255, .04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(123, 0, 255, .04) 1px, transparent 1px);
+            background-size: 66px 66px
+        }
+
+        .hscan {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            pointer-events: none;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, .018) 2px, rgba(0, 0, 0, .018) 4px)
+        }
+
+        .hcnt {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 960px;
+            padding: 0 22px
+        }
+
+        .hbadges {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+            opacity: 0;
+            transform: translateY(14px)
+        }
+
+        .hbdg {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 6px 14px;
+            background: rgba(0, 255, 136, .07);
+            border: 1px solid rgba(0, 255, 136, .2);
+            border-radius: 20px;
+            font-family: var(--fo);
+            font-size: .56rem;
+            letter-spacing: .13em;
+            color: var(--a);
+            white-space: nowrap
+        }
+
+        @media(max-width:700px) {
+            .hbadges {
+                display: none
+            }
+        }
+
+        .heye {
+            font-family: var(--fo);
+            font-size: .61rem;
+            letter-spacing: .4em;
+            text-transform: uppercase;
+            color: var(--a);
+            margin-bottom: 22px;
+            opacity: 0;
+            transform: translateY(14px)
+        }
+
+        .hh1 {
+            font-family: var(--fo);
+            font-size: clamp(2.8rem, 8.5vw, 7.5rem);
+            font-weight: 900;
+            line-height: .9;
+            margin-bottom: 10px;
+            opacity: 0
+        }
+
+        .hh1 .l1 {
+            display: block;
+            color: var(--tx);
+            text-shadow: 0 0 60px rgba(123, 0, 255, .4)
+        }
+
+        .hh1 .l2 {
+            display: block;
+            background: var(--grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative
+        }
+
+        .glitch {
+            position: relative
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text
+        }
+
+        .glitch::before {
+            animation: ga 4s infinite;
+            clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+            transform: translate(-2px)
+        }
+
+        .glitch::after {
+            animation: gb 4s infinite;
+            clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+            transform: translate(2px)
+        }
+
+        @keyframes ga {
+
+            0%,
+            90%,
+            100% {
+                opacity: 0;
+                transform: translate(-2px)
+            }
+
+            92% {
+                opacity: .8;
+                transform: translate(-5px);
+                filter: hue-rotate(90deg)
+            }
+
+            94% {
+                opacity: .5;
+                transform: translate(2px)
+            }
+
+            96% {
+                opacity: 0
+            }
+        }
+
+        @keyframes gb {
+
+            0%,
+            88%,
+            100% {
+                opacity: 0;
+                transform: translate(2px)
+            }
+
+            90% {
+                opacity: .7;
+                transform: translate(5px);
+                filter: hue-rotate(-90deg)
+            }
+
+            92% {
+                opacity: .4;
+                transform: translate(-2px)
+            }
+
+            94% {
+                opacity: 0
+            }
+        }
+
+        .hsub {
+            font-size: clamp(.93rem, 1.9vw, 1.25rem);
+            color: #CBCBE9;
+            max-width: 630px;
+            margin: 24px auto 40px;
+            opacity: 0;
+            transform: translateY(16px);
+            line-height: 1.86
+        }
+
+        .hsub em {
+            font-style: normal;
+            color: var(--s);
+            font-weight: 700
+        }
+
+        .hctas {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            opacity: 0;
+            transform: translateY(22px)
+        }
+
+        .htr {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 18px;
+            opacity: 0
+        }
+
+        .htr span {
+            font-size: .75rem;
+            color: var(--tm);
+            display: flex;
+            align-items: center;
+            gap: 6px
+        }
+
+        .htr span::before {
+            content: '✓';
+            color: var(--a);
+            font-weight: 900
+        }
+
+        .hstats {
+            position: absolute;
+            bottom: 52px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 46px;
+            z-index: 10;
+            opacity: 0;
+            white-space: nowrap
+        }
+
+        .sn {
+            font-family: var(--fo);
+            font-size: 1.85rem;
+            font-weight: 900;
+            background: var(--grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text
+        }
+
+        .sl {
+            font-size: .62rem;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: var(--tm)
+        }
+
+        .sdiv {
+            width: 1px;
+            background: linear-gradient(180deg, transparent, rgba(123, 0, 255, .5), transparent)
+        }
+
+        .sarrow {
+            position: absolute;
+            bottom: 11px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            opacity: .4
+        }
+
+        .sarrow span {
+            font-family: var(--fo);
+            font-size: .5rem;
+            letter-spacing: .3em;
+            color: var(--tm)
+        }
+
+        .sline {
+            width: 1px;
+            height: 35px;
+            background: linear-gradient(180deg, var(--p), transparent);
+            animation: sp 2s ease-in-out infinite
+        }
+
+        @keyframes sp {
+
+            0%,
+            100% {
+                opacity: .3
+            }
+
+            50% {
+                opacity: 1
+            }
+        }
+
+        @media(max-width:700px) {
+            .hstats {
+                gap: 16px
+            }
+
+            .sdiv {
+                display: none
+            }
+        }
+
+        /* ── PROBLEM (flip cards) ── */
+        #prob {
+            padding: 120px 60px;
+            background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%)
+        }
+
+        .cgrid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px
+        }
+
+        .fw {
+            height: 355px;
+            perspective: 1100px
+        }
+
+        .fi {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform .75s cubic-bezier(.25, .46, .45, .94)
+        }
+
+        .fw:hover .fi {
+            transform: rotateY(180deg)
+        }
+
+        .fc,
+        .bc {
+            position: absolute;
+            inset: 0;
+            backface-visibility: hidden;
+            border-radius: 14px;
+            padding: 34px 26px;
+            border: 1px solid var(--brd);
+            background: var(--card);
+            overflow: hidden
+        }
+
+        .fc::before,
+        .bc::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--grad)
+        }
+
+        .bc {
+            transform: rotateY(180deg);
+            background: linear-gradient(135deg, rgba(123, 0, 255, .1), rgba(0, 229, 255, .06));
+            border-color: var(--brd-s);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center
+        }
+
+        .bc::before {
+            background: linear-gradient(90deg, var(--s), var(--a))
+        }
+
+        .ci {
+            font-size: 2.3rem;
+            margin-bottom: 17px
+        }
+
+        .ct {
+            font-family: var(--fo);
+            font-size: .9rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--tx);
+            letter-spacing: .04em
+        }
+
+        .cd {
+            font-size: .85rem;
+            color: var(--tm);
+            line-height: 1.78
+        }
+
+        .bc .ct {
+            color: var(--s)
+        }
+
+        .bc .cd {
+            color: var(--tx)
+        }
+
+        .chint {
+            margin-top: 15px;
+            font-family: var(--fo);
+            font-size: .67rem;
+            letter-spacing: .13em;
+            color: var(--a)
+        }
+
+        .bcta {
+            margin-top: 17px;
+            font-family: var(--fo);
+            font-size: .64rem;
+            letter-spacing: .2em;
+            color: var(--a);
+            text-transform: uppercase
+        }
+
+        @media(max-width:900px) {
+            .cgrid {
+                grid-template-columns: 1fr
+            }
+
+            .fw {
+                height: auto;
+                perspective: none
+            }
+
+            .fi {
+                transform: none !important
+            }
+
+            .bc {
+                position: relative;
+                transform: none;
+                margin-top: 0
+            }
+
+            .fc {
+                display: none
+            }
+        }
+
+        /* ── SCENARIOS ── */
+        #scenarios {
+            padding: 120px 60px;
+            background: var(--bg2)
+        }
+
+        .sgrid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px
+        }
+
+        .sc2 {
+            position: relative;
+            border-radius: 14px;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            border: 1px solid var(--brd);
+            transition: all .4s;
+            opacity: 0;
+            transform: translateY(34px)
+        }
+
+        .sc2:hover {
+            border-color: var(--p2);
+            box-shadow: var(--gp)
+        }
+
+        .sc2 img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .55s
+        }
+
+        .sc2:hover img {
+            transform: scale(1.05)
+        }
+
+        .sov {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 25%, rgba(7, 7, 15, .9) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 24px
+        }
+
+        .sno {
+            font-family: var(--fo);
+            font-size: .55rem;
+            letter-spacing: .28em;
+            text-transform: uppercase;
+            color: var(--a);
+            margin-bottom: 7px
+        }
+
+        .snm {
+            font-family: var(--fo);
+            font-size: 1.08rem;
+            font-weight: 900;
+            color: var(--tx);
+            margin-bottom: 7px;
+            letter-spacing: .04em
+        }
+
+        .sds {
+            font-size: .79rem;
+            color: rgba(255, 255, 255, .6);
+            line-height: 1.6;
+            max-width: 310px
+        }
+
+        .sbdg {
+            position: absolute;
+            top: 13px;
+            right: 13px;
+            padding: 5px 11px;
+            background: rgba(0, 255, 136, .08);
+            border: 1px solid rgba(0, 255, 136, .25);
+            border-radius: 4px;
+            font-family: var(--fo);
+            font-size: .55rem;
+            letter-spacing: .17em;
+            color: var(--a);
+            text-transform: uppercase
+        }
+
+        @media(max-width:900px) {
+            .sgrid {
+                grid-template-columns: 1fr
+            }
+        }
+
+        /* ── DEVIANTS ── */
+        #deviants {
+            padding: 120px 60px;
+            background: var(--bg2);
+            overflow: hidden
+        }
+
+        .dvi {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 68px;
+            align-items: center;
+            margin-bottom: 68px
+        }
+
+        .dvt h2 {
+            font-family: var(--fo);
+            font-size: clamp(1.8rem, 3.8vw, 2.8rem);
+            font-weight: 900;
+            margin-bottom: 17px
+        }
+
+        .dvt p {
+            color: var(--tm);
+            line-height: 1.82;
+            font-size: .94rem;
+            margin-bottom: 13px
+        }
+
+        .dvimg {
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            border: 1px solid var(--brd-s);
+            box-shadow: var(--gs)
+        }
+
+        .dvimg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover
+        }
+
+        .dvstrip {
+            display: flex;
+            gap: 13px;
+            overflow: hidden;
+            position: relative
+        }
+
+        .dvstrip::before,
+        .dvstrip::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 90px;
+            z-index: 2;
+            pointer-events: none
+        }
+
+        .dvstrip::before {
+            left: 0;
+            background: linear-gradient(90deg, var(--bg2), transparent)
+        }
+
+        .dvstrip::after {
+            right: 0;
+            background: linear-gradient(-90deg, var(--bg2), transparent)
+        }
+
+        .dvc {
+            flex-shrink: 0;
+            width: 205px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--brd);
+            transition: all .3s;
+            position: relative
+        }
+
+        .dvc:hover {
+            border-color: var(--p2);
+            box-shadow: var(--gp);
+            transform: translateY(-5px)
+        }
+
+        .dvc img {
+            width: 100%;
+            height: 245px;
+            object-fit: cover
+        }
+
+        .dvn {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 10px 12px;
+            background: linear-gradient(180deg, transparent, rgba(7, 7, 15, .9));
+            font-family: var(--fo);
+            font-size: .62rem;
+            font-weight: 700;
+            color: var(--tx);
+            letter-spacing: .1em;
+            text-transform: uppercase
+        }
+
+        @media(max-width:900px) {
+            .dvi {
+                grid-template-columns: 1fr;
+                gap: 34px
+            }
+        }
+
+        /* ── PROOF ── */
+        #proof {
+            padding: 120px 0;
+            background: var(--bg);
+            overflow: hidden
+        }
+
+        #proof .sh {
+            padding: 0 60px
+        }
+
+        .ttrack {
+            display: flex;
+            gap: 22px;
+            padding: 18px 60px;
+            width: max-content
+        }
+
+        .tcard {
+            width: 355px;
+            flex-shrink: 0;
+            padding: 28px 24px;
+            background: var(--card);
+            border: 1px solid var(--brd);
+            border-radius: 14px;
+            position: relative;
+            overflow: hidden;
+            transition: all .3s
+        }
+
+        .tcard::before {
+            content: '"';
+            position: absolute;
+            top: -14px;
+            right: 15px;
+            font-size: 7rem;
+            font-family: var(--fo);
+            background: var(--grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: .1;
+            line-height: 1
+        }
+
+        .tcard:hover {
+            border-color: var(--brd-s);
+            box-shadow: var(--gs)
+        }
+
+        .tstars {
+            color: var(--a);
+            font-size: .88rem;
+            margin-bottom: 13px;
+            letter-spacing: 2px
+        }
+
+        .trev {
+            font-size: .86rem;
+            color: var(--tx);
+            line-height: 1.78;
+            margin-bottom: 18px
+        }
+
+        .tauth {
+            display: flex;
+            align-items: center;
+            gap: 11px
+        }
+
+        .tav {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--grad);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--fo);
+            font-size: .86rem;
+            font-weight: 900;
+            color: #fff;
+            flex-shrink: 0;
+            box-shadow: var(--gp)
+        }
+
+        .tnm {
+            font-family: var(--fo);
+            font-size: .76rem;
+            font-weight: 700;
+            color: var(--tx)
+        }
+
+        .trk {
+            font-size: .69rem;
+            color: var(--s)
+        }
+
+        .ngrid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 17px;
+            padding: 0 60px;
+            margin-top: 54px
+        }
+
+        .nc {
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--brd);
+            background: var(--card);
+            transition: all .3s;
+            opacity: 0;
+            transform: translateY(26px)
+        }
+
+        .nc:hover {
+            border-color: var(--p2);
+            box-shadow: var(--gp)
+        }
+
+        .nc img {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            transition: transform .4s
+        }
+
+        .nc:hover img {
+            transform: scale(1.04)
+        }
+
+        .nb {
+            padding: 12px 14px
+        }
+
+        .ntag {
+            font-family: var(--fo);
+            font-size: .53rem;
+            letter-spacing: .22em;
+            color: var(--a);
+            text-transform: uppercase;
+            margin-bottom: 5px
+        }
+
+        .ntitle {
+            font-family: var(--fo);
+            font-size: .73rem;
+            color: var(--tx);
+            line-height: 1.55;
+            font-weight: 700
+        }
+
+        .bdgrow {
+            display: flex;
+            justify-content: center;
+            gap: 26px;
+            margin-top: 58px;
+            padding: 0 60px;
+            flex-wrap: wrap
+        }
+
+        .bdg {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            padding: 13px 22px;
+            background: rgba(123, 0, 255, .05);
+            border: 1px solid var(--brd);
+            border-radius: 10px;
+            transition: box-shadow .3s
+        }
+
+        .bdg:hover {
+            box-shadow: var(--gp)
+        }
+
+        .bv {
+            font-family: var(--fo);
+            font-size: 1.06rem;
+            font-weight: 900;
+            color: var(--a)
+        }
+
+        .bl {
+            font-family: var(--fo);
+            font-size: .61rem;
+            color: var(--tm);
+            text-transform: uppercase;
+            letter-spacing: .09em
+        }
+
+        @media(max-width:900px) {
+            .ngrid {
+                grid-template-columns: repeat(2, 1fr);
+                padding: 0 16px
+            }
+
+            .bdgrow,
+            #proof .sh,
+            .ttrack {
+                padding-left: 16px;
+                padding-right: 16px
+            }
+        }
+
+        /* ── FEATURES ── */
+        #features {
+            padding: 120px 60px;
+            background: var(--bg2)
+        }
+
+        .fgrid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 19px
+        }
+
+        .fcd {
+            padding: 34px 26px;
+            background: var(--card);
+            border: 1px solid var(--brd);
+            border-radius: 14px;
+            position: relative;
+            overflow: hidden;
+            transition: all .4s;
+            opacity: 0;
+            transform: scale(.88) translateY(26px)
+        }
+
+        .fcd::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--grad);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .4s
+        }
+
+        .fcd:hover {
+            border-color: rgba(123, 0, 255, .4);
+            box-shadow: var(--gp);
+            transform: translateY(-5px)
+        }
+
+        .fcd:hover::after {
+            transform: scaleX(1)
+        }
+
+        .fcd.big {
+            grid-column: span 2;
+            background: linear-gradient(135deg, rgba(123, 0, 255, .1), rgba(0, 229, 255, .05));
+            border-color: rgba(123, 0, 255, .3)
+        }
+
+        .fic {
+            width: 48px;
+            height: 48px;
+            background: rgba(123, 0, 255, .12);
+            border: 1px solid rgba(123, 0, 255, .25);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 18px;
+            transition: all .3s
+        }
+
+        .fcd:hover .fic {
+            background: rgba(123, 0, 255, .24);
+            box-shadow: var(--gp)
+        }
+
+        .ft {
+            font-family: var(--fo);
+            font-size: .88rem;
+            font-weight: 700;
+            letter-spacing: .04em;
+            margin-bottom: 10px;
+            color: var(--tx)
+        }
+
+        .fd {
+            font-size: .84rem;
+            color: var(--tm);
+            line-height: 1.78
+        }
+
+        .ftg {
+            margin-top: 12px;
+            display: inline-block;
+            padding: 4px 10px;
+            background: rgba(0, 255, 136, .07);
+            border: 1px solid rgba(0, 255, 136, .17);
+            border-radius: 2px;
+            font-family: var(--fo);
+            font-size: .53rem;
+            letter-spacing: .18em;
+            color: var(--a);
+            text-transform: uppercase
+        }
+
+        .clgrid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 19px;
+            margin-top: 52px
+        }
+
+        .clc {
+            border-radius: 14px;
+            overflow: hidden;
+            aspect-ratio: 3/4;
+            border: 1px solid var(--brd);
+            transition: all .4s;
+            opacity: 0;
+            transform: translateY(26px);
+            position: relative
+        }
+
+        .clc:hover {
+            border-color: var(--p2);
+            box-shadow: var(--gp);
+            transform: translateY(-7px)
+        }
+
+        .clc img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .5s
+        }
+
+        .clc:hover img {
+            transform: scale(1.05)
+        }
+
+        .clov {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 40%, rgba(7, 7, 15, .94) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 21px
+        }
+
+        .clno {
+            font-family: var(--fo);
+            font-size: .53rem;
+            letter-spacing: .32em;
+            color: var(--a);
+            margin-bottom: 5px
+        }
+
+        .clnm {
+            font-family: var(--fo);
+            font-size: 1.02rem;
+            font-weight: 900;
+            color: var(--tx);
+            margin-bottom: 6px
+        }
+
+        .clds {
+            font-size: .75rem;
+            color: rgba(255, 255, 255, .57);
+            line-height: 1.5
+        }
+
+        @media(max-width:900px) {
+            .fgrid {
+                grid-template-columns: 1fr
+            }
+
+            .fcd.big {
+                grid-column: span 1
+            }
+
+            .clgrid {
+                grid-template-columns: 1fr
+            }
+        }
+
+        /* ── STEPS ── */
+        #steps {
+            padding: 98px 60px;
+            background: var(--bg);
+            text-align: center
+        }
+
+        #steps h2 {
+            font-family: var(--fo);
+            font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+            font-weight: 900;
+            margin-bottom: 11px
+        }
+
+        .stepsub {
+            color: var(--tm);
+            margin-bottom: 56px;
+            font-size: .95rem
+        }
+
+        .strow {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            max-width: 880px;
+            margin: 0 auto;
+            position: relative
+        }
+
+        .strow::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 16%;
+            right: 16%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--p), var(--s), var(--a), transparent)
+        }
+
+        .step {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            padding: 0 20px;
+            opacity: 0;
+            transform: translateY(22px)
+        }
+
+        .stepn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--bg2);
+            border: 2px solid var(--p);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--fo);
+            font-size: 1.18rem;
+            font-weight: 900;
+            color: var(--tx);
+            box-shadow: var(--gp);
+            position: relative;
+            z-index: 1
+        }
+
+        .stept {
+            font-family: var(--fo);
+            font-size: .78rem;
+            font-weight: 700;
+            letter-spacing: .06em;
+            color: var(--tx)
+        }
+
+        .stepd {
+            font-size: .79rem;
+            color: var(--tm);
+            line-height: 1.65;
+            text-align: center
+        }
+
+        @media(max-width:700px) {
+            .strow {
+                flex-direction: column;
+                align-items: center;
+                gap: 28px
+            }
+
+            .strow::before {
+                display: none
+            }
+        }
+
+        /* ── URGENCY ── */
+        #urgency {
+            padding: 108px 60px;
+            background: var(--bg);
+            text-align: center;
+            position: relative;
+            overflow: hidden
+        }
+
+        .uglow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 680px;
+            height: 680px;
+            background: radial-gradient(ellipse, rgba(123, 0, 255, .1) 0%, transparent 70%);
+            pointer-events: none
+        }
+
+        .uinn {
+            max-width: 820px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2
+        }
+
+        #urgency h2 {
+            font-family: var(--fo);
+            font-size: clamp(1.8rem, 4.5vw, 3.1rem);
+            font-weight: 900;
+            margin-bottom: 13px
+        }
+
+        .udesc {
+            font-size: .97rem;
+            color: var(--tm);
+            margin-bottom: 48px;
+            line-height: 1.82
+        }
+
+        .cdown {
+            display: flex;
+            justify-content: center;
+            gap: 22px;
+            margin-bottom: 48px;
+            flex-wrap: wrap
+        }
+
+        .cdu {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px
+        }
+
+        .cdn {
+            font-family: var(--fo);
+            font-size: clamp(2.5rem, 6.5vw, 4.6rem);
+            font-weight: 900;
+            background: var(--grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            min-width: 106px;
+            text-align: center;
+            padding: 15px 18px;
+            background-color: var(--bg2);
+            border: 2px solid rgba(123, 0, 255, .28);
+            border-radius: 10px;
+            box-shadow: var(--gp);
+            -webkit-text-fill-color: unset;
+            animation: cdg 1.5s ease-in-out infinite
+        }
+
+        @keyframes cdg {
+
+            0%,
+            100% {
+                box-shadow: var(--gp)
+            }
+
+            50% {
+                box-shadow: var(--gp), var(--gs)
+            }
+        }
+
+        .cdl {
+            font-family: var(--fo);
+            font-size: .56rem;
+            letter-spacing: .3em;
+            text-transform: uppercase;
+            color: var(--tm)
+        }
+
+        .cdsep {
+            font-family: var(--fo);
+            font-size: 3.3rem;
+            color: var(--p2);
+            align-self: center;
+            animation: bl 1s step-end infinite
+        }
+
+        @keyframes bl {
+            50% {
+                opacity: 0
+            }
+        }
+
+        .obox {
+            background: rgba(123, 0, 255, .07);
+            border: 1px solid rgba(123, 0, 255, .2);
+            border-radius: 14px;
+            padding: 32px;
+            margin-bottom: 38px
+        }
+
+        .otitle {
+            font-family: var(--fo);
+            font-size: .86rem;
+            letter-spacing: .1em;
+            color: var(--a);
+            margin-bottom: 7px
+        }
+
+        .olist {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 18px;
+            text-align: left
+        }
+
+        .olist li {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            font-size: .89rem;
+            color: var(--tx)
+        }
+
+        .olist li::before {
+            content: '✓';
+            color: var(--a);
+            font-weight: 900;
+            flex-shrink: 0;
+            width: 17px;
+            height: 17px;
+            background: rgba(0, 255, 136, .08);
+            border: 1px solid rgba(0, 255, 136, .22);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .66rem
+        }
+
+        .trow {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 18px
+        }
+
+        .tbdg {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: .75rem;
+            color: var(--tm)
+        }
+
+        @media(max-width:900px) {
+            .olist {
+                grid-template-columns: 1fr
+            }
+
+            .cdown {
+                gap: 11px
+            }
+
+            .cdn {
+                min-width: 78px;
+                font-size: 2.2rem
+            }
+        }
+
+        /* ── FAQ ── */
+        #faq {
+            padding: 98px 60px;
+            background: var(--bg2)
+        }
+
+        #faq .inn {
+            max-width: 760px
+        }
+
+        #faq h2 {
+            font-family: var(--fo);
+            font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 11px
+        }
+
+        .faqsub {
+            text-align: center;
+            color: var(--tm);
+            font-size: .94rem;
+            margin-bottom: 48px
+        }
+
+        .faqlist {
+            display: flex;
+            flex-direction: column;
+            gap: 3px
+        }
+
+        .faqit {
+            border: 1px solid var(--brd);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: border-color .3s;
+            background: var(--card)
+        }
+
+        .faqit.open {
+            border-color: rgba(123, 0, 255, .45);
+            box-shadow: var(--gp)
+        }
+
+        .faqq {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 17px 22px;
+            cursor: pointer;
+            user-select: none;
+            gap: 15px
+        }
+
+        .faqt {
+            font-family: var(--fo);
+            font-size: .82rem;
+            font-weight: 700;
+            color: var(--tx);
+            letter-spacing: .04em;
+            line-height: 1.45
+        }
+
+        .faqi {
+            flex-shrink: 0;
+            width: 27px;
+            height: 27px;
+            border: 1px solid rgba(123, 0, 255, .3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .88rem;
+            color: var(--p2);
+            transition: transform .3s, background .3s
+        }
+
+        .faqit.open .faqi {
+            transform: rotate(45deg);
+            background: rgba(123, 0, 255, .15)
+        }
+
+        .faqa {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .42s ease
+        }
+
+        .faqit.open .faqa {
+            max-height: 260px
+        }
+
+        .faqb {
+            padding: 0 22px 21px;
+            font-size: .86rem;
+            color: var(--tm);
+            line-height: 1.82
+        }
+
+        .faqb strong {
+            color: var(--s)
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            padding: 70px 60px 32px;
+            background: var(--bg2);
+            border-top: 1px solid var(--brd);
+            position: relative;
+            z-index: 2;
+            opacity: 0;
+            transform: translateY(24px)
+        }
+
+        .ftop {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 48px;
+            margin-bottom: 48px;
+            flex-wrap: wrap
+        }
+
+        .ftag {
+            font-size: .8rem;
+            color: var(--tm);
+            margin-top: 10px;
+            max-width: 230px;
+            line-height: 1.78
+        }
+
+        .fcol h4 {
+            font-family: var(--fo);
+            font-size: .59rem;
+            letter-spacing: .28em;
+            text-transform: uppercase;
+            color: var(--a);
+            margin-bottom: 15px
+        }
+
+        .fcol ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px
+        }
+
+        .fcol a {
+            font-size: .84rem;
+            color: var(--tm);
+            text-decoration: none;
+            transition: color .2s;
+            cursor: none
+        }
+
+        .fcol a:hover {
+            color: var(--s)
+        }
+
+        .fbot {
+            padding-top: 24px;
+            border-top: 1px solid rgba(123, 0, 255, .07);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 11px
+        }
+
+        .copy {
+            font-size: .73rem;
+            color: var(--tm)
+        }
+
+        .llinks {
+            display: flex;
+            gap: 16px
+        }
+
+        .llinks a {
+            font-size: .73rem;
+            color: var(--tm);
+            text-decoration: none;
+            transition: color .2s;
+            cursor: none
+        }
+
+        .llinks a:hover {
+            color: var(--tx)
+        }
+
+        /* ── EXIT POPUP ── */
+        #exitpop {
+            position: fixed;
+            inset: 0;
+            z-index: 99990;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .4s
+        }
+
+        #exitpop.show {
+            opacity: 1;
+            pointer-events: all
+        }
+
+        .eov {
+            position: absolute;
+            inset: 0;
+            background: rgba(7, 7, 15, .97);
+            backdrop-filter: blur(22px)
+        }
+
+        .ebox {
+            position: relative;
+            z-index: 1;
+            max-width: 530px;
+            padding: 50px 40px;
+            background: var(--bg2);
+            border: 2px solid var(--p);
+            border-radius: 18px;
+            box-shadow: var(--gp), 0 0 90px rgba(123, 0, 255, .22);
+            text-align: center
+        }
+
+        .etitle {
+            font-family: var(--fo);
+            font-size: 1.65rem;
+            font-weight: 900;
+            margin-bottom: 11px;
+            animation: exg .5s steps(2) infinite
+        }
+
+        @keyframes exg {
+
+            0%,
+            100% {
+                text-shadow: 2px 0 var(--s), -2px 0 var(--p)
+            }
+
+            50% {
+                text-shadow: -2px 0 var(--a), 2px 0 var(--s)
+            }
+        }
+
+        .esub {
+            color: var(--tm);
+            margin-bottom: 26px;
+            font-size: .92rem;
+            line-height: 1.78
+        }
+
+        .ecls {
+            position: absolute;
+            top: 17px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--tm);
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: color .2s
+        }
+
+        .ecls:hover {
+            color: var(--tx)
+        }
+
+        /* ── SWISS FLAG ACCENT ── */
+        .swiss-stripe {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            z-index: 9999;
+            background: linear-gradient(180deg, #FF0000 0%, #fff 50%, #FF0000 100%);
+            opacity: .6
+        }
+
+        @media(max-width:900px) {
+
+            #prob,
+            #scenarios,
+            #deviants,
+            #features,
+            #steps,
+            #urgency,
+            #faq,
+            footer {
+                padding-left: 16px;
+                padding-right: 16px
+            }
+
+            #proof .sh,
+            .ngrid,
+            .bdgrow,
+            .ttrack {
+                padding-left: 16px;
+                padding-right: 16px
+            }
+        }
+    </style>
 </head>
 
 <body>
-
     <div id="cur"></div>
     <div id="curf"></div>
     <div id="pb"></div>
     <canvas id="pc"></canvas>
     <canvas id="cfc"></canvas>
     <div class="noise"></div>
+    <div class="swiss-stripe"></div>
 
-    <!-- ════ FIX #1 — Sticky CTA bar ════ -->
-    <div id="sticky-cta">
-        <p class="sticky-msg">⏳ Offre expire dans <strong id="sticky-timer">—:—:—</strong> — Pack OP (49,99€) offert aux
-            10 000 premiers</p>
-        <a href="https://adl.easebar.com/d/g/oncehuman/c/gwpc" target="_blank" class="sticky-btn">⚡ Télécharger
-            GRATUIT</a>
+    <!-- ═══ LANGUAGE SWITCHER (5 langues suisses) ═══ -->
+    <div id="langbar">
+        <button class="lbtn active" data-lang="fr" onclick="setLang('fr')">🇨🇭 FR</button>
+        <div class="lsep"></div>
+        <button class="lbtn" data-lang="en" onclick="setLang('en')">🇬🇧 EN</button>
+        <div class="lsep"></div>
+        <button class="lbtn" data-lang="de" onclick="setLang('de')">🇩🇪 DE</button>
+        <div class="lsep"></div>
+        <button class="lbtn" data-lang="it" onclick="setLang('it')">🇮🇹 IT</button>
+        <div class="lsep"></div>
+        <button class="lbtn" data-lang="rm" onclick="setLang('rm')">🏔️ RM</button>
     </div>
 
-    <!-- NAV -->
+    <!-- ═══ STICKY BAR ═══ -->
+    <div id="sbar">
+        <p class="stxt"><span data-t="sticky.msg"></span> <strong id="stimer">—</strong></p>
+        <a href="https://adl.easebar.com/d/g/oncehuman/c/gwpc" target="_blank" class="scta" data-t="sticky.btn"></a>
+    </div>
+
+    <!-- ═══ NAV ═══ -->
     <nav id="nav">
-        <div class="logo">ONCE HUMAN</div>
+        <div class="logo orb">ONCE HUMAN</div>
         <ul class="nav-links">
-            <li><a href="#scenarios">Scénarios</a></li>
-            <li><a href="#deviants">Déviants</a></li>
-            <li><a href="#proof">Avis</a></li>
+            <li><a href="#scenarios" data-t="nav.s"></a></li>
+            <li><a href="#deviants" data-t="nav.d"></a></li>
+            <li><a href="#proof" data-t="nav.r"></a></li>
             <li><a href="#faq">FAQ</a></li>
-            <li><a href="#urgency">Pack OP</a></li>
+            <li><a href="#urgency" data-t="nav.p"></a></li>
         </ul>
-        <a href="#urgency" class="btn" style="padding:10px 22px;font-size:.7rem"><span>⚡ Pack Gratuit</span></a>
+        <a href="#urgency" class="nav-cta" data-t="nav.cta"></a>
     </nav>
 
     <!-- ═══ HERO ═══ -->
     <section id="hero">
-        <div class="hero-img">
-            <!-- ════ FIX #5 — fetchpriority high, no lazy on LCP image ════ -->
-            <img src="https://www.oncehuman.game/pc/gw/20250418171534/img/kv20260112_1f38dace.jpg"
-                alt="Once Human V3 — Monde Post-Apocalyptique Nalcott" id="hero-bg-img" fetchpriority="high"
+        <div class="hbg">
+            <img src="https://www.oncehuman.game/pc/gw/20250418171534/img/kv20260112_1f38dace.jpg" alt="Once Human V3"
+                class="id=" hero-img"" fetchpriority="high"
                 onerror="this.src='https://r.res.easebar.com/pic/20260211/803d70ff-81dd-4df3-b4e3-73a7061dcfff.jpg'">
         </div>
-        <div class="hero-grid"></div>
-        <div class="hero-scan"></div>
-
-        <div class="hero-content" id="hc">
-
-            <!-- ════ FIX #1 & #2 — Immediate trust + value badges ════ -->
-            <div class="hero-badge-row" id="hbr">
-                <span class="hbadge">🏆 #1 Survival PC 2024</span>
-                <span class="hbadge">⭐ 4.8/5 sur Steam</span>
-                <span class="hbadge">🎁 Pack 49,99€ Offert</span>
-                <span class="hbadge">✓ 100% Gratuit</span>
+        <div class="hgrid"></div>
+        <div class="hscan"></div>
+        <div class="hcnt" id="hcnt">
+            <div class="hbadges" id="hbadges">
+                <span class="hbdg" data-t="h.b1"></span>
+                <span class="hbdg" data-t="h.b2"></span>
+                <span class="hbdg" data-t="h.b3"></span>
+                <span class="hbdg" data-t="h.b4"></span>
             </div>
-
-            <p class="hero-eye" id="hey">▸ VISIONAL WHEEL S3 — ABERRANT PROGENY EN DIRECT</p>
-            <h1 class="hero-h1" id="hh1">
-                <span class="l1">L'ÉVEIL</span>
-                <span class="l2 glitch" data-text="DU MUTANT">DU MUTANT</span>
+            <p class="heye" id="heye" data-t="h.eye"></p>
+            <h1 class="hh1" id="hh1">
+                <span class="l1" data-t="h.l1"></span>
+                <span class="l2 glitch" id="glitch-el"></span>
             </h1>
-
-            <!-- ════ FIX #2 — Clear benefit-driven subtitle ════ -->
-            <p class="hero-sub" id="hsub">
-                Survie. Mutation. Domination.<br>
-                <em>Télécharge gratuitement</em> et reçois le Pack Éveil Mutant (valeur 49,99€)<br>
-                — offert aux <em>10 000 premiers joueurs</em> uniquement.
-            </p>
-
-            <div class="hero-ctas" id="hctas">
-                <a href="https://adl.easebar.com/d/g/oncehuman/c/gwpc" target="_blank" class="btn btn-big"><span>🎮
-                        Télécharger Gratuitement</span></a>
-                <a href="#scenarios" class="btn2"><span>▷ Voir les Scénarios</span></a>
+            <p class="hsub" id="hsub" data-th="h.sub"></p>
+            <div class="hctas" id="hctas">
+                <a href="https://adl.easebar.com/d/g/oncehuman/c/gwpc" target="_blank" class="btn big"
+                    data-t="h.cta1"></a>
+                <a href="#scenarios" class="btn2" data-t="h.cta2"></a>
             </div>
-
-            <!-- ════ FIX #4 — Trust signals inline with CTA ════ -->
-            <div class="hero-trust" id="htrust">
-                <span class="htrust">Aucune CB requise</span>
-                <span class="htrust">Jeu 100% Gratuit</span>
-                <span class="htrust">Anti-virus certifié</span>
-                <span class="htrust">2M+ joueurs actifs</span>
+            <div class="htr" id="htr">
+                <span data-t="h.tr1"></span>
+                <span data-t="h.tr2"></span>
+                <span data-t="h.tr3"></span>
+                <span data-t="h.tr4"></span>
             </div>
         </div>
-
-        <div class="hero-stats" id="hstats">
+        <div class="hstats" id="hstats">
             <div style="text-align:center">
-                <div class="stat-n">2M+</div>
-                <div class="stat-l">Joueurs Actifs</div>
+                <div class="sn">2M+</div>
+                <div class="sl" data-t="h.s1"></div>
             </div>
             <div class="sdiv"></div>
             <div style="text-align:center">
-                <div class="stat-n">4.8★</div>
-                <div class="stat-l">Note Steam</div>
+                <div class="sn">4.8★</div>
+                <div class="sl" data-t="h.s2"></div>
             </div>
             <div class="sdiv"></div>
             <div style="text-align:center">
-                <div class="stat-n">#1</div>
-                <div class="stat-l">Survival PC 2024</div>
+                <div class="sn">#1</div>
+                <div class="sl" data-t="h.s3"></div>
             </div>
             <div class="sdiv"></div>
             <div style="text-align:center">
-                <div class="stat-n">Free</div>
-                <div class="stat-l">Play Forever</div>
+                <div class="sn">Free</div>
+                <div class="sl" data-t="h.s4"></div>
             </div>
         </div>
-        <div class="sarrow"><span>SCROLL</span>
+        <div class="sarrow"><span data-t="h.scroll"></span>
             <div class="sline"></div>
         </div>
     </section>
 
-    <!-- PROBLÈME -->
+    <!-- ═══ PROBLEM ═══ -->
     <section id="prob" class="sec">
-        <div class="sec-inner">
-            <div class="sec-hdr">
-                <span class="tag">Pourquoi Once Human ?</span>
-                <h2>Tu en as marre des <span class="gtx">survivals génériques ?</span></h2>
-                <p>Ce que les autres jeux ne t'offrent jamais — et ce qui rend V3 impossible à poser. Survole les
-                    cartes.</p>
+        <div class="inn">
+            <div class="sh">
+                <span class="tag" data-t="p.tag"></span>
+                <h2 data-th="p.title"></h2>
+                <p data-t="p.desc"></p>
             </div>
-            <div class="cards">
-                <div class="flip-w">
-                    <div class="flip">
-                        <div class="cfront"><span class="ci">😤</span>
-                            <h3 class="ct">Monde Vide & Sans Âme</h3>
-                            <p class="cd">Les survivals classiques t'offrent une carte vide, des loots répétitifs et une
-                                progression qui s'essoufle en 10h. Aucune surprise, aucun mystère.</p>
-                            <p
-                                style="margin-top:14px;font-size:.76rem;color:var(--a);font-family:var(--fd);letter-spacing:.15em">
-                                ← SURVOLE POUR LA SOLUTION</p>
+            <div class="cgrid">
+                <div class="fw">
+                    <div class="fi">
+                        <div class="fc">
+                            <div class="ci">😤</div>
+                            <h3 class="ct" data-t="p.c1f.t"></h3>
+                            <p class="cd" data-t="p.c1f.d"></p>
+                            <p class="chint" data-t="p.hint"></p>
                         </div>
-                        <div class="cback"><span class="ci">🌌</span>
-                            <h3 class="ct">Narration Organique</h3>
-                            <p class="cd">Once Human génère un monde vivant avec des événements narratifs dynamiques.
-                                Chaque session révèle une nouvelle couche du mystère Stardust.</p><span
-                                class="cback-cta">↻ DÉCOUVRIR →</span>
+                        <div class="bc">
+                            <div class="ci">🌌</div>
+                            <h3 class="ct" data-t="p.c1b.t"></h3>
+                            <p class="cd" data-t="p.c1b.d"></p><span class="bcta" data-t="p.c1b.cta"></span>
                         </div>
                     </div>
                 </div>
-                <div class="flip-w">
-                    <div class="flip">
-                        <div class="cfront"><span class="ci">⚔️</span>
-                            <h3 class="ct">Combats Plats & Prévisibles</h3>
-                            <p class="cd">Le même cycle de click-looting depuis 10 ans. Ennemis prévisibles, boss
-                                éponges à dégâts. Aucun vrai skill requis.</p>
-                            <p
-                                style="margin-top:14px;font-size:.76rem;color:var(--a);font-family:var(--fd);letter-spacing:.15em">
-                                ← SURVOLE POUR LA SOLUTION</p>
+                <div class="fw">
+                    <div class="fi">
+                        <div class="fc">
+                            <div class="ci">⚔️</div>
+                            <h3 class="ct" data-t="p.c2f.t"></h3>
+                            <p class="cd" data-t="p.c2f.d"></p>
+                            <p class="chint" data-t="p.hint"></p>
                         </div>
-                        <div class="cback"><span class="ci">🔬</span>
-                            <h3 class="ct">Combat Mutant Stratégique</h3>
-                            <p class="cd">Armes modulaires + pouvoirs Deviants. 47 types d'ennemis avec IA adaptative.
-                                Chaque combat exige une approche différente.</p><span class="cback-cta">↻ VOIR LES
-                                COMBATS →</span>
+                        <div class="bc">
+                            <div class="ci">🔬</div>
+                            <h3 class="ct" data-t="p.c2b.t"></h3>
+                            <p class="cd" data-t="p.c2b.d"></p><span class="bcta" data-t="p.c2b.cta"></span>
                         </div>
                     </div>
                 </div>
-                <div class="flip-w">
-                    <div class="flip">
-                        <div class="cfront"><span class="ci">🏚️</span>
-                            <h3 class="ct">Construction Sans Vision</h3>
-                            <p class="cd">Placer des blocs pour placer des blocs. Ta base est un simple stockage de
-                                ressources sans impact sur le gameplay.</p>
-                            <p
-                                style="margin-top:14px;font-size:.76rem;color:var(--a);font-family:var(--fd);letter-spacing:.15em">
-                                ← SURVOLE POUR LA SOLUTION</p>
+                <div class="fw">
+                    <div class="fi">
+                        <div class="fc">
+                            <div class="ci">🏚️</div>
+                            <h3 class="ct" data-t="p.c3f.t"></h3>
+                            <p class="cd" data-t="p.c3f.d"></p>
+                            <p class="chint" data-t="p.hint"></p>
                         </div>
-                        <div class="cback"><span class="ci">🏗️</span>
-                            <h3 class="ct">Bases Tactiques & Évolutives</h3>
-                            <p class="cd">Cradle 3.0 : labo de recherche, défenses IA autonomes, fermes d'énergie. Ta
-                                base est ton avantage compétitif.</p><span class="cback-cta">↻ BUILD & CONQUER →</span>
+                        <div class="bc">
+                            <div class="ci">🏗️</div>
+                            <h3 class="ct" data-t="p.c3b.t"></h3>
+                            <p class="cd" data-t="p.c3b.d"></p><span class="bcta" data-t="p.c3b.cta"></span>
                         </div>
                     </div>
                 </div>
@@ -212,562 +2309,1513 @@
         </div>
     </section>
 
-    <!-- SCÉNARIOS -->
-    <section id="scenarios" class="sec" style="padding:120px 60px;background:var(--bg2)">
-        <div class="sec-inner">
-            <div class="sec-hdr">
-                <span class="tag">Scénarios Officiels</span>
-                <h2>Des mondes <span class="gtx">uniques à conquérir</span></h2>
-                <p>Chaque scénario est un univers complet avec ses règles propres, ses mystères et ses boss légendaires.
-                </p>
+    <!-- ═══ SCENARIOS ═══ -->
+    <section id="scenarios" class="sec">
+        <div class="inn">
+            <div class="sh">
+                <span class="tag" data-t="sc.tag"></span>
+                <h2 data-th="sc.title"></h2>
+                <p data-t="sc.desc"></p>
             </div>
-            <div class="scen-grid">
-                <div class="scen-card">
-                    <img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-jbbq_ff311c2b.jpg"
-                        alt="Endless Dream — Scénario Once Human" loading="lazy"
+            <div class="sgrid">
+                <div class="sc2"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-jbbq_ff311c2b.jpg"
+                        alt="Endless Dream" loading="lazy"
                         onerror="this.src='https://r.res.easebar.com/pic/20260302/ea157404-a533-49ea-8e12-9478ea208536.jpg'">
-                    <div class="scen-card-overlay"><span class="scen-tag">▸ Scénario 01</span>
-                        <h3 class="scen-name">ENDLESS DREAM</h3>
-                        <p class="scen-desc">Nalcott envahie par un brouillard de cauchemar. Purifiez la brume, éliminez
-                            la source des ténèbres.</p>
-                    </div>
-                    <span class="scen-badge">🔥 ACTIF</span>
+                    <div class="sov"><span class="sno">▸ 01</span>
+                        <div class="snm">ENDLESS DREAM</div>
+                        <p class="sds" data-t="sc.s1"></p>
+                    </div><span class="sbdg" data-t="sc.b1"></span>
                 </div>
-                <div class="scen-card">
-                    <img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-yzkh_1cb0640d.jpg"
-                        alt="The Way of Winter — Scénario Once Human" loading="lazy"
+                <div class="sc2"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-yzkh_1cb0640d.jpg"
+                        alt="Way of Winter" loading="lazy"
                         onerror="this.src='https://r.res.easebar.com/pic/20260226/c5b46a57-b2af-4c37-ba95-9b4d7c2168c7.jpg'">
-                    <div class="scen-card-overlay"><span class="scen-tag">▸ Scénario 02</span>
-                        <h3 class="scen-name">THE WAY OF WINTER</h3>
-                        <p class="scen-desc">Des déserts arides aux montagnes glacées — nouveaux adversaires, alliés
-                            inattendus.</p>
-                    </div>
-                    <span class="scen-badge">❄️ SAISONNIER</span>
+                    <div class="sov"><span class="sno">▸ 02</span>
+                        <div class="snm">THE WAY OF WINTER</div>
+                        <p class="sds" data-t="sc.s2"></p>
+                    </div><span class="sbdg" data-t="sc.b2"></span>
                 </div>
-                <div class="scen-card">
-                    <img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-ngxl_13adb5bb.jpg"
-                        alt="Prismverse's Clash — Scénario Once Human" loading="lazy"
+                <div class="sc2"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-ngxl_13adb5bb.jpg"
+                        alt="Prismverse" loading="lazy"
                         onerror="this.src='https://r.res.easebar.com/pic/20260119/1d2b69e9-4629-4a02-90ed-47e65e737cec.jpeg'">
-                    <div class="scen-card-overlay"><span class="scen-tag">▸ Scénario 03</span>
-                        <h3 class="scen-name">PRISMVERSE'S CLASH</h3>
-                        <p class="scen-desc">Mayflies contre Rosetta — la rivalité pour les Prism Deviations va tout
-                            faire basculer.</p>
-                    </div>
-                    <span class="scen-badge">⚔️ PVP</span>
+                    <div class="sov"><span class="sno">▸ 03</span>
+                        <div class="snm">PRISMVERSE'S CLASH</div>
+                        <p class="sds" data-t="sc.s3"></p>
+                    </div><span class="sbdg" data-t="sc.b3"></span>
                 </div>
-                <div class="scen-card">
-                    <img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-yzyz_9eed6351.jpg"
-                        alt="Evolution's Call — Scénario Once Human" loading="lazy"
+                <div class="sc2"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-yzyz_9eed6351.jpg"
+                        alt="Evolution" loading="lazy"
                         onerror="this.src='https://r.res.easebar.com/pic/20260217/05ff4028-c01a-424c-a161-29ba420fddcd.jpg'">
-                    <div class="scen-card-overlay"><span class="scen-tag">▸ Scénario 04</span>
-                        <h3 class="scen-name">EVOLUTION'S CALL</h3>
-                        <p class="scen-desc">Les zones frontières deviennent des champs de bataille. Ton Warband
-                            t'appelle à la lutte.</p>
-                    </div>
-                    <span class="scen-badge">🏆 RANKED</span>
+                    <div class="sov"><span class="sno">▸ 04</span>
+                        <div class="snm">EVOLUTION'S CALL</div>
+                        <p class="sds" data-t="sc.s4"></p>
+                    </div><span class="sbdg" data-t="sc.b4"></span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- DÉVIANTS -->
+    <!-- ═══ DEVIANTS ═══ -->
     <section id="deviants" class="sec">
-        <div class="sec-inner">
-            <div class="dev-intro">
-                <div class="dev-intro-text">
-                    <span class="tag">Créatures & Déviants</span>
-                    <h2>Des entités <span class="gtx">au-delà du réel</span></h2>
-                    <p>Les <strong style="color:var(--s)">Déviations</strong> défient la logique — pouvoirs surnaturels
-                        au-delà de la vie, du temps et de la thermodynamique.</p>
-                    <p>Capture-les. Fusionne-les. Envoie-les au combat. Le Visional Wheel S3 t'offre les pouvoirs des
-                        aberrants eux-mêmes.</p>
-                    <a href="#urgency" class="btn" style="margin-top:28px;display:inline-flex"><span>🧬 Capturer les
-                            Déviants</span></a>
+        <div class="inn">
+            <div class="dvi">
+                <div class="dvt">
+                    <span class="tag" data-t="dv.tag"></span>
+                    <h2 data-th="dv.title"></h2>
+                    <p data-t="dv.p1"></p>
+                    <p data-t="dv.p2"></p>
+                    <a href="#urgency" class="btn" style="margin-top:26px;display:inline-flex" data-t="dv.cta"></a>
                 </div>
-                <div class="dev-intro-img">
-                    <img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-1_759a48d4.png"
-                        alt="Deviation — Once Human" loading="lazy"
+                <div class="dvimg"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-1_759a48d4.png"
+                        alt="Deviant" loading="lazy"
                         onerror="this.src='https://r.res.easebar.com/pic/20260302/ea157404-a533-49ea-8e12-9478ea208536.jpg'">
                 </div>
             </div>
-            <div class="dev-strip" id="devstrip">
-                <div class="dev-item"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-1_759a48d4.png"
-                        alt="Deviant Alpha" loading="lazy">
-                    <div class="dev-item-name">DÉVIANT ALPHA</div>
+            <div class="dvstrip" id="dvstrip">
+                <div class="dvc"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-1_759a48d4.png"
+                        alt="d1" loading="lazy">
+                    <div class="dvn" data-t="dv.d1"></div>
                 </div>
-                <div class="dev-item"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-2_b501c895.png"
-                        alt="Scorcher" loading="lazy">
-                    <div class="dev-item-name">SCORCHER</div>
+                <div class="dvc"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-2_b501c895.png"
+                        alt="d2" loading="lazy">
+                    <div class="dvn" data-t="dv.d2"></div>
                 </div>
-                <div class="dev-item"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-3_04f56fbc.png"
-                        alt="Watcher" loading="lazy">
-                    <div class="dev-item-name">WATCHER</div>
+                <div class="dvc"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-3_04f56fbc.png"
+                        alt="d3" loading="lazy">
+                    <div class="dvn" data-t="dv.d3"></div>
                 </div>
-                <div class="dev-item"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-4_9ed4f43b.png"
-                        alt="Abyssal" loading="lazy">
-                    <div class="dev-item-name">ABYSSAL</div>
+                <div class="dvc"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-4_9ed4f43b.png"
+                        alt="d4" loading="lazy">
+                    <div class="dvn" data-t="dv.d4"></div>
                 </div>
-                <div class="dev-item"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-5_0ff2a3c3.png"
-                        alt="Prism Shade" loading="lazy">
-                    <div class="dev-item-name">PRISM SHADE</div>
+                <div class="dvc"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-5_0ff2a3c3.png"
+                        alt="d5" loading="lazy">
+                    <div class="dvn" data-t="dv.d5"></div>
                 </div>
-                <div class="dev-item"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-1_759a48d4.png"
-                        alt="Deviant Alpha 2" loading="lazy">
-                    <div class="dev-item-name">DÉVIANT ALPHA</div>
+                <div class="dvc"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-1_759a48d4.png"
+                        alt="d1b" loading="lazy">
+                    <div class="dvn" data-t="dv.d1"></div>
                 </div>
-                <div class="dev-item"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-2_b501c895.png"
-                        alt="Scorcher 2" loading="lazy">
-                    <div class="dev-item-name">SCORCHER</div>
+                <div class="dvc"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-2_b501c895.png"
+                        alt="d2b" loading="lazy">
+                    <div class="dvn" data-t="dv.d2"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- PREUVES -->
+    <!-- ═══ SOCIAL PROOF ═══ -->
     <section id="proof" class="sec">
-        <div class="sec-hdr" style="padding:0 60px;margin-bottom:56px">
-            <span class="tag">Communauté</span>
-            <h2>2 millions de joueurs <span class="gtx">ne mentent pas</span></h2>
+        <div class="sh">
+            <span class="tag" data-t="pr.tag"></span>
+            <h2 data-th="pr.title"></h2>
         </div>
         <div style="overflow:hidden;position:relative">
             <div class="ttrack" id="ttrack">
                 <div class="tcard">
                     <div class="tstars">★★★★★</div>
-                    <p class="ttxt">« V3 a tout changé. Le système Deviant est addictif, les events de faction épiques.
-                        Je pensais pas rester plus de 2h — ça fait 3 semaines que j'y joue tous les soirs. »</p>
-                    <div class="tauthor">
-                        <div class="tavatar">KR</div>
+                    <p class="trev" data-t="pr.t1"></p>
+                    <div class="tauth">
+                        <div class="tav">KR</div>
                         <div>
-                            <div class="taname">KryptoRavenX</div>
-                            <div class="tarank">🎖 Rang S — Serveur EU-West</div>
+                            <div class="tnm">KryptoRavenX</div>
+                            <div class="trk" data-t="pr.r1"></div>
                         </div>
                     </div>
                 </div>
                 <div class="tcard">
                     <div class="tstars">★★★★★</div>
-                    <p class="ttxt">« Meilleur survival F2P de l'année. La direction artistique post-apo est insane. Mes
-                        viewers ont tous téléchargé après mon premier stream V3. »</p>
-                    <div class="tauthor">
-                        <div class="tavatar">NX</div>
+                    <p class="trev" data-t="pr.t2"></p>
+                    <div class="tauth">
+                        <div class="tav">NX</div>
                         <div>
-                            <div class="taname">NovaxStream</div>
-                            <div class="tarank">📺 Streamer 180K — Twitch</div>
+                            <div class="tnm">NovaxStream</div>
+                            <div class="trk" data-t="pr.r2"></div>
                         </div>
                     </div>
                 </div>
                 <div class="tcard">
                     <div class="tstars">★★★★★</div>
-                    <p class="ttxt">« J'ai refait ma base 4 fois pour optimiser les défenses. Le crafting est si profond
-                        que t'as toujours quelque chose à améliorer. Mon nouveau Rust — en mieux. »</p>
-                    <div class="tauthor">
-                        <div class="tavatar">ZP</div>
+                    <p class="trev" data-t="pr.t3"></p>
+                    <div class="tauth">
+                        <div class="tav">ZP</div>
                         <div>
-                            <div class="taname">ZephyrPro99</div>
-                            <div class="tarank">🏆 Top 0.1% Construction</div>
+                            <div class="tnm">ZephyrPro99</div>
+                            <div class="trk" data-t="pr.r3"></div>
                         </div>
                     </div>
                 </div>
                 <div class="tcard">
                     <div class="tstars">★★★★★</div>
-                    <p class="ttxt">« Les zones de contamination V3 sont sublimes. On sent vraiment le travail des devs.
-                        Et les optimisations GPU ? Enfin un survival qui tourne à 120fps. »</p>
-                    <div class="tauthor">
-                        <div class="tavatar">ML</div>
+                    <p class="trev" data-t="pr.t4"></p>
+                    <div class="tauth">
+                        <div class="tav">ML</div>
                         <div>
-                            <div class="taname">MirroLune_FR</div>
-                            <div class="tarank">🌟 Testeur Bêta Officiel</div>
+                            <div class="tnm">MirroLune</div>
+                            <div class="trk" data-t="pr.r4"></div>
                         </div>
                     </div>
                 </div>
                 <div class="tcard">
                     <div class="tstars">★★★★★</div>
-                    <p class="ttxt">« Raid 12 contre 30 grâce à une stratégie de base pensée. Aucun autre jeu ne donne
-                        ces sensations. La profondeur tactique est au niveau des meilleurs RTS. »</p>
-                    <div class="tauthor">
-                        <div class="tavatar">DR</div>
+                    <p class="trev" data-t="pr.t5"></p>
+                    <div class="tauth">
+                        <div class="tav">DR</div>
                         <div>
-                            <div class="taname">DarkRaider_EU</div>
-                            <div class="tarank">⚔️ Leader de Faction Top 5</div>
+                            <div class="tnm">DarkRaider_EU</div>
+                            <div class="trk" data-t="pr.r5"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="news-grid" id="newsgrid">
-            <div class="news-card"><img
-                    src="https://r.res.easebar.com/pic/20260302/ea157404-a533-49ea-8e12-9478ea208536.jpg"
-                    alt="Dev Blog Tech" loading="lazy" onerror="this.style.height='120px'">
-                <div class="news-card-body">
-                    <div class="news-card-tag">Dev Blog</div>
-                    <div class="news-card-title">Refonte Complète du Système Tech — Avril 2026</div>
+        <div class="ngrid" id="ngrid">
+            <div class="nc"><img src="https://r.res.easebar.com/pic/20260302/ea157404-a533-49ea-8e12-9478ea208536.jpg"
+                    alt="n1" loading="lazy">
+                <div class="nb">
+                    <div class="ntag" data-t="pr.n1t"></div>
+                    <div class="ntitle" data-t="pr.n1"></div>
                 </div>
             </div>
-            <div class="news-card"><img
-                    src="https://r.res.easebar.com/pic/20260226/c5b46a57-b2af-4c37-ba95-9b4d7c2168c7.jpg"
-                    alt="Patch 2.3.3" loading="lazy" onerror="this.style.height='120px'">
-                <div class="news-card-body">
-                    <div class="news-card-tag">Mise à Jour</div>
-                    <div class="news-card-title">Patch V2.3.3 — Nouvelles Optimisations</div>
+            <div class="nc"><img src="https://r.res.easebar.com/pic/20260226/c5b46a57-b2af-4c37-ba95-9b4d7c2168c7.jpg"
+                    alt="n2" loading="lazy">
+                <div class="nb">
+                    <div class="ntag" data-t="pr.n2t"></div>
+                    <div class="ntitle" data-t="pr.n2"></div>
                 </div>
             </div>
-            <div class="news-card"><img
-                    src="https://r.res.easebar.com/pic/20260119/1d2b69e9-4629-4a02-90ed-47e65e737cec.jpeg"
-                    alt="Visional Wheel S3" loading="lazy" onerror="this.style.height='120px'">
-                <div class="news-card-body">
-                    <div class="news-card-tag">Visional Wheel</div>
-                    <div class="news-card-title">Aberrant Progeny S3 — Maintenant en Direct</div>
+            <div class="nc"><img src="https://r.res.easebar.com/pic/20260119/1d2b69e9-4629-4a02-90ed-47e65e737cec.jpeg"
+                    alt="n3" loading="lazy">
+                <div class="nb">
+                    <div class="ntag" data-t="pr.n3t"></div>
+                    <div class="ntitle" data-t="pr.n3"></div>
                 </div>
             </div>
-            <div class="news-card"><img
-                    src="https://r.res.easebar.com/pic/20260217/05ff4028-c01a-424c-a161-29ba420fddcd.jpg"
-                    alt="Shadow Pavilion" loading="lazy" onerror="this.style.height='120px'">
-                <div class="news-card-body">
-                    <div class="news-card-tag">Événement</div>
-                    <div class="news-card-title">Shadow Pavilion — Récompenses Exclusives</div>
+            <div class="nc"><img src="https://r.res.easebar.com/pic/20260217/05ff4028-c01a-424c-a161-29ba420fddcd.jpg"
+                    alt="n4" loading="lazy">
+                <div class="nb">
+                    <div class="ntag" data-t="pr.n4t"></div>
+                    <div class="ntitle" data-t="pr.n4"></div>
                 </div>
             </div>
         </div>
-        <div class="pbadges">
-            <div class="pbadge"><span style="font-size:1.4rem">🏆</span>
+        <div class="bdgrow">
+            <div class="bdg"><span style="font-size:1.38rem">🏆</span>
                 <div>
-                    <div class="pbv">Best Survival 2024</div>
-                    <div class="pbl">Gaming Awards</div>
+                    <div class="bv" data-t="pr.bv1"></div>
+                    <div class="bl" data-t="pr.bl1"></div>
                 </div>
             </div>
-            <div class="pbadge"><span style="font-size:1.4rem">🎮</span>
+            <div class="bdg"><span style="font-size:1.38rem">🎮</span>
                 <div>
-                    <div class="pbv">4.8 / 5</div>
-                    <div class="pbl">Steam — 47K Avis</div>
+                    <div class="bv">4.8/5</div>
+                    <div class="bl" data-t="pr.bl2"></div>
                 </div>
             </div>
-            <div class="pbadge"><span style="font-size:1.4rem">📦</span>
+            <div class="bdg"><span style="font-size:1.38rem">📦</span>
                 <div>
-                    <div class="pbv">2M+ Downloads</div>
-                    <div class="pbl">En 6 Semaines</div>
+                    <div class="bv">2M+</div>
+                    <div class="bl" data-t="pr.bl3"></div>
                 </div>
             </div>
-            <div class="pbadge"><span style="font-size:1.4rem">🔥</span>
+            <div class="bdg"><span style="font-size:1.38rem">🔥</span>
                 <div>
-                    <div class="pbv">#1 Trending</div>
-                    <div class="pbl">Twitch FR — 3 Semaines</div>
+                    <div class="bv">#1</div>
+                    <div class="bl" data-t="pr.bl4"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FEATURES -->
+    <!-- ═══ FEATURES ═══ -->
     <section id="features" class="sec">
-        <div class="sec-inner">
-            <div class="sec-hdr">
-                <span class="tag">Visional Wheel S3 — Nouveautés</span>
-                <h2>Tout ce que <span class="gtx">V3 apporte</span></h2>
-                <p>La mise à jour la plus massive de l'histoire d'Once Human. Plus de contenu, de profondeur, de chaos.
-                </p>
+        <div class="inn">
+            <div class="sh">
+                <span class="tag" data-t="ft.tag"></span>
+                <h2 data-th="ft.title"></h2>
+                <p data-t="ft.desc"></p>
             </div>
             <div class="fgrid">
-                <div class="fc big">
+                <div class="fcd big">
                     <div class="fic">🌩️</div>
-                    <h3 class="ft">ZONES STARDUST CONTAMINÉES V3</h3>
-                    <p class="fd2">Zones dynamiques Level 6 avec weather system procédural. Tornades de spores, orages
-                        magnétiques, rifts dimensionnels. Chaque visite est unique. Ressources rares et boss légendaires
-                        — pour les survivants qui osent.</p><span class="ftag">⚡ Exclusif V3</span>
+                    <h3 class="ft" data-t="ft.f1t"></h3>
+                    <p class="fd" data-t="ft.f1d"></p><span class="ftg" data-t="ft.f1x"></span>
                 </div>
-                <div class="fc">
+                <div class="fcd">
                     <div class="fic">🧬</div>
-                    <h3 class="ft">ARBRE DEVIANT ÉTENDU</h3>
-                    <p class="fd2">+23 nouveaux pouvoirs. Fusion : combine 2 pouvoirs en un hybride. 1800+ combinaisons
-                        possibles.</p><span class="ftag">🔬 Nouveau</span>
+                    <h3 class="ft" data-t="ft.f2t"></h3>
+                    <p class="fd" data-t="ft.f2d"></p><span class="ftg" data-t="ft.f2x"></span>
                 </div>
-                <div class="fc">
+                <div class="fcd">
                     <div class="fic">🏰</div>
-                    <h3 class="ft">CRADLE 3.0 — BASE ÉVOLUÉE</h3>
-                    <p class="fd2">Construction modulaire. Bâtiments évolutifs. Défenses IA autonomes. Laboratoire Tier
-                        5.</p><span class="ftag">🏗️ Refonte</span>
+                    <h3 class="ft" data-t="ft.f3t"></h3>
+                    <p class="fd" data-t="ft.f3d"></p><span class="ftg" data-t="ft.f3x"></span>
                 </div>
-                <div class="fc">
+                <div class="fcd">
                     <div class="fic">⚔️</div>
-                    <h3 class="ft">FACTIONS & GUERRE OUVERTE</h3>
-                    <p class="fd2">Raids PvP planifiés, alliances, trahisons. La carte politique évolue chaque semaine.
-                    </p><span class="ftag">🌐 Multi</span>
+                    <h3 class="ft" data-t="ft.f4t"></h3>
+                    <p class="fd" data-t="ft.f4d"></p><span class="ftg" data-t="ft.f4x"></span>
                 </div>
-                <div class="fc">
+                <div class="fcd">
                     <div class="fic">🎯</div>
-                    <h3 class="ft">ARMES MODULAIRES</h3>
-                    <p class="fd2">340+ recettes. 6 mods actifs par arme. Chaque build est une signature unique.</p>
-                    <span class="ftag">🔧 Profond</span>
+                    <h3 class="ft" data-t="ft.f5t"></h3>
+                    <p class="fd" data-t="ft.f5d"></p><span class="ftg" data-t="ft.f5x"></span>
                 </div>
-                <div class="fc">
+                <div class="fcd">
                     <div class="fic">🎨</div>
-                    <h3 class="ft">DIRECTION ARTISTIQUE POST-APO</h3>
-                    <p class="fd2">Cycle jour/nuit cinématique. Effets volumétriques. Bande-son adaptative exclusive.
-                    </p><span class="ftag">🌟 Visuel</span>
+                    <h3 class="ft" data-t="ft.f6t"></h3>
+                    <p class="fd" data-t="ft.f6d"></p><span class="ftg" data-t="ft.f6x"></span>
                 </div>
             </div>
-            <div style="text-align:center;margin:65px 0 34px"><span class="tag">Classes de Personnage</span>
-                <h2 style="font-family:var(--fd);font-size:clamp(1.5rem,3.2vw,2.3rem);font-weight:900">Choisis ton <span
-                        class="gtx">évolution</span></h2>
+            <div style="text-align:center;margin:62px 0 32px">
+                <span class="tag" data-t="ft.ctag"></span>
+                <h2 style="font-family:var(--fo);font-size:clamp(1.5rem,3.2vw,2.3rem);font-weight:900"
+                    data-th="ft.ctitle"></h2>
             </div>
-            <div class="class-strip">
-                <div class="class-card"><img
-                        src="https://www.oncehuman.game/pc/gw/20250418171534/img/zhiye_lh1_968083c7.png"
-                        alt="Classe Assaut" loading="lazy"
-                        onerror="this.src='https://r.res.easebar.com/pic/20260306/32ab8e2c-f4ff-4035-82ce-e5f99892622f.jpg'">
-                    <div class="class-card-ov">
-                        <div class="class-number">CLASS 01</div>
-                        <div class="class-name">ASSAUT</div>
-                        <div class="class-desc">Dominance offensive. Armes lourdes, pouvoirs destructeurs, zone control
-                            absolu.</div>
+            <div class="clgrid">
+                <div class="clc"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/zhiye_lh1_968083c7.png"
+                        alt="Class1" loading="lazy"
+                        onerror="this.src='https://r.res.easebar.com/pic/20260302/ea157404-a533-49ea-8e12-9478ea208536.jpg'">
+                    <div class="clov">
+                        <div class="clno">CLASS 01</div>
+                        <div class="clnm" data-t="ft.cl1n"></div>
+                        <div class="clds" data-t="ft.cl1d"></div>
                     </div>
                 </div>
-                <div class="class-card"><img
-                        src="https://www.oncehuman.game/pc/gw/20250418171534/img/zhiye_lh2_24acaa85.png"
-                        alt="Classe Nexus" loading="lazy"
-                        onerror="this.src='https://r.res.easebar.com/pic/20260304/754c842e-f9f7-439f-bda9-b4918fcb403d.jpg'">
-                    <div class="class-card-ov">
-                        <div class="class-number">CLASS 02</div>
-                        <div class="class-name">NEXUS</div>
-                        <div class="class-desc">Soutien tactique, amplification des alliés, commandement de faction.
-                        </div>
+                <div class="clc"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/zhiye_lh2_24acaa85.png"
+                        alt="Class2" loading="lazy"
+                        onerror="this.src='https://r.res.easebar.com/pic/20260226/c5b46a57-b2af-4c37-ba95-9b4d7c2168c7.jpg'">
+                    <div class="clov">
+                        <div class="clno">CLASS 02</div>
+                        <div class="clnm" data-t="ft.cl2n"></div>
+                        <div class="clds" data-t="ft.cl2d"></div>
                     </div>
                 </div>
-                <div class="class-card"><img
-                        src="https://www.oncehuman.game/pc/gw/20250418171534/img/zhiye_lh3_266702db.png"
-                        alt="Classe Phantom" loading="lazy"
-                        onerror="this.src='https://r.res.easebar.com/pic/20260302/2eb658ff-09bc-46bf-8658-db04e6cfae05.jpg'">
-                    <div class="class-card-ov">
-                        <div class="class-number">CLASS 03</div>
-                        <div class="class-name">PHANTOM</div>
-                        <div class="class-desc">Infiltration, piégeage, guérilla. L'ennemi ne te voit jamais venir.
-                        </div>
+                <div class="clc"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/zhiye_lh3_266702db.png"
+                        alt="Class3" loading="lazy"
+                        onerror="this.src='https://r.res.easebar.com/pic/20260119/1d2b69e9-4629-4a02-90ed-47e65e737cec.jpeg'">
+                    <div class="clov">
+                        <div class="clno">CLASS 03</div>
+                        <div class="clnm" data-t="ft.cl3n"></div>
+                        <div class="clds" data-t="ft.cl3d"></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ════ FIX #3 — 3 ÉTAPES SIMPLES ════ -->
+    <!-- ═══ 3 STEPS ═══ -->
     <section id="steps" class="sec">
-        <h2>Commence en <span class="gtx">3 étapes simples</span></h2>
-        <p>De zéro à joueur actif en moins de 5 minutes. Aucune configuration complexe.</p>
-        <div class="steps-row" id="steps-row">
+        <h2 data-th="st.title"></h2>
+        <p class="stepsub" data-t="st.sub"></p>
+        <div class="strow" id="strow">
             <div class="step">
-                <div class="step-num">1</div>
-                <div class="step-title">TÉLÉCHARGE</div>
-                <div class="step-desc">Clique sur le bouton ci-dessous. Le launcher officiel s'installe automatiquement.
-                    Taille : ~12 Go.</div>
+                <div class="stepn">1</div>
+                <div class="stept" data-t="st.1t"></div>
+                <div class="stepd" data-t="st.1d"></div>
             </div>
             <div class="step">
-                <div class="step-num">2</div>
-                <div class="step-title">CRÉE TON COMPTE</div>
-                <div class="step-desc">Inscription gratuite en 30 secondes. Aucune CB requise. Email + mot de passe
-                    suffisent.</div>
+                <div class="stepn">2</div>
+                <div class="stept" data-t="st.2t"></div>
+                <div class="stepd" data-t="st.2d"></div>
             </div>
             <div class="step">
-                <div class="step-num">3</div>
-                <div class="step-title">JOUE & REÇOIS</div>
-                <div class="step-desc">Lance le jeu, reçois automatiquement le Pack Éveil Mutant (49,99€) dans ton
-                    inventaire.</div>
+                <div class="stepn">3</div>
+                <div class="stept" data-t="st.3t"></div>
+                <div class="stepd" data-t="st.3d"></div>
             </div>
         </div>
-        <div style="margin-top:44px">
-            <a href="https://adl.easebar.com/d/g/oncehuman/c/gwpc" target="_blank" class="btn btn-big"><span>⚡ Commencer
-                    Maintenant — Gratuit</span></a>
-        </div>
+        <div style="margin-top:44px"><a href="https://adl.easebar.com/d/g/oncehuman/c/gwpc" target="_blank"
+                class="btn big" data-t="st.cta"></a></div>
     </section>
 
-    <!-- URGENCE -->
+    <!-- ═══ URGENCY ═══ -->
     <section id="urgency" class="sec">
-        <div class="ubg"></div>
-        <div class="u-inner">
-            <span class="tag">⚠️ Offre Limitée</span>
-            <h2>Pack <span class="gtx">OP Exclusif</span> — Expire Dans :</h2>
-            <p class="udesc">Télécharge Once Human V3 maintenant et déverrouille automatiquement le Pack Éveil Mutant.
-                Valeur totale : 49,99€ — offert aux 10 000 premiers uniquement.</p>
-            <div class="cdwrap">
+        <div class="uglow"></div>
+        <div class="uinn">
+            <span class="tag" data-t="ur.tag"></span>
+            <h2 data-th="ur.title"></h2>
+            <p class="udesc" data-t="ur.desc"></p>
+            <div class="cdown">
                 <div class="cdu">
                     <div class="cdn" id="cdh">23</div>
-                    <div class="cdl">Heures</div>
+                    <div class="cdl" data-t="ur.h"></div>
                 </div>
                 <div class="cdsep">:</div>
                 <div class="cdu">
                     <div class="cdn" id="cdm">47</div>
-                    <div class="cdl">Minutes</div>
+                    <div class="cdl" data-t="ur.m"></div>
                 </div>
                 <div class="cdsep">:</div>
                 <div class="cdu">
                     <div class="cdn" id="cds">00</div>
-                    <div class="cdl">Secondes</div>
+                    <div class="cdl" data-t="ur.s"></div>
                 </div>
             </div>
-            <div class="uoffer">
-                <p style="font-family:var(--fd);font-size:.88rem;letter-spacing:.1em;color:var(--a);margin-bottom:6px">
-                    🎁 PACK ÉVEIL MUTANT — INCLUS AVEC LE TÉLÉCHARGEMENT</p>
+            <div class="obox">
+                <p class="otitle" data-t="ur.ot"></p>
                 <ul class="olist">
-                    <li>Skin Exclusif "Apex Mutant" (Armure Chromée)</li>
-                    <li>Arme Légendaire : Fusil Stardust Mk.III</li>
-                    <li>Pack Ressources Départ (×500 matériaux rares)</li>
-                    <li>Accès Serveur Premium PvE Prioritaire</li>
-                    <li>Badge Vétéran V3 (profil + chat)</li>
-                    <li>30 jours de Battle Pass Gratuit</li>
+                    <li data-t="ur.o1"></li>
+                    <li data-t="ur.o2"></li>
+                    <li data-t="ur.o3"></li>
+                    <li data-t="ur.o4"></li>
+                    <li data-t="ur.o5"></li>
+                    <li data-t="ur.o6"></li>
                 </ul>
             </div>
-            <a href="https://adl.easebar.com/d/g/oncehuman/c/gwpc" target="_blank" class="btn btn-big" id="mcta">
-                <span>⚡ Télécharger Once Human V3 — GRATUIT</span>
-            </a>
-            <!-- ════ FIX #4 — TRUST badges under main CTA ════ -->
-            <div class="trust-row">
-                <span class="tbadge">Fichier sécurisé — Certifié Anti-Virus</span>
-                <span class="tbadge green">Aucune carte bancaire requise</span>
-                <span class="tbadge green">Jeu 100% Free to Play</span>
-                <span class="tbadge green">Remboursement 0€ (jeu gratuit)</span>
+            <a href="https://adl.easebar.com/d/g/oncehuman/c/gwpc" target="_blank" class="btn big" id="mcta"
+                data-t="ur.cta"></a>
+            <div class="trow">
+                <span class="tbdg">🔒 <span data-t="ur.tr1"></span></span>
+                <span class="tbdg">✓ <span data-t="ur.tr2"></span></span>
+                <span class="tbdg">✓ <span data-t="ur.tr3"></span></span>
             </div>
         </div>
     </section>
 
-    <!-- ════ FIX #4 — FAQ SECTION ════ -->
+    <!-- ═══ FAQ ═══ -->
     <section id="faq" class="sec">
-        <div class="sec-inner">
-            <h2>Questions <span class="gtx">Fréquentes</span></h2>
-            <p class="faq-sub">Tout ce que tu dois savoir avant de télécharger</p>
-            <div class="faq-list" id="faq-list">
-
-                <div class="faq-item">
-                    <div class="faq-q"><span class="faq-q-text">Once Human est-il vraiment gratuit ? Y a-t-il des
-                            microtransactions cachées ?</span><span class="faq-icon">+</span></div>
-                    <div class="faq-a">
-                        <div class="faq-a-inner">Oui, Once Human est <strong>100% Free to Play</strong>. Le jeu complet
-                            est gratuit, y compris le contenu V3. Les microtransactions se limitent à des cosmétiques
-                            purement esthétiques (skins, emotes) — aucun avantage gameplay ne peut être acheté. Le
-                            Pay-to-Win est strictement interdit par la charte de NetEase Games.</div>
+        <div class="inn">
+            <h2 data-th="fq.title"></h2>
+            <p class="faqsub" data-t="fq.sub"></p>
+            <div class="faqlist" id="faqlist">
+                <div class="faqit">
+                    <div class="faqq"><span class="faqt" data-t="fq.q1"></span><span class="faqi">+</span></div>
+                    <div class="faqa">
+                        <div class="faqb" data-th="fq.a1"></div>
                     </div>
                 </div>
-
-                <div class="faq-item">
-                    <div class="faq-q"><span class="faq-q-text">Comment recevoir le Pack Éveil Mutant (valeur 49,99€)
-                            ?</span><span class="faq-icon">+</span></div>
-                    <div class="faq-a">
-                        <div class="faq-a-inner">Le pack est attribué automatiquement lors de ta première connexion, à
-                            condition d'être parmi les 10 000 premiers. Aucun code promo requis. Tu trouveras les items
-                            directement dans ton <strong>inventaire en jeu</strong> dès le tutoriel terminé.</div>
+                <div class="faqit">
+                    <div class="faqq"><span class="faqt" data-t="fq.q2"></span><span class="faqi">+</span></div>
+                    <div class="faqa">
+                        <div class="faqb" data-th="fq.a2"></div>
                     </div>
                 </div>
-
-                <div class="faq-item">
-                    <div class="faq-q"><span class="faq-q-text">Quelle est la configuration PC requise ?</span><span
-                            class="faq-icon">+</span></div>
-                    <div class="faq-a">
-                        <div class="faq-a-inner"><strong>Minimum :</strong> Windows 10 64-bit, Intel i5-6600K / AMD
-                            Ryzen 5 1600, GTX 1060 6Go / RX 580 8Go, 16 Go RAM, 60 Go stockage
-                            SSD.<br><strong>Recommandé :</strong> Windows 11, Intel i7-10700K / Ryzen 7 5800X, RTX 3070
-                            / RX 6800, 32 Go RAM, SSD NVMe. Taille du fichier : environ 12 Go.</div>
+                <div class="faqit">
+                    <div class="faqq"><span class="faqt" data-t="fq.q3"></span><span class="faqi">+</span></div>
+                    <div class="faqa">
+                        <div class="faqb" data-th="fq.a3"></div>
                     </div>
                 </div>
-
-                <div class="faq-item">
-                    <div class="faq-q"><span class="faq-q-text">Le jeu contient-il des virus ou logiciels indésirables
-                            ?</span><span class="faq-icon">+</span></div>
-                    <div class="faq-a">
-                        <div class="faq-a-inner">Once Human est édité par <strong>NetEase Games</strong>, l'un des plus
-                            grands éditeurs mondiaux (coté en bourse). Le launcher est certifié par les principaux
-                            antivirus. Le jeu intègre GameGuard, un anti-cheat certifié. Aucun logiciel tiers n'est
-                            installé sans ta permission.</div>
+                <div class="faqit">
+                    <div class="faqq"><span class="faqt" data-t="fq.q4"></span><span class="faqi">+</span></div>
+                    <div class="faqa">
+                        <div class="faqb" data-th="fq.a4"></div>
                     </div>
                 </div>
-
-                <div class="faq-item">
-                    <div class="faq-q"><span class="faq-q-text">Peut-on jouer en solo ou faut-il obligatoirement un
-                            groupe ?</span><span class="faq-icon">+</span></div>
-                    <div class="faq-a">
-                        <div class="faq-a-inner">Les deux modes sont disponibles. <strong>Le solo est entièrement
-                                viable</strong> — la progression, la construction et même les boss peuvent être faits
-                            seul. Les contenus multijoueurs (raids de faction, guerres de territoire) sont optionnels et
-                            réservés aux joueurs qui le souhaitent.</div>
+                <div class="faqit">
+                    <div class="faqq"><span class="faqt" data-t="fq.q5"></span><span class="faqi">+</span></div>
+                    <div class="faqa">
+                        <div class="faqb" data-th="fq.a5"></div>
                     </div>
                 </div>
-
-                <div class="faq-item">
-                    <div class="faq-q"><span class="faq-q-text">Qu'est-ce que le "Visional Wheel S3 — Aberrant Progeny"
-                            ?</span><span class="faq-icon">+</span></div>
-                    <div class="faq-a">
-                        <div class="faq-a-inner">C'est la troisième saison du mode compétitif <strong>Visional
-                                Wheel</strong>. Tu incarnes les pouvoirs des aberrants eux-mêmes — pétrifie tes ennemis
-                            avec le regard du Watcher, ou incinère-les avec les flammes du Scorcher. Trois zones
-                            spéciales ont été ouvertes avec des règles uniques et des récompenses exclusives.</div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- ═══ FOOTER ═══ -->
     <footer id="ft">
-        <div style="max-width:1200px;margin:0 auto">
+        <div class="inn">
             <div class="ftop">
                 <div>
-                    <div class="logo" style="font-size:1.45rem">ONCE HUMAN</div>
-                    <p class="ftag2">Le survival post-apocalyptique qui redéfinit les standards. Visional Wheel S3
-                        disponible maintenant — gratuitement.</p>
+                    <div class="logo orb" style="font-size:1.35rem">ONCE HUMAN</div>
+                    <p class="ftag" data-t="fo.tag"></p>
+                    <div style="margin-top:14px;font-size:.72rem;color:var(--tm)">🇨🇭 Disponible en CHF · FR · DE · IT
+                        · RM · EN</div>
                 </div>
-                <div class="flcol">
-                    <h4>Jeu</h4>
+                <div class="fcol">
+                    <h4 data-t="fo.c1h"></h4>
                     <ul>
-                        <li><a href="https://adl.easebar.com/d/g/oncehuman/c/gwpc" target="_blank">Télécharger PC</a>
+                        <li><a href="https://adl.easebar.com/d/g/oncehuman/c/gwpc" target="_blank" data-t="fo.c1l1"></a>
                         </li>
-                        <li><a href="#">Patch Notes</a></li>
-                        <li><a href="#">Roadmap 2026</a></li>
-                        <li><a href="#">Status Serveurs</a></li>
+                        <li><a href="#" data-t="fo.c1l2"></a></li>
+                        <li><a href="#" data-t="fo.c1l3"></a></li>
+                        <li><a href="#" data-t="fo.c1l4"></a></li>
                     </ul>
                 </div>
-                <div class="flcol">
-                    <h4>Communauté</h4>
+                <div class="fcol">
+                    <h4 data-t="fo.c2h"></h4>
                     <ul>
-                        <li><a href="#">Discord Officiel</a></li>
+                        <li><a href="#">Discord</a></li>
                         <li><a href="#">Reddit</a></li>
                         <li><a href="#">Twitch</a></li>
                         <li><a href="#">YouTube</a></li>
                     </ul>
                 </div>
-                <div class="flcol">
-                    <h4>Support</h4>
+                <div class="fcol">
+                    <h4 data-t="fo.c3h"></h4>
                     <ul>
-                        <li><a href="#">Centre d'Aide</a></li>
-                        <li><a href="#">Signaler un Bug</a></li>
-                        <li><a href="#">Presse & Médias</a></li>
-                        <li><a href="https://www.oncehuman.game/grfkpt/">Co-Dev Feedback</a></li>
+                        <li><a href="#" data-t="fo.c3l1"></a></li>
+                        <li><a href="#" data-t="fo.c3l2"></a></li>
+                        <li><a href="#" data-t="fo.c3l3"></a></li>
                     </ul>
                 </div>
             </div>
             <div class="fbot">
-                <p class="fcopy">© 2026 Once Human — NetEase Games / Starry Studio. Tous droits réservés.</p>
-                <div class="fleg"><a
-                        href="https://protocol.unisdk.easebar.com/release/latest_v475.html">Confidentialité</a><a
-                        href="https://protocol.unisdk.easebar.com/release/latest_v487.html">CGU</a><a
-                        href="#">Cookies</a></div>
+                <p class="copy" data-t="fo.copy"></p>
+                <div class="llinks">
+                    <a href="https://protocol.unisdk.easebar.com/release/latest_v475.html" data-t="fo.priv"></a>
+                    <a href="https://protocol.unisdk.easebar.com/release/latest_v487.html" data-t="fo.terms"></a>
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- EXIT POPUP -->
-    <div id="epop">
+    <!-- ═══ EXIT POPUP ═══ -->
+    <div id="exitpop">
         <div class="eov"></div>
-        <div class="ecnt">
+        <div class="ebox">
             <button class="ecls" id="ecls">✕</button>
             <p style="font-size:2rem;margin-bottom:10px">⚠️</p>
-            <h2 class="egtitle gtx">NE PARTEZ PAS SANS VOTRE PACK OP !</h2>
-            <p class="esub">Le Pack Éveil Mutant (valeur <strong style="color:var(--a)">49,99€</strong>) est offert aux
-                10 000 premiers. Il vous reste une place.</p>
+            <h2 class="etitle gt" data-t="ex.title"></h2>
+            <p class="esub" data-th="ex.sub"></p>
             <a href="https://adl.easebar.com/d/g/oncehuman/c/gwpc" target="_blank" class="btn"
-                style="width:100%;justify-content:center;margin-bottom:13px"><span>🎮 Récupérer Mon Pack —
-                    GRATUIT</span></a>
-            <a href="#" id="edecl"
-                style="font-size:.76rem;color:var(--tm);cursor:pointer;text-decoration:none;display:block">Non merci, je
-                préfère jouer sans avantage</a>
+                style="width:100%;justify-content:center;margin-bottom:13px" data-t="ex.cta"></a>
+            <a href="#" id="exdec" style="font-size:.74rem;color:var(--tm);text-decoration:none;display:block"
+                data-t="ex.dec"></a>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        const T = {
+            "fr": {
+                "sticky.msg": "Offre expire dans",
+                "sticky.btn": "⚡ Télécharger GRATUIT",
+                "nav.s": "Scénarios",
+                "nav.d": "Déviants",
+                "nav.r": "Avis",
+                "nav.p": "Pack OP",
+                "nav.cta": "⚡ Pack Gratuit",
+                "h.b1": "🏆 #1 Survival PC 2024",
+                "h.b2": "⭐ 4.8/5 Steam",
+                "h.b3": "🎁 Pack CHF 54.– Offert",
+                "h.b4": "✓ 100% Gratuit",
+                "h.eye": "▸ VISIONAL WHEEL S3 — ABERRANT PROGENY EN DIRECT",
+                "h.l1": "L'ÉVEIL",
+                "h.glitch": "DU MUTANT",
+                "h.sub": "Survie. Mutation. Domination.<br><em>Télécharge gratuitement</em> et reçois le Pack Éveil Mutant (valeur CHF†54.–)<br>offert aux <em>10 000 premiers joueurs</em>.",
+                "h.cta1": "🎮 Jouer Gratuitement",
+                "h.cta2": "▷ Voir les Scénarios",
+                "h.tr1": "Aucune CB requise",
+                "h.tr2": "100% Gratuit",
+                "h.tr3": "Anti-virus certifié",
+                "h.tr4": "2M+ joueurs actifs",
+                "h.s1": "Joueurs Actifs",
+                "h.s2": "Note Steam",
+                "h.s3": "Survival PC 2024",
+                "h.s4": "Play Forever",
+                "h.scroll": "SCROLL",
+                "p.tag": "Pourquoi Once Human ?",
+                "p.title": "Tu en as marre des <span class=\"gt\">survivals génériques ?</span>",
+                "p.desc": "Ce que les autres jeux ne t'offrent jamais — survole chaque carte.",
+                "p.hint": "← Survole pour la solution",
+                "p.c1f.t": "Monde Vide & Sans Âme",
+                "p.c1f.d": "Carte vide, loots répétitifs, progression épuisée en 10h. Aucun mystère.",
+                "p.c1b.t": "Narration Organique",
+                "p.c1b.d": "Un monde vivant avec événements narratifs dynamiques. Chaque session révèle une couche du mystère Stardust.",
+                "p.c1b.cta": "↻ DÉCOUVRIR →",
+                "p.c2f.t": "Combats Plats & Prévisibles",
+                "p.c2f.d": "Même cycle click-loot depuis 10 ans. Boss éponges, IA prévisible.",
+                "p.c2b.t": "Combat Mutant Stratégique",
+                "p.c2b.d": "Armes modulaires + pouvoirs Deviants. 47 types d'ennemis avec IA adaptative.",
+                "p.c2b.cta": "↻ VOIR LES COMBATS →",
+                "p.c3f.t": "Construction Sans Vision",
+                "p.c3f.d": "Ta base est un simple stockage sans impact sur le gameplay.",
+                "p.c3b.t": "Bases Tactiques & Évolutives",
+                "p.c3b.d": "Cradle 3.0 : labo, défenses IA, fermes d'énergie. Ta base = ton avantage.",
+                "p.c3b.cta": "↻ BUILD & CONQUER →",
+                "sc.tag": "Scénarios Officiels",
+                "sc.title": "Des mondes <span class=\"gt\">uniques à conquérir</span>",
+                "sc.desc": "Chaque scénario est un univers complet avec ses règles, mystères et boss légendaires.",
+                "sc.s1": "Nalcott envahie par un brouillard de cauchemar. Purifiez la brume, éliminez la source des ténèbres.",
+                "sc.b1": "🔥 ACTIF",
+                "sc.s2": "Des déserts arides aux montagnes glacées — nouveaux adversaires, alliés inattendus.",
+                "sc.b2": "❄️ SAISONNIER",
+                "sc.s3": "Mayflies contre Rosetta — la rivalité pour les Prism Deviations va tout faire basculer.",
+                "sc.b3": "⚔️ PVP",
+                "sc.s4": "Les zones frontières deviennent des champs de bataille. Ton Warband t'appelle.",
+                "sc.b4": "🏆 RANKED",
+                "dv.tag": "Créatures & Déviants",
+                "dv.title": "Des entités <span class=\"gt\">au-delà du réel</span>",
+                "dv.p1": "Les Déviations défient la logique — pouvoirs surnaturels au-delà de la vie, du temps et de la thermodynamique.",
+                "dv.p2": "Capture-les. Fusionne-les. Envoie-les au combat. Le Visional Wheel S3 t'offre les pouvoirs des aberrants.",
+                "dv.cta": "🧬 Capturer les Déviants",
+                "dv.d1": "DÉVIANT ALPHA",
+                "dv.d2": "SCORCHER",
+                "dv.d3": "WATCHER",
+                "dv.d4": "ABYSSAL",
+                "dv.d5": "PRISM SHADE",
+                "pr.tag": "Communauté",
+                "pr.title": "2 millions de joueurs <span class=\"gt\">ne mentent pas</span>",
+                "pr.t1": "« V3 a tout changé. Le système Deviant est addictif, les events de faction épiques. 3 semaines que je joue tous les soirs. »",
+                "pr.r1": "🎖 Rang S — Serveur EU-West",
+                "pr.t2": "« Meilleur survival F2P de l'année. La DA post-apo est insane. Tous mes viewers ont téléchargé après mon stream. »",
+                "pr.r2": "📺 Streamer 180K — Twitch",
+                "pr.t3": "« J'ai refait ma base 4 fois pour optimiser les défenses. Le crafting est si profond que t'as toujours quelque chose à faire. »",
+                "pr.r3": "🏆 Top 0.1% Construction",
+                "pr.t4": "« Les zones de contamination V3 sont sublimes. Enfin un survival à 120fps ! »",
+                "pr.r4": "🌟 Testeur Bêta Officiel",
+                "pr.t5": "« Raid 12 contre 30 grâce à une stratégie de base pensée. Aucun autre jeu ne donne ces sensations. »",
+                "pr.r5": "⚔️ Leader Faction Top 5",
+                "pr.n1t": "Dev Blog",
+                "pr.n1": "Refonte Complète du Système Tech — Avril 2026",
+                "pr.n2t": "Mise à Jour",
+                "pr.n2": "Patch V2.3.3 — Nouvelles Optimisations",
+                "pr.n3t": "Visional Wheel",
+                "pr.n3": "Aberrant Progeny S3 — Maintenant Disponible",
+                "pr.n4t": "Événement",
+                "pr.n4": "Shadow Pavilion — Récompenses Exclusives",
+                "pr.bv1": "Best Survival 2024",
+                "pr.bl1": "Gaming Awards",
+                "pr.bl2": "Steam — 47K Avis",
+                "pr.bl3": "En 6 Semaines",
+                "pr.bl4": "Twitch CH/FR — 3 Semaines",
+                "ft.tag": "Visional Wheel S3",
+                "ft.title": "Tout ce que <span class=\"gt\">V3 apporte</span>",
+                "ft.desc": "La mise à jour la plus massive de l'histoire d'Once Human.",
+                "ft.f1t": "ZONES STARDUST V3",
+                "ft.f1d": "Zones dynamiques Level 6 avec weather procédural. Tornades, orages magnétiques, rifts. Boss légendaires pour les survivants qui osent.",
+                "ft.f1x": "⚡ Exclusif V3",
+                "ft.f2t": "ARBRE DEVIANT ÉTENDU",
+                "ft.f2d": "+23 nouveaux pouvoirs. Fusion : 2 pouvoirs → 1 hybride. 1800+ combinaisons.",
+                "ft.f2x": "🔬 Nouveau",
+                "ft.f3t": "CRADLE 3.0",
+                "ft.f3d": "Construction modulaire. Défenses IA autonomes. Laboratoire Tier 5.",
+                "ft.f3x": "🏗️ Refonte",
+                "ft.f4t": "FACTIONS & GUERRE",
+                "ft.f4d": "Raids PvP, alliances diplomatiques, trahisons. La carte politique évolue chaque semaine.",
+                "ft.f4x": "🌐 Multi",
+                "ft.f5t": "ARMES MODULAIRES",
+                "ft.f5d": "340+ recettes. 6 mods actifs simultanément. Chaque build est unique.",
+                "ft.f5x": "🔧 Profond",
+                "ft.f6t": "DIRECTION ARTISTIQUE",
+                "ft.f6d": "Cycle cinématique jour/nuit. Effets volumétriques next-gen. Bande-son adaptative.",
+                "ft.f6x": "🌟 Visuel",
+                "ft.ctag": "Classes de Personnage",
+                "ft.ctitle": "Choisis ton <span class=\"gt\">évolution</span>",
+                "ft.cl1n": "ASSAUT",
+                "ft.cl1d": "Dominance offensive. Armes lourdes, pouvoirs destructeurs.",
+                "ft.cl2n": "NEXUS",
+                "ft.cl2d": "Soutien tactique. Amplification alliés, commandement faction.",
+                "ft.cl3n": "PHANTOM",
+                "ft.cl3d": "Infiltration, piégeage, guérilla. L'ennemi ne te voit jamais venir.",
+                "st.title": "Commence en <span class=\"gt\">3 étapes simples</span>",
+                "st.sub": "De zéro à joueur actif en moins de 5 minutes.",
+                "st.cta": "⚡ Commencer Maintenant — Gratuit",
+                "st.1t": "TÉLÉCHARGE",
+                "st.1d": "Clique sur le bouton. Le launcher officiel s'installe. (~12 Go)",
+                "st.2t": "CRÉE TON COMPTE",
+                "st.2d": "Inscription gratuite en 30 secondes. Email + mot de passe suffisent.",
+                "st.3t": "JOUE & REÇOIS",
+                "st.3d": "Lance le jeu, reçois le Pack Éveil Mutant (CHF 54.–) dans ton inventaire.",
+                "ur.tag": "⚠️ Offre Limitée",
+                "ur.title": "Pack <span class=\"gt\">OP Exclusif</span> — Expire Dans :",
+                "ur.desc": "Télécharge Once Human V3 maintenant et déverrouille le Pack Éveil Mutant (CHF 54.–) — offert aux 10 000 premiers.",
+                "ur.h": "Heures",
+                "ur.m": "Minutes",
+                "ur.s": "Secondes",
+                "ur.ot": "🎁 PACK ÉVEIL MUTANT — INCLUS AVEC LE TÉLÉCHARGEMENT",
+                "ur.o1": "Skin Exclusif «Apex Mutant» (Armure Chromée)",
+                "ur.o2": "Arme Légendaire : Fusil Stardust Mk.III",
+                "ur.o3": "Pack Ressources Départ (×500 matériaux rares)",
+                "ur.o4": "Accès Serveur Premium PvE Prioritaire",
+                "ur.o5": "Badge Vétéran V3",
+                "ur.o6": "30 jours Battle Pass Gratuit",
+                "ur.cta": "⚡ Télécharger Once Human V3 — GRATUIT",
+                "ur.tr1": "Fichier sécurisé Anti-Virus",
+                "ur.tr2": "Aucune carte bancaire",
+                "ur.tr3": "100% Free to Play",
+                "fq.title": "Questions <span class=\"gt\">Fréquentes</span>",
+                "fq.sub": "Tout ce que tu dois savoir avant de télécharger",
+                "fq.q1": "Once Human est-il vraiment gratuit ? Y a-t-il des microtransactions cachées ?",
+                "fq.a1": "Oui, Once Human est <strong>100% Free to Play</strong>. Les microtransactions se limitent à des cosmétiques. Aucun avantage gameplay ne peut être acheté.",
+                "fq.q2": "Comment recevoir le Pack Éveil Mutant (valeur CHF 54.–) ?",
+                "fq.a2": "Le pack est attribué automatiquement lors de ta première connexion parmi les 10 000 premiers. Les items apparaissent dans ton <strong>inventaire en jeu</strong> dès le tutoriel terminé.",
+                "fq.q3": "Quelle est la configuration PC requise ?",
+                "fq.a3": "<strong>Minimum :</strong> Windows 10, i5-6600K / Ryzen 5 1600, GTX 1060 6 Go, 16 Go RAM, 60 Go SSD.<br><strong>Recommandé :</strong> Windows 11, i7-10700K / Ryzen 7 5800X, RTX 3070, 32 Go RAM, SSD NVMe.",
+                "fq.q4": "Le jeu contient-il des virus ?",
+                "fq.a4": "Once Human est édité par <strong>NetEase Games</strong>, société cotée en bourse. Le launcher est certifié par les principaux antivirus. Le jeu intègre GameGuard anti-cheat certifié.",
+                "fq.q5": "Peut-on jouer en solo ?",
+                "fq.a5": "Oui, <strong>le solo est entièrement viable</strong>. Progression, construction et boss peuvent être faits seul. Les raids PvP de faction sont entièrement optionnels.",
+                "fo.tag": "Le survival post-apo qui redéfinit les standards. V3 disponible maintenant — gratuitement.",
+                "fo.c1h": "Jeu",
+                "fo.c1l1": "Télécharger PC",
+                "fo.c1l2": "Patch Notes",
+                "fo.c1l3": "Roadmap 2026",
+                "fo.c1l4": "Status Serveurs",
+                "fo.c2h": "Communauté",
+                "fo.c3h": "Support",
+                "fo.c3l1": "Centre d'Aide",
+                "fo.c3l2": "Signaler un Bug",
+                "fo.c3l3": "Presse & Médias",
+                "fo.copy": "© 2026 Once Human — NetEase Games / Starry Studio.",
+                "fo.priv": "Confidentialité",
+                "fo.terms": "CGU",
+                "ex.title": "NE PARTEZ PAS SANS VOTRE PACK OP !",
+                "ex.sub": "Le Pack Éveil Mutant (valeur <strong style='color:var(--a)'>CHF 54.–</strong>) est offert aux 10 000 premiers. Il reste une place.",
+                "ex.cta": "🎮 Récupérer Mon Pack — GRATUIT",
+                "ex.dec": "Non merci, je préfère jouer sans avantage"
+            },
+            "en": {
+                "sticky.msg": "Offer expires in",
+                "sticky.btn": "⚡ Download FREE",
+                "nav.s": "Scenarios",
+                "nav.d": "Deviants",
+                "nav.r": "Reviews",
+                "nav.p": "OP Pack",
+                "nav.cta": "⚡ Free Pack",
+                "h.b1": "🏆 #1 PC Survival 2024",
+                "h.b2": "⭐ 4.8/5 Steam",
+                "h.b3": "🎁 CHF 54.– Pack Free",
+                "h.b4": "✓ 100% Free",
+                "h.eye": "▸ VISIONAL WHEEL S3 — ABERRANT PROGENY NOW LIVE",
+                "h.l1": "THE AWAKENING",
+                "h.glitch": "OF THE MUTANT",
+                "h.sub": "Survive. Mutate. Dominate.<br><em>Download for free</em> and receive the Awakening Mutant Pack (value CHF†54.–)<br>gifted to the <em>first 10,000 players</em> only.",
+                "h.cta1": "🎮 Play for Free",
+                "h.cta2": "▷ Watch Gameplay",
+                "h.tr1": "No credit card needed",
+                "h.tr2": "100% Free to Play",
+                "h.tr3": "Anti-virus certified",
+                "h.tr4": "2M+ active players",
+                "h.s1": "Active Players",
+                "h.s2": "Steam Rating",
+                "h.s3": "PC Survival 2024",
+                "h.s4": "Play Forever",
+                "h.scroll": "SCROLL",
+                "p.tag": "Why Once Human?",
+                "p.title": "Tired of <span class=\"gt\">generic survival games?</span>",
+                "p.desc": "What other games never give you — hover cards to discover the solution.",
+                "p.hint": "← Hover for the solution",
+                "p.c1f.t": "Empty & Soulless World",
+                "p.c1f.d": "Empty map, repetitive loot, progression that runs dry in 10h. No mystery.",
+                "p.c1b.t": "Organic Storytelling",
+                "p.c1b.d": "A living world with dynamic narrative events. Every session reveals a new layer of the Stardust mystery.",
+                "p.c1b.cta": "↻ DISCOVER →",
+                "p.c2f.t": "Flat & Predictable Combat",
+                "p.c2f.d": "Same click-loot loop for 10 years. Damage-sponge bosses, predictable AI.",
+                "p.c2b.t": "Strategic Mutant Combat",
+                "p.c2b.d": "Modular weapons + Deviant powers. 47 enemy types with adaptive AI.",
+                "p.c2b.cta": "↻ SEE COMBAT →",
+                "p.c3f.t": "Purposeless Building",
+                "p.c3f.d": "Your base is just storage with no real gameplay impact.",
+                "p.c3b.t": "Tactical & Evolving Bases",
+                "p.c3b.d": "Cradle 3.0: research lab, autonomous AI defenses, energy farms. Your base = your edge.",
+                "p.c3b.cta": "↻ BUILD & CONQUER →",
+                "sc.tag": "Official Scenarios",
+                "sc.title": "Unique worlds <span class=\"gt\">to conquer</span>",
+                "sc.desc": "Each scenario is a complete universe with its own rules, mysteries and legendary bosses.",
+                "sc.s1": "Nalcott invaded by nightmare fog. Purify the mist, eliminate the source of darkness.",
+                "sc.b1": "🔥 ACTIVE",
+                "sc.s2": "From arid deserts to frozen mountains — new adversaries, unexpected allies.",
+                "sc.b2": "❄️ SEASONAL",
+                "sc.s3": "Mayflies vs Rosetta — the rivalry for Prism Deviations will change everything.",
+                "sc.b3": "⚔️ PVP",
+                "sc.s4": "Border zones become battlegrounds. Your Warband calls you to the fight.",
+                "sc.b4": "🏆 RANKED",
+                "dv.tag": "Creatures & Deviants",
+                "dv.title": "Entities <span class=\"gt\">beyond reality</span>",
+                "dv.p1": "Deviations defy logic — supernatural powers beyond life, time and thermodynamics.",
+                "dv.p2": "Capture them. Fuse them. Send them to battle. Visional Wheel S3 grants you the power of the aberrants.",
+                "dv.cta": "🧬 Capture Deviants",
+                "dv.d1": "ALPHA DEVIANT",
+                "dv.d2": "SCORCHER",
+                "dv.d3": "WATCHER",
+                "dv.d4": "ABYSSAL",
+                "dv.d5": "PRISM SHADE",
+                "pr.tag": "Community",
+                "pr.title": "2 million players <span class=\"gt\">don't lie</span>",
+                "pr.t1": "\"V3 changed everything. The Deviant system is addictive, faction events are epic. I haven't stopped playing for 3 weeks.\"",
+                "pr.r1": "🎖 Rank S — EU-West Server",
+                "pr.t2": "\"Best F2P survival of the year. The post-apo art direction is insane. All my viewers downloaded it after my V3 stream.\"",
+                "pr.r2": "📺 Streamer 180K — Twitch",
+                "pr.t3": "\"I rebuilt my base 4 times to optimize defenses. The crafting is so deep you always have something to do.\"",
+                "pr.r3": "🏆 Top 0.1% Builder",
+                "pr.t4": "\"The contamination zones in V3 are visually stunning. Finally a survival game at 120fps!\"",
+                "pr.r4": "🌟 Official Beta Tester",
+                "pr.t5": "\"12 vs 30 raid won thanks to smart base strategy. No other game gives you these feelings.\"",
+                "pr.r5": "⚔️ Top 5 Faction Leader",
+                "pr.n1t": "Dev Blog",
+                "pr.n1": "Full Tech System Overhaul — April 2026",
+                "pr.n2t": "Update",
+                "pr.n2": "Patch V2.3.3 — New Optimizations",
+                "pr.n3t": "Visional Wheel",
+                "pr.n3": "Aberrant Progeny S3 — Now Live",
+                "pr.n4t": "Event",
+                "pr.n4": "Shadow Pavilion — Exclusive Rewards",
+                "pr.bv1": "Best Survival 2024",
+                "pr.bl1": "Gaming Awards",
+                "pr.bl2": "Steam — 47K Reviews",
+                "pr.bl3": "In 6 Weeks",
+                "pr.bl4": "Twitch — 3 Weeks #1",
+                "ft.tag": "Visional Wheel S3",
+                "ft.title": "Everything <span class=\"gt\">V3 delivers</span>",
+                "ft.desc": "The biggest update in Once Human history. More content, more depth, more chaos.",
+                "ft.f1t": "STARDUST ZONES V3",
+                "ft.f1d": "Dynamic Level 6 contamination zones with procedural weather. Tornadoes, magnetic storms, dimensional rifts. Legendary bosses for daring survivors.",
+                "ft.f1x": "⚡ V3 Exclusive",
+                "ft.f2t": "EXTENDED DEVIANT TREE",
+                "ft.f2d": "+23 new powers. Fusion: combine 2 powers → 1 hybrid. 1800+ combinations.",
+                "ft.f2x": "🔬 New",
+                "ft.f3t": "CRADLE 3.0",
+                "ft.f3d": "Modular construction. Autonomous AI defenses. Tier 5 Laboratory.",
+                "ft.f3x": "🏗️ Revamped",
+                "ft.f4t": "FACTIONS & OPEN WAR",
+                "ft.f4d": "PvP raids, diplomatic alliances, betrayals. The political map evolves weekly.",
+                "ft.f4x": "🌐 Multiplayer",
+                "ft.f5t": "MODULAR WEAPONS",
+                "ft.f5d": "340+ recipes. 6 active mods simultaneously. Every build is a unique signature.",
+                "ft.f5x": "🔧 Deep",
+                "ft.f6t": "POST-APO ART DIRECTION",
+                "ft.f6d": "Cinematic day/night cycle. Next-gen volumetric effects. Adaptive exclusive soundtrack.",
+                "ft.f6x": "🌟 Visual",
+                "ft.ctag": "Character Classes",
+                "ft.ctitle": "Choose your <span class=\"gt\">evolution</span>",
+                "ft.cl1n": "ASSAULT",
+                "ft.cl1d": "Offensive dominance. Heavy weapons, destructive powers.",
+                "ft.cl2n": "NEXUS",
+                "ft.cl2d": "Tactical support. Ally amplification, faction command.",
+                "ft.cl3n": "PHANTOM",
+                "ft.cl3d": "Infiltration, trapping, guerrilla. The enemy never sees you coming.",
+                "st.title": "Start in <span class=\"gt\">3 simple steps</span>",
+                "st.sub": "From zero to active player in under 5 minutes.",
+                "st.cta": "⚡ Start Now — Free",
+                "st.1t": "DOWNLOAD",
+                "st.1d": "Click the button. The official launcher installs automatically. (~12 GB)",
+                "st.2t": "CREATE ACCOUNT",
+                "st.2d": "Free sign-up in 30 seconds. Email + password only.",
+                "st.3t": "PLAY & RECEIVE",
+                "st.3d": "Launch the game, receive the Awakening Pack (CHF 54.–) in your inventory.",
+                "ur.tag": "⚠️ Limited Offer",
+                "ur.title": "Exclusive <span class=\"gt\">OP Pack</span> — Expires In:",
+                "ur.desc": "Download Once Human V3 now and unlock the Mutant Awakening Pack (CHF 54.–) — gifted to the first 10,000 players only.",
+                "ur.h": "Hours",
+                "ur.m": "Minutes",
+                "ur.s": "Seconds",
+                "ur.ot": "🎁 MUTANT AWAKENING PACK — INCLUDED WITH DOWNLOAD",
+                "ur.o1": "Exclusive Skin «Apex Mutant» (Chrome Armor)",
+                "ur.o2": "Legendary Weapon: Stardust Rifle Mk.III",
+                "ur.o3": "Starter Resource Pack (×500 rare materials)",
+                "ur.o4": "Premium PvE Priority Server Access",
+                "ur.o5": "Veteran V3 Badge",
+                "ur.o6": "30-day Free Battle Pass",
+                "ur.cta": "⚡ Download Once Human V3 — FREE",
+                "ur.tr1": "Secure file — Anti-virus certified",
+                "ur.tr2": "No credit card required",
+                "ur.tr3": "100% Free to Play",
+                "fq.title": "Frequently Asked <span class=\"gt\">Questions</span>",
+                "fq.sub": "Everything you need to know before downloading",
+                "fq.q1": "Is Once Human really free? Are there hidden microtransactions?",
+                "fq.a1": "Yes, Once Human is <strong>100% Free to Play</strong>. Microtransactions are limited to cosmetics only. No gameplay advantages can be purchased.",
+                "fq.q2": "How do I receive the Mutant Awakening Pack (value CHF 54.–)?",
+                "fq.a2": "The pack is automatically granted on your first login if you're among the first 10,000 players. Items appear in your <strong>in-game inventory</strong> after the tutorial.",
+                "fq.q3": "What are the PC requirements?",
+                "fq.a3": "<strong>Minimum:</strong> Windows 10, i5-6600K / Ryzen 5 1600, GTX 1060 6GB, 16 GB RAM, 60 GB SSD.<br><strong>Recommended:</strong> Windows 11, i7-10700K / Ryzen 7 5800X, RTX 3070, 32 GB RAM, NVMe SSD.",
+                "fq.q4": "Is the game safe? Does it contain malware?",
+                "fq.a4": "Once Human is published by <strong>NetEase Games</strong>, a publicly listed company. The launcher is certified by major antivirus programs. The game includes GameGuard anti-cheat.",
+                "fq.q5": "Can I play solo?",
+                "fq.a5": "Yes, <strong>solo is fully viable</strong>. Progression, building and bosses can all be done alone. PvP faction raids are entirely optional.",
+                "fo.tag": "The post-apocalyptic survival that redefines standards. V3 available now — for free.",
+                "fo.c1h": "Game",
+                "fo.c1l1": "Download PC",
+                "fo.c1l2": "Patch Notes",
+                "fo.c1l3": "Roadmap 2026",
+                "fo.c1l4": "Server Status",
+                "fo.c2h": "Community",
+                "fo.c3h": "Support",
+                "fo.c3l1": "Help Center",
+                "fo.c3l2": "Report a Bug",
+                "fo.c3l3": "Press & Media",
+                "fo.copy": "© 2026 Once Human — NetEase Games / Starry Studio.",
+                "fo.priv": "Privacy Policy",
+                "fo.terms": "Terms of Use",
+                "ex.title": "DON'T LEAVE WITHOUT YOUR OP PACK!",
+                "ex.sub": "The Mutant Awakening Pack (worth <strong style='color:var(--a)'>CHF 54.–</strong>) is for the first 10,000 players. One spot remains.",
+                "ex.cta": "🎮 Claim My Pack — FREE",
+                "ex.dec": "No thanks, I prefer to play without advantages"
+            },
+            "de": {
+                "sticky.msg": "Angebot läuft ab in",
+                "sticky.btn": "⚡ Gratis Herunterladen",
+                "nav.s": "Szenarien",
+                "nav.d": "Deviants",
+                "nav.r": "Bewertungen",
+                "nav.p": "OP-Pack",
+                "nav.cta": "⚡ Gratis-Pack",
+                "h.b1": "🏆 #1 Survival-Spiel 2024",
+                "h.b2": "⭐ 4.8/5 Steam",
+                "h.b3": "🎁 Pack CHF 54.– Gratis",
+                "h.b4": "✓ 100% Kostenlos",
+                "h.eye": "▸ VISIONAL WHEEL S3 — ABERRANT PROGENY JETZT LIVE",
+                "h.l1": "DAS ERWACHEN",
+                "h.glitch": "DES MUTANTEN",
+                "h.sub": "Überleben. Mutieren. Dominieren.<br><em>Kostenlos herunterladen</em> und das Erwachungs-Mutanten-Pack (Wert CHF†54.–)<br>für die <em>ersten 10'000 Spieler</em> erhalten.",
+                "h.cta1": "🎮 Kostenlos Spielen",
+                "h.cta2": "▷ Gameplay Ansehen",
+                "h.tr1": "Keine Kreditkarte nötig",
+                "h.tr2": "100% Kostenlos",
+                "h.tr3": "Antivirensoftware-zertifiziert",
+                "h.tr4": "2M+ aktive Spieler",
+                "h.s1": "Aktive Spieler",
+                "h.s2": "Steam-Bewertung",
+                "h.s3": "Survival-Spiel 2024",
+                "h.s4": "Immer kostenlos",
+                "h.scroll": "SCROLLEN",
+                "p.tag": "Warum Once Human?",
+                "p.title": "Genug von <span class=\"gt\">generischen Survival-Spielen?</span>",
+                "p.desc": "Was andere Spiele nie bieten — fahre über jede Karte, um die Lösung zu entdecken.",
+                "p.hint": "← Hover für die Lösung",
+                "p.c1f.t": "Leere & seelenlose Welt",
+                "p.c1f.d": "Leere Karte, repetitiver Loot, Fortschritt nach 10 Stunden erschöpft. Kein Mysterium.",
+                "p.c1b.t": "Organisches Storytelling",
+                "p.c1b.d": "Eine lebendige Welt mit dynamischen Narrativ-Events. Jede Runde enthüllt eine neue Schicht des Stardust-Mysteriums.",
+                "p.c1b.cta": "↻ ENTDECKEN →",
+                "p.c2f.t": "Flache & vorhersehbare Kämpfe",
+                "p.c2f.d": "Derselbe Click-Loot-Kreislauf seit 10 Jahren. Boss-Schwamm, vorhersehbare KI.",
+                "p.c2b.t": "Strategischer Mutantenkampf",
+                "p.c2b.d": "Modulare Waffen + Deviant-Kräfte. 47 Gegnertypen mit adaptiver KI.",
+                "p.c2b.cta": "↻ KÄMPFE SEHEN →",
+                "p.c3f.t": "Sinnloses Bauen",
+                "p.c3f.d": "Deine Basis ist nur Lagerung ohne echten Gameplay-Einfluss.",
+                "p.c3b.t": "Taktische & sich entwickelnde Basen",
+                "p.c3b.d": "Cradle 3.0: Forschungslabor, autonome KI-Verteidigung, Energiefarmen. Deine Basis = dein Vorteil.",
+                "p.c3b.cta": "↻ BAUEN & DOMINIEREN →",
+                "sc.tag": "Offizielle Szenarien",
+                "sc.title": "Einzigartige Welten <span class=\"gt\">zum Erobern</span>",
+                "sc.desc": "Jedes Szenario ist ein vollständiges Universum mit eigenen Regeln, Mysterien und legendären Bossen.",
+                "sc.s1": "Nalcott von Albtraunebel überfallen. Reinige den Nebel, vernichte die Quelle der Finsternis.",
+                "sc.b1": "🔥 AKTIV",
+                "sc.s2": "Von kargen Wüsten bis zu gefrorenen Bergen — neue Widersacher, unerwartete Verbündete.",
+                "sc.b2": "❄️ SAISONAL",
+                "sc.s3": "Mayflies gegen Rosetta — der Wettkampf um Prism Deviations wird alles verändern.",
+                "sc.b3": "⚔️ PVP",
+                "sc.s4": "Grenzgebiete werden zum Schlachtfeld. Dein Warband ruft dich.",
+                "sc.b4": "🏆 RANKED",
+                "dv.tag": "Kreaturen & Deviants",
+                "dv.title": "Entitäten <span class=\"gt\">jenseits der Realität</span>",
+                "dv.p1": "Abweichungen trotzen der Logik — übernatürliche Kräfte jenseits des Lebens, der Zeit und der Thermodynamik.",
+                "dv.p2": "Fange sie. Fusioniere sie. Schicke sie in den Kampf. Visional Wheel S3 verleiht dir die Kräfte der Aberranten.",
+                "dv.cta": "🧬 Deviants Fangen",
+                "dv.d1": "ALPHA-DEVIANT",
+                "dv.d2": "SCORCHER",
+                "dv.d3": "WATCHER",
+                "dv.d4": "ABYSSAL",
+                "dv.d5": "PRISM SHADE",
+                "pr.tag": "Community",
+                "pr.title": "2 Millionen Spieler <span class=\"gt\">lügen nicht</span>",
+                "pr.t1": "«V3 hat alles verändert. Das Deviant-System macht süchtig, die Fraktions-Events sind episch. Ich spiele seit 3 Wochen jeden Abend.»",
+                "pr.r1": "🎖 Rang S — EU-West-Server",
+                "pr.t2": "«Bestes F2P-Survival des Jahres. Die postapokalyptische Ästhetik ist der Hammer. Alle meine Zuschauer haben's nach meinem Stream heruntergeladen.»",
+                "pr.r2": "📺 Streamer 180K — Twitch",
+                "pr.t3": "«Ich habe meine Basis 4 Mal umgebaut, um die Verteidigung zu optimieren. Das Crafting-System ist so tiefgründig, man hat immer etwas zu tun.»",
+                "pr.r3": "🏆 Top 0.1% Baumeister",
+                "pr.t4": "«Die Kontaminationszonen in V3 sind visuell atemberaubend. Endlich ein Survival-Spiel mit 120fps!»",
+                "pr.r4": "🌟 Offizieller Beta-Tester",
+                "pr.t5": "«12 gegen 30 Raid dank cleverer Basisstrategie gewonnen. Kein anderes Spiel vermittelt diese Gefühle.»",
+                "pr.r5": "⚔️ Top 5 Fraktionsführer",
+                "pr.n1t": "Dev-Blog",
+                "pr.n1": "Vollständige Technologie-Überarbeitung — April 2026",
+                "pr.n2t": "Update",
+                "pr.n2": "Patch V2.3.3 — Neue Optimierungen",
+                "pr.n3t": "Visional Wheel",
+                "pr.n3": "Aberrant Progeny S3 — Jetzt verfügbar",
+                "pr.n4t": "Event",
+                "pr.n4": "Shadow Pavilion — Exklusive Belohnungen",
+                "pr.bv1": "Best Survival 2024",
+                "pr.bl1": "Gaming Awards",
+                "pr.bl2": "Steam — 47K Bewertungen",
+                "pr.bl3": "In 6 Wochen",
+                "pr.bl4": "Twitch CH/DE — 3 Wochen",
+                "ft.tag": "Visional Wheel S3",
+                "ft.title": "Alles, was <span class=\"gt\">V3 bietet</span>",
+                "ft.desc": "Das grösste Update in der Geschichte von Once Human.",
+                "ft.f1t": "STARDUST-ZONEN V3",
+                "ft.f1d": "Dynamische Level-6-Zonen mit prozeduralem Wetter. Tornados, Magnetstürme, dimensionale Risse. Legendäre Bosse für mutige Überlebende.",
+                "ft.f1x": "⚡ V3-Exklusiv",
+                "ft.f2t": "ERWEITERTER DEVIANT-BAUM",
+                "ft.f2d": "+23 neue Kräfte. Fusion: 2 Kräfte → 1 Hybrid. 1800+ Kombinationen.",
+                "ft.f2x": "🔬 Neu",
+                "ft.f3t": "CRADLE 3.0",
+                "ft.f3d": "Modulares Bauen. Autonome KI-Verteidigung. Labor der Stufe 5.",
+                "ft.f3x": "🏗️ Überarbeitet",
+                "ft.f4t": "FRAKTIONEN & KRIEG",
+                "ft.f4d": "PvP-Raids, diplomatische Allianzen, Verrat. Die politische Karte ändert sich wöchentlich.",
+                "ft.f4x": "🌐 Multiplayer",
+                "ft.f5t": "MODULARE WAFFEN",
+                "ft.f5d": "340+ Rezepte. 6 aktive Mods gleichzeitig. Jeder Build ist einzigartig.",
+                "ft.f5x": "🔧 Tiefgründig",
+                "ft.f6t": "POSTAPOKALYPTISCHE ÄSTHETIK",
+                "ft.f6d": "Filmischer Tag-/Nachtzyklus. Next-Gen-Volumeneffekte. Adaptiver exklusiver Soundtrack.",
+                "ft.f6x": "🌟 Visuell",
+                "ft.ctag": "Charakterklassen",
+                "ft.ctitle": "Wähle deine <span class=\"gt\">Evolution</span>",
+                "ft.cl1n": "ANGRIFF",
+                "ft.cl1d": "Offensive Dominanz. Schwere Waffen, zerstörerische Kräfte.",
+                "ft.cl2n": "NEXUS",
+                "ft.cl2d": "Taktische Unterstützung. Verbündeten-Verstärkung, Fraktionskommando.",
+                "ft.cl3n": "PHANTOM",
+                "ft.cl3d": "Infiltration, Fallen, Guerilla. Der Feind sieht dich nie kommen.",
+                "st.title": "In <span class=\"gt\">3 einfachen Schritten</span> starten",
+                "st.sub": "Von Null zum aktiven Spieler in weniger als 5 Minuten.",
+                "st.cta": "⚡ Jetzt Starten — Kostenlos",
+                "st.1t": "HERUNTERLADEN",
+                "st.1d": "Klick auf den Button. Der offizielle Launcher installiert sich automatisch. (~12 GB)",
+                "st.2t": "KONTO ERSTELLEN",
+                "st.2d": "Kostenlose Registrierung in 30 Sekunden. Nur E-Mail + Passwort.",
+                "st.3t": "SPIELEN & ERHALTEN",
+                "st.3d": "Starte das Spiel, erhalte das Erwachungs-Pack (CHF 54.–) in deinem Inventar.",
+                "ur.tag": "⚠️ Begrenztes Angebot",
+                "ur.title": "Exklusives <span class=\"gt\">OP-Pack</span> — Läuft ab in:",
+                "ur.desc": "Lade Once Human V3 jetzt herunter und schalte das Mutanten-Erwachungs-Pack (CHF 54.–) frei — für die ersten 10'000 Spieler.",
+                "ur.h": "Stunden",
+                "ur.m": "Minuten",
+                "ur.s": "Sekunden",
+                "ur.ot": "🎁 MUTANTEN-ERWACHUNGS-PACK — INKLUSIVE BEIM DOWNLOAD",
+                "ur.o1": "Exklusiver Skin «Apex-Mutant» (Chrom-Rüstung)",
+                "ur.o2": "Legendäre Waffe: Stardust-Gewehr Mk.III",
+                "ur.o3": "Starter-Ressourcenpaket (×500 seltene Materialien)",
+                "ur.o4": "Premium PvE Prioritätsserver-Zugang",
+                "ur.o5": "Veteran-V3-Abzeichen",
+                "ur.o6": "30 Tage kostenloser Battle Pass",
+                "ur.cta": "⚡ Once Human V3 Herunterladen — KOSTENLOS",
+                "ur.tr1": "Sichere Datei — Antivirenzertifiziert",
+                "ur.tr2": "Keine Kreditkarte erforderlich",
+                "ur.tr3": "100% Free to Play",
+                "fq.title": "Häufige <span class=\"gt\">Fragen</span>",
+                "fq.sub": "Alles, was du vor dem Download wissen musst",
+                "fq.q1": "Ist Once Human wirklich kostenlos? Gibt es versteckte Mikrotransaktionen?",
+                "fq.a1": "Ja, Once Human ist <strong>100% Free to Play</strong>. Mikrotransaktionen beschränken sich auf kosmetische Gegenstände. Kein Spielvorteil kann gekauft werden.",
+                "fq.q2": "Wie erhalte ich das Mutanten-Erwachungs-Pack (Wert CHF 54.–)?",
+                "fq.a2": "Das Pack wird automatisch bei deiner ersten Anmeldung vergeben, wenn du unter den ersten 10'000 Spielern bist. Items erscheinen in deinem <strong>Ingame-Inventar</strong> nach dem Tutorial.",
+                "fq.q3": "Was sind die PC-Systemanforderungen?",
+                "fq.a3": "<strong>Minimum:</strong> Windows 10, i5-6600K / Ryzen 5 1600, GTX 1060 6 GB, 16 GB RAM, 60 GB SSD.<br><strong>Empfohlen:</strong> Windows 11, i7-10700K / Ryzen 7 5800X, RTX 3070, 32 GB RAM, NVMe SSD.",
+                "fq.q4": "Ist das Spiel sicher? Enthält es Malware?",
+                "fq.a4": "Once Human wird von <strong>NetEase Games</strong> veröffentlicht, einem börsennotierten Unternehmen. Der Launcher ist von führenden Antivirenprogrammen zertifiziert.",
+                "fq.q5": "Kann ich alleine spielen?",
+                "fq.a5": "Ja, <strong>Solo ist vollständig spielbar</strong>. Fortschritt, Bau und Bosse können alleine bewältigt werden. PvP-Fraktionsraids sind optional.",
+                "fo.tag": "Das postapokalyptische Survival-Spiel, das Standards neu definiert. V3 jetzt verfügbar.",
+                "fo.c1h": "Spiel",
+                "fo.c1l1": "PC Herunterladen",
+                "fo.c1l2": "Patch-Notizen",
+                "fo.c1l3": "Roadmap 2026",
+                "fo.c1l4": "Server-Status",
+                "fo.c2h": "Community",
+                "fo.c3h": "Support",
+                "fo.c3l1": "Hilfecenter",
+                "fo.c3l2": "Bug Melden",
+                "fo.c3l3": "Presse & Medien",
+                "fo.copy": "© 2026 Once Human — NetEase Games / Starry Studio.",
+                "fo.priv": "Datenschutz",
+                "fo.terms": "Nutzungsbedingungen",
+                "ex.title": "OHNE IHR OP-PACK NICHT GEHEN!",
+                "ex.sub": "Das Mutanten-Erwachungs-Pack (Wert <strong style='color:var(--a)'>CHF 54.–</strong>) gilt für die ersten 10'000 Spieler. Nur noch ein Platz frei.",
+                "ex.cta": "🎮 Mein Pack Holen — KOSTENLOS",
+                "ex.dec": "Nein danke, ich spiele lieber ohne Vorteil"
+            },
+            "it": {
+                "sticky.msg": "L'offerta scade tra",
+                "sticky.btn": "⚡ Scarica GRATIS",
+                "nav.s": "Scenari",
+                "nav.d": "Devianti",
+                "nav.r": "Recensioni",
+                "nav.p": "Pack OP",
+                "nav.cta": "⚡ Pack Gratis",
+                "h.b1": "🏆 #1 Survival PC 2024",
+                "h.b2": "⭐ 4.8/5 Steam",
+                "h.b3": "🎁 Pack CHF 54.– In Regalo",
+                "h.b4": "✓ 100% Gratuito",
+                "h.eye": "▸ VISIONAL WHEEL S3 — ABERRANT PROGENY ORA DISPONIBILE",
+                "h.l1": "IL RISVEGLIO",
+                "h.glitch": "DEL MUTANTE",
+                "h.sub": "Sopravvivi. Muta. Domina.<br><em>Scarica gratis</em> e ricevi il Pack Risveglio Mutante (valore CHF†54.–)<br>in regalo ai <em>primi 10'000 giocatori</em>.",
+                "h.cta1": "🎮 Gioca Gratis",
+                "h.cta2": "▷ Guarda il Gameplay",
+                "h.tr1": "Nessuna carta di credito",
+                "h.tr2": "100% Gratuito",
+                "h.tr3": "Certificato anti-virus",
+                "h.tr4": "2M+ giocatori attivi",
+                "h.s1": "Giocatori Attivi",
+                "h.s2": "Valutazione Steam",
+                "h.s3": "Survival PC 2024",
+                "h.s4": "Per sempre gratis",
+                "h.scroll": "SCORRI",
+                "p.tag": "Perché Once Human?",
+                "p.title": "Stanco dei <span class=\"gt\">survival generici?</span>",
+                "p.desc": "Quello che gli altri giochi non ti danno mai — passa il cursore su ogni carta.",
+                "p.hint": "← Passa il cursore per la soluzione",
+                "p.c1f.t": "Mondo Vuoto & Senz'anima",
+                "p.c1f.d": "Mappa vuota, loot ripetitivo, progressione esaurita in 10 ore. Nessun mistero.",
+                "p.c1b.t": "Narrazione Organica",
+                "p.c1b.d": "Un mondo vivo con eventi narrativi dinamici. Ogni sessione rivela un nuovo strato del mistero Stardust.",
+                "p.c1b.cta": "↻ SCOPRI →",
+                "p.c2f.t": "Combattimenti Piatti & Prevedibili",
+                "p.c2f.d": "Lo stesso ciclo click-loot da 10 anni. Boss-spugna, IA prevedibile.",
+                "p.c2b.t": "Combattimento Mutante Strategico",
+                "p.c2b.d": "Armi modulari + poteri Devianti. 47 tipi di nemici con IA adattiva.",
+                "p.c2b.cta": "↻ VEDI I COMBATTIMENTI →",
+                "p.c3f.t": "Costruzione Senza Senso",
+                "p.c3f.d": "La tua base è solo deposito senza impatto sul gameplay.",
+                "p.c3b.t": "Basi Tattiche & in Evoluzione",
+                "p.c3b.d": "Cradle 3.0: laboratorio, difese IA autonome, fattorie di energia. La tua base = il tuo vantaggio.",
+                "p.c3b.cta": "↻ COSTRUISCI & DOMINA →",
+                "sc.tag": "Scenari Ufficiali",
+                "sc.title": "Mondi unici <span class=\"gt\">da conquistare</span>",
+                "sc.desc": "Ogni scenario è un universo completo con le proprie regole, misteri e boss leggendari.",
+                "sc.s1": "Nalcott invasa da nebbia da incubo. Purifica la nebbia, elimina la fonte delle tenebre.",
+                "sc.b1": "🔥 ATTIVO",
+                "sc.s2": "Da deserti aridi a montagne ghiacciate — nuovi avversari, alleati inaspettati.",
+                "sc.b2": "❄️ STAGIONALE",
+                "sc.s3": "Mayflies contro Rosetta — la rivalità per le Prism Deviations cambierà tutto.",
+                "sc.b3": "⚔️ PVP",
+                "sc.s4": "Le zone di frontiera diventano campi di battaglia. Il tuo Warband ti chiama.",
+                "sc.b4": "🏆 RANKED",
+                "dv.tag": "Creature & Devianti",
+                "dv.title": "Entità <span class=\"gt\">oltre la realtà</span>",
+                "dv.p1": "Le Deviazioni sfidano la logica — poteri soprannaturali oltre la vita, il tempo e la termodinamica.",
+                "dv.p2": "Catturali. Fondili. Mandali in battaglia. Visional Wheel S3 ti dona i poteri degli aberranti.",
+                "dv.cta": "🧬 Cattura i Devianti",
+                "dv.d1": "DEVIANTE ALFA",
+                "dv.d2": "SCORCHER",
+                "dv.d3": "WATCHER",
+                "dv.d4": "ABYSSAL",
+                "dv.d5": "PRISM SHADE",
+                "pr.tag": "Comunità",
+                "pr.title": "2 milioni di giocatori <span class=\"gt\">non mentono</span>",
+                "pr.t1": "«V3 ha cambiato tutto. Il sistema Deviante è addictivo, gli eventi delle fazioni sono epici. Gioco ogni sera da 3 settimane.»",
+                "pr.r1": "🎖 Rango S — Server EU-West",
+                "pr.t2": "«Miglior survival F2P dell'anno. L'estetica post-apocalittica è incredibile. Tutti i miei spettatori hanno scaricato il gioco dopo il mio stream.»",
+                "pr.r2": "📺 Streamer 180K — Twitch",
+                "pr.t3": "«Ho ricostruito la mia base 4 volte per ottimizzare le difese. Il crafting è così profondo che c'è sempre qualcosa da fare.»",
+                "pr.r3": "🏆 Top 0.1% Costruttori",
+                "pr.t4": "«Le zone di contaminazione in V3 sono visivamente mozzafiato. Finalmente un survival a 120fps!»",
+                "pr.r4": "🌟 Beta Tester Ufficiale",
+                "pr.t5": "«Raid 12 contro 30 vinto grazie a una strategia di base studiata. Nessun altro gioco dà queste sensazioni.»",
+                "pr.r5": "⚔️ Leader Fazione Top 5",
+                "pr.n1t": "Dev Blog",
+                "pr.n1": "Revisione Completa del Sistema Tecnologico — Aprile 2026",
+                "pr.n2t": "Aggiornamento",
+                "pr.n2": "Patch V2.3.3 — Nuove Ottimizzazioni",
+                "pr.n3t": "Visional Wheel",
+                "pr.n3": "Aberrant Progeny S3 — Ora Disponibile",
+                "pr.n4t": "Evento",
+                "pr.n4": "Shadow Pavilion — Ricompense Esclusive",
+                "pr.bv1": "Best Survival 2024",
+                "pr.bl1": "Gaming Awards",
+                "pr.bl2": "Steam — 47K Recensioni",
+                "pr.bl3": "In 6 Settimane",
+                "pr.bl4": "Twitch CH/IT — 3 Settimane",
+                "ft.tag": "Visional Wheel S3",
+                "ft.title": "Tutto ciò che <span class=\"gt\">V3 porta</span>",
+                "ft.desc": "Il più grande aggiornamento nella storia di Once Human.",
+                "ft.f1t": "ZONE STARDUST V3",
+                "ft.f1d": "Zone di contaminazione dinamiche di Livello 6 con meteo procedurale. Tornado, tempeste magnetiche, squarci dimensionali.",
+                "ft.f1x": "⚡ Esclusivo V3",
+                "ft.f2t": "ALBERO DEVIANTE ESTESO",
+                "ft.f2d": "+23 nuovi poteri. Fusione: 2 poteri → 1 ibrido. 1800+ combinazioni.",
+                "ft.f2x": "🔬 Nuovo",
+                "ft.f3t": "CRADLE 3.0",
+                "ft.f3d": "Costruzione modulare. Difese IA autonome. Laboratorio Livello 5.",
+                "ft.f3x": "🏗️ Rinnovato",
+                "ft.f4t": "FAZIONI & GUERRA APERTA",
+                "ft.f4d": "Raid PvP, alleanze diplomatiche, tradimenti. La mappa politica evolve ogni settimana.",
+                "ft.f4x": "🌐 Multiplayer",
+                "ft.f5t": "ARMI MODULARI",
+                "ft.f5d": "340+ ricette. 6 mod attivi simultaneamente. Ogni build è unica.",
+                "ft.f5x": "🔧 Profondo",
+                "ft.f6t": "DIREZIONE ARTISTICA",
+                "ft.f6d": "Ciclo giorno/notte cinematografico. Effetti volumetrici next-gen. Colonna sonora adattiva esclusiva.",
+                "ft.f6x": "🌟 Visivo",
+                "ft.ctag": "Classi del Personaggio",
+                "ft.ctitle": "Scegli la tua <span class=\"gt\">evoluzione</span>",
+                "ft.cl1n": "ASSALTO",
+                "ft.cl1d": "Dominanza offensiva. Armi pesanti, poteri distruttivi.",
+                "ft.cl2n": "NEXUS",
+                "ft.cl2d": "Supporto tattico. Amplificazione alleati, comando fazione.",
+                "ft.cl3n": "PHANTOM",
+                "ft.cl3d": "Infiltrazione, trappole, guerriglia. Il nemico non ti vede mai arrivare.",
+                "st.title": "Inizia in <span class=\"gt\">3 semplici passi</span>",
+                "st.sub": "Da zero a giocatore attivo in meno di 5 minuti.",
+                "st.cta": "⚡ Inizia Ora — Gratis",
+                "st.1t": "SCARICA",
+                "st.1d": "Clicca il pulsante. Il launcher ufficiale si installa automaticamente. (~12 GB)",
+                "st.2t": "CREA L'ACCOUNT",
+                "st.2d": "Registrazione gratuita in 30 secondi. Solo email + password.",
+                "st.3t": "GIOCA & RICEVI",
+                "st.3d": "Avvia il gioco, ricevi il Pack Risveglio Mutante (CHF 54.–) nel tuo inventario.",
+                "ur.tag": "⚠️ Offerta Limitata",
+                "ur.title": "Pack <span class=\"gt\">OP Esclusivo</span> — Scade Tra:",
+                "ur.desc": "Scarica Once Human V3 ora e sblocca il Pack Risveglio Mutante (CHF 54.–) — in regalo ai primi 10'000 giocatori.",
+                "ur.h": "Ore",
+                "ur.m": "Minuti",
+                "ur.s": "Secondi",
+                "ur.ot": "🎁 PACK RISVEGLIO MUTANTE — INCLUSO NEL DOWNLOAD",
+                "ur.o1": "Skin Esclusiva «Apex Mutante» (Armatura Cromata)",
+                "ur.o2": "Arma Leggendaria: Fucile Stardust Mk.III",
+                "ur.o3": "Pack Risorse Starter (×500 materiali rari)",
+                "ur.o4": "Accesso Server Premium PvE Prioritario",
+                "ur.o5": "Badge Veterano V3",
+                "ur.o6": "30 giorni Battle Pass Gratuito",
+                "ur.cta": "⚡ Scarica Once Human V3 — GRATIS",
+                "ur.tr1": "File sicuro — Certificato Anti-virus",
+                "ur.tr2": "Nessuna carta di credito",
+                "ur.tr3": "100% Free to Play",
+                "fq.title": "Domande <span class=\"gt\">Frequenti</span>",
+                "fq.sub": "Tutto ciò che devi sapere prima di scaricare",
+                "fq.q1": "Once Human è davvero gratuito? Ci sono microtransazioni nascoste?",
+                "fq.a1": "Sì, Once Human è <strong>100% Free to Play</strong>. Le microtransazioni sono limitate a oggetti cosmetici. Nessun vantaggio nel gameplay può essere acquistato.",
+                "fq.q2": "Come ricevo il Pack Risveglio Mutante (valore CHF 54.–)?",
+                "fq.a2": "Il pack viene assegnato automaticamente al primo accesso se sei tra i primi 10'000 giocatori. Gli oggetti appaiono nel tuo <strong>inventario in gioco</strong> dopo il tutorial.",
+                "fq.q3": "Quali sono i requisiti PC?",
+                "fq.a3": "<strong>Minimi:</strong> Windows 10, i5-6600K / Ryzen 5 1600, GTX 1060 6GB, 16 GB RAM, 60 GB SSD.<br><strong>Raccomandati:</strong> Windows 11, i7-10700K / Ryzen 7 5800X, RTX 3070, 32 GB RAM, NVMe SSD.",
+                "fq.q4": "Il gioco è sicuro? Contiene malware?",
+                "fq.a4": "Once Human è pubblicato da <strong>NetEase Games</strong>, società quotata in borsa. Il launcher è certificato dai principali antivirus. Il gioco include GameGuard anti-cheat.",
+                "fq.q5": "Si può giocare in solitaria?",
+                "fq.a5": "Sì, <strong>il solitario è pienamente realizzabile</strong>. Progressione, costruzione e boss possono essere affrontati da soli. I raid PvP delle fazioni sono opzionali.",
+                "fo.tag": "Il survival post-apocalittico che ridefinisce gli standard. V3 disponibile ora — gratis.",
+                "fo.c1h": "Gioco",
+                "fo.c1l1": "Scarica PC",
+                "fo.c1l2": "Note Patch",
+                "fo.c1l3": "Roadmap 2026",
+                "fo.c1l4": "Stato Server",
+                "fo.c2h": "Comunità",
+                "fo.c3h": "Supporto",
+                "fo.c3l1": "Centro Assistenza",
+                "fo.c3l2": "Segnala un Bug",
+                "fo.c3l3": "Stampa & Media",
+                "fo.copy": "© 2026 Once Human — NetEase Games / Starry Studio.",
+                "fo.priv": "Privacy",
+                "fo.terms": "Termini di Utilizzo",
+                "ex.title": "NON ANDARTENE SENZA IL TUO PACK OP!",
+                "ex.sub": "Il Pack Risveglio Mutante (valore <strong style='color:var(--a)'>CHF 54.–</strong>) è per i primi 10'000 giocatori. Rimane un solo posto.",
+                "ex.cta": "🎮 Riscatta il Mio Pack — GRATIS",
+                "ex.dec": "No grazie, preferisco giocare senza vantaggi"
+            },
+            "rm": {
+                "sticky.msg": "Offerta expira en",
+                "sticky.btn": "⚡ Telechargiar GRATUIT",
+                "nav.s": "Scenaris",
+                "nav.d": "Deviants",
+                "nav.r": "Recensions",
+                "nav.p": "Pack OP",
+                "nav.cta": "⚡ Pack Gratuit",
+                "h.b1": "🏆 #1 Surviva PC 2024",
+                "h.b2": "⭐ 4.8/5 Steam",
+                "h.b3": "🎁 Pack CHF 54.– Gratuit",
+                "h.b4": "✓ 100% Gratuit",
+                "h.eye": "▸ VISIONAL WHEEL S3 — ABERRANT PROGENY VIVAN ORA",
+                "h.l1": "IL SVEGLIAR",
+                "h.glitch": "DAL MUTANT",
+                "h.sub": "Survivar. Mutar. Dominar.<br><em>Telechargiar gratuitamain</em> e retschaiver il Pack Svegliar Mutant (valur CHF†54.–)<br>regalà als <em>emprims 10'000 giugaders</em>.",
+                "h.cta1": "🎮 Giugar Gratuit",
+                "h.cta2": "▷ Guardar il Gameplay",
+                "h.tr1": "Nagin carta da credit",
+                "h.tr2": "100% Gratuit",
+                "h.tr3": "Certificà anti-virus",
+                "h.tr4": "2M+ giugaders actifs",
+                "h.s1": "Giugaders Actifs",
+                "h.s2": "Nota Steam",
+                "h.s3": "Surviva PC 2024",
+                "h.s4": "Adina gratuit",
+                "h.scroll": "SCROLLAR",
+                "p.tag": "Pertgé Once Human?",
+                "p.title": "Sat stuf dals <span class=\"gt\">gieus da surviva generics?</span>",
+                "p.desc": "Quai che auters gieus na t'ofreran mai — passer il cursor sur mintga carta.",
+                "p.hint": "← Hover per la soluziun",
+                "p.c1f.t": "Mund Vid & Senz'olma",
+                "p.c1f.d": "Carta vida, loot repetitiv, progressiun esaurida en 10 uras. Nagin misteru.",
+                "p.c1b.t": "Narraziun Organica",
+                "p.c1b.d": "In mund vivant cun eveniments narrativs dynamics. Mintga sessiun revela in nov strat dal misteru Stardust.",
+                "p.c1b.cta": "↻ SCUBIRAR →",
+                "p.c2f.t": "Cumbats Plats & Previsibels",
+                "p.c2f.d": "Il medem cicl click-loot dapi 10 onns. Boss-spunga, IA previsibla.",
+                "p.c2b.t": "Cumbat Mutant Strategic",
+                "p.c2b.d": "Armas modulars + poders Deviants. 47 tips d'inimis cun IA adaptiva.",
+                "p.c2b.cta": "↻ VESAIR LOS CUMBATS →",
+                "p.c3f.t": "Construcziun Senza Senns",
+                "p.c3f.d": "Tia basa è mo in deposit senza influenza sin il gameplay.",
+                "p.c3b.t": "Basas Tactics & en Evoluziun",
+                "p.c3b.d": "Cradle 3.0: labor da retschertga, defensas IA autonomas, farmas d'energia. Tia basa = tes avantatg.",
+                "p.c3b.cta": "↻ CONSTRUIR & DOMINAR →",
+                "sc.tag": "Scenaris Uffizials",
+                "sc.title": "Mund unics <span class=\"gt\">da conquistar</span>",
+                "sc.desc": "Mintga scenari è in univers cumplain cun sias reglias, mistieris e boss legendars.",
+                "sc.s1": "Nalcott invadida d'ina brüma da incubus. Purifichai la brüma, eliminai la funtauna da las tenebras.",
+                "sc.b1": "🔥 ACTIV",
+                "sc.s2": "Da desertas arias fin muntognas geladas — novs adversaris, alliads inaspettads.",
+                "sc.b2": "❄️ SAISONAL",
+                "sc.s3": "Mayflies cunter Rosetta — la rivalitad per las Prism Deviations va cambiar tut.",
+                "sc.b3": "⚔️ PVP",
+                "sc.s4": "Las zonas da cunfin daventan champs da battaglia. Tes Warband te cloma.",
+                "sc.b4": "🏆 RANKED",
+                "dv.tag": "Creaturas & Deviants",
+                "dv.title": "Entitads <span class=\"gt\">sur la realitad</span>",
+                "dv.p1": "Las Deviazions sfidon la logica — poders soprannaturals sur la vita, il temp e la termodinamica.",
+                "dv.p2": "Tschertgar els. Fundir els. Trametter els en battaglia. Visional Wheel S3 ta dà ils poders dals aberrants.",
+                "dv.cta": "🧬 Tschertgar ils Deviants",
+                "dv.d1": "DEVIANT ALFA",
+                "dv.d2": "SCORCHER",
+                "dv.d3": "WATCHER",
+                "dv.d4": "ABYSSAL",
+                "dv.d5": "PRISM SHADE",
+                "pr.tag": "Cuminanza",
+                "pr.title": "2 milliuns da giugaders <span class=\"gt\">na manzunan betg</span>",
+                "pr.t1": "«V3 ha midà tut. Il sistem Deviant è addictiv, ils events da fracziun èn epics. Giug mintga saira dapi 3 emnas.»",
+                "pr.r1": "🎖 Rang S — Server EU-West",
+                "pr.t2": "«Il meglier survival F2P da l'onn. L'estetica post-apocaliptica è incredibla. Tut mes spectaders han telechargiàla suenter mia stream.»",
+                "pr.r2": "📺 Streamer 180K — Twitch",
+                "pr.t3": "«Hai reconstruì mia basa 4 giadas per optimisar las defensas. Il crafting è uschè profund che hai adina insatge da far.»",
+                "pr.r3": "🏆 Top 0.1% Constructor",
+                "pr.t4": "«Las zonas da contaminaziun en V3 èn visivamain stüpendas. Finalmain in survival a 120fps!»",
+                "pr.r4": "🌟 Testader Beta Uffizial",
+                "pr.t5": "«Raid 12 cunter 30 gudagnà grazia a ina strategia da basa bain pensada. Nagin auter gi dà questas sensaziuns.»",
+                "pr.r5": "⚔️ Manader Fracziun Top 5",
+                "pr.n1t": "Dev Blog",
+                "pr.n1": "Revisiun Cumplessiva dal System Tech — Avrigl 2026",
+                "pr.n2t": "Actualisaziun",
+                "pr.n2": "Patch V2.3.3 — Novas Optimisaziuns",
+                "pr.n3t": "Visional Wheel",
+                "pr.n3": "Aberrant Progeny S3 — Uss Disponibel",
+                "pr.n4t": "Eveniment",
+                "pr.n4": "Shadow Pavilion — Premis Exclusivs",
+                "pr.bv1": "Best Survival 2024",
+                "pr.bl1": "Gaming Awards",
+                "pr.bl2": "Steam — 47K Recensions",
+                "pr.bl3": "En 6 Emnas",
+                "pr.bl4": "Twitch CH/RM — 3 Emnas",
+                "ft.tag": "Visional Wheel S3",
+                "ft.title": "Tut quai che <span class=\"gt\">V3 porta</span>",
+                "ft.desc": "La actualisaziun la pli gronda en l'istorgia da Once Human.",
+                "ft.f1t": "ZONAS STARDUST V3",
+                "ft.f1d": "Zonas dynamics Nivel 6 cun meteo procedural. Turbins, tempestas magneticas, fendidas dimensiunalas. Boss legendars per ils surviders curagius.",
+                "ft.f1x": "⚡ Exclusiv V3",
+                "ft.f2t": "BIRO DEVIANT EXTENDÌ",
+                "ft.f2d": "+23 novs poders. Fusiun: 2 poders → 1 hybrid. 1800+ cumbinaziuns.",
+                "ft.f2x": "🔬 Nov",
+                "ft.f3t": "CRADLE 3.0",
+                "ft.f3d": "Construcziun modulara. Defensas IA autonomas. Labor Nivel 5.",
+                "ft.f3x": "🏗️ Renovà",
+                "ft.f4t": "FRACZIUNS & GUERRA",
+                "ft.f4d": "Raids PvP, allianças diplomatics, tradiments. La carta politica evolvesch mintga emna.",
+                "ft.f4x": "🌐 Multiplayer",
+                "ft.f5t": "ARMAS MODULARS",
+                "ft.f5d": "340+ retscheptas. 6 mods actifs simultanamain. Mintga build è unica.",
+                "ft.f5x": "🔧 Profund",
+                "ft.f6t": "DIRECZIUN ARTISTICA",
+                "ft.f6d": "Cicl da di/notg cinematografic. Effects volumetrics next-gen. Colonna sonora adaptiva exclusiva.",
+                "ft.f6x": "🌟 Visual",
+                "ft.ctag": "Classas dal Caracter",
+                "ft.ctitle": "Tscherni tia <span class=\"gt\">evoluziun</span>",
+                "ft.cl1n": "ASSALT",
+                "ft.cl1d": "Dominanza offensiva. Armas pesantas, poders destruttivs.",
+                "ft.cl2n": "NEXUS",
+                "ft.cl2d": "Sustegn tactic. Amplificaziun alliads, cumand fracziun.",
+                "ft.cl3n": "PHANTOM",
+                "ft.cl3d": "Infiltraziun, traps, guerriglia. L'inimic na te veseva mai vegnir.",
+                "st.title": "Cumenza en <span class=\"gt\">3 pass simpels</span>",
+                "st.sub": "Da nulla a giugader activ en main da 5 minutas.",
+                "st.cta": "⚡ Cumenzar Uss — Gratuit",
+                "st.1t": "TELECHARGIAR",
+                "st.1d": "Clicca sin il buttun. Il launcher uffizial s'installa automaticamain. (~12 GB)",
+                "st.2t": "CREAR IL CONTO",
+                "st.2d": "Registraziun gratuita en 30 secundas. Mo e-mail + pled-clav.",
+                "st.3t": "GIUGAR & RETSCHAIVER",
+                "st.3d": "Startai il gi, retschaivet il Pack Svegliar Mutant (CHF 54.–) en tes inventari.",
+                "ur.tag": "⚠️ Offerta Limitada",
+                "ur.title": "Pack <span class=\"gt\">OP Exclusiv</span> — Expira En:",
+                "ur.desc": "Telechargiai Once Human V3 uss e deblochai il Pack Svegliar Mutant (CHF 54.–) — regalà als emprims 10'000 giugaders.",
+                "ur.h": "Uras",
+                "ur.m": "Minutas",
+                "ur.s": "Secundas",
+                "ur.ot": "🎁 PACK SVEGLIAR MUTANT — INCLUS CUN IL TELECHARGIAR",
+                "ur.o1": "Skin Exclusiv «Apex Mutant» (Armadura Cromada)",
+                "ur.o2": "Arma Legendara: Fuschil Stardust Mk.III",
+                "ur.o3": "Pack Ressursas Starter (×500 materials rars)",
+                "ur.o4": "Access Server Premium PvE Prioritari",
+                "ur.o5": "Badge Veteran V3",
+                "ur.o6": "30 dis Battle Pass Gratuit",
+                "ur.cta": "⚡ Telechargiar Once Human V3 — GRATUIT",
+                "ur.tr1": "Datoteca segira — Certificada Anti-virus",
+                "ur.tr2": "Nagin carta da credit",
+                "ur.tr3": "100% Free to Play",
+                "fq.title": "Dumondas <span class=\"gt\">Frequentas</span>",
+                "fq.sub": "Tut quai che dastgas savair avant il telechargiar",
+                "fq.q1": "È Once Human vairamain gratuit? Hai transactions-micro zuppadas?",
+                "fq.a1": "Gea, Once Human è <strong>100% Free to Play</strong>. Las transactions-micro sa limiteschan a objects cosmeticos. Nagin avantatg da gameplay po vegnir cumpro.",
+                "fq.q2": "Co retschaiv jau il Pack Svegliar Mutant (valur CHF 54.–)?",
+                "fq.a2": "Il pack vegn attribuì automaticamain tar il tieu emprim accès sch'es enconoras ils emprims 10'000 giugaders. Ils objects cumperan en tes <strong>inventari en gi</strong> suenter il tutorial.",
+                "fq.q3": "Tge configurazium PC dovrai?",
+                "fq.a3": "<strong>Minimum:</strong> Windows 10, i5-6600K / Ryzen 5 1600, GTX 1060 6 GB, 16 GB RAM, 60 GB SSD.<br><strong>Recumandà:</strong> Windows 11, i7-10700K / Ryzen 7 5800X, RTX 3070, 32 GB RAM, NVMe SSD.",
+                "fq.q4": "È il gi segir? Cuntegna el malware?",
+                "fq.a4": "Once Human vegn edì da <strong>NetEase Games</strong>, societad inscretta en borsa. Il launcher è certificà dals principals anti-virus. Il gi integrescha GameGuard anti-cheat.",
+                "fq.q5": "Sa po giugar sulettamain?",
+                "fq.a5": "Gea, <strong>il solo è plensamain possibel</strong>. Progressiun, construcziun e boss pon vegnir solvids sul. Ils raids PvP da fracziun èn opziunals.",
+                "fo.tag": "Il gi da surviva post-apocaliptic che redefinescha ils standards. V3 disponibel uss.",
+                "fo.c1h": "Gi",
+                "fo.c1l1": "Telechargiar PC",
+                "fo.c1l2": "Notas Patch",
+                "fo.c1l3": "Roadmap 2026",
+                "fo.c1l4": "Status Servers",
+                "fo.c2h": "Cuminanza",
+                "fo.c3h": "Sustegn",
+                "fo.c3l1": "Center d'Agid",
+                "fo.c3l2": "Annunziar in Bug",
+                "fo.c3l3": "Pressa & Media",
+                "fo.copy": "© 2026 Once Human — NetEase Games / Starry Studio.",
+                "fo.priv": "Protecziun da Datas",
+                "fo.terms": "Cundiziuns d'Utilisaziun",
+                "ex.title": "NA PARTIR BETG SENZA tes PACK OP!",
+                "ex.sub": "Il Pack Svegliar Mutant (valur <strong style='color:var(--a)'>CHF 54.–</strong>) è per ils emprims 10'000 giugaders. Resta mo in lieu.",
+                "ex.cta": "🎮 Survegnir Miu Pack — GRATUIT",
+                "ex.dec": "Na grazia, preferescha giugar senza avantatg"
+            }
+        };
 
+        function setLang(code) {
+            if (!T[code]) return;
+            const d = T[code];
+            document.querySelectorAll('[data-t]').forEach(el => {
+                const k = el.getAttribute('data-t');
+                if (d[k] !== undefined) el.textContent = d[k];
+            });
+            document.querySelectorAll('[data-th]').forEach(el => {
+                const k = el.getAttribute('data-th');
+                if (d[k] !== undefined) el.innerHTML = d[k];
+            });
+            // Special: glitch element
+            const gl = document.getElementById('glitch-el');
+            if (gl && d['h.glitch']) { gl.textContent = d['h.glitch']; gl.setAttribute('data-text', d['h.glitch']); }
+            // body lang
+            document.body.className = document.body.className.replace(/\blang-\w+\b/g, '').trim();
+            document.body.classList.add('lang-' + code);
+            document.documentElement.lang = { 'fr': 'fr-CH', 'en': 'en-CH', 'de': 'de-CH', 'it': 'it-CH', 'rm': 'rm-CH' }[code] || code;
+            // active button
+            document.querySelectorAll('.lbtn').forEach(b => {
+                const lc = b.getAttribute('data-lang');
+                b.classList.toggle('active', lc === code);
+            });
+            try { localStorage.setItem('oh_lang5', code); } catch (e) { }
+        }
+        window.addEventListener('DOMContentLoaded', () => {
+            let saved = 'fr';
+            try { saved = localStorage.getItem('oh_lang5') || 'fr'; } catch (e) { }
+            setLang(saved);
+        });
+
+    </script>
+    <script defer>
+
+        function initGSAP() {
+            if (typeof gsap === 'undefined') { setTimeout(initGSAP, 120); return; }
+            gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+            const tl = gsap.timeline({ delay: .22 });
+            tl.to('#hbadges', { opacity: 1, y: 0, duration: .6, ease: 'power3.out' })
+                .to('#heye', { opacity: 1, y: 0, duration: .65, ease: 'power3.out' }, '-=.3')
+                .to('#hh1', { opacity: 1, duration: .9, ease: 'power3.out' }, '-=.45')
+                .to('#hsub', { opacity: 1, y: 0, duration: .75, ease: 'power3.out' }, '-=.5')
+                .to('#hctas', { opacity: 1, y: 0, duration: .65, ease: 'back.out(1.5)' }, '-=.45')
+                .to('#htr', { opacity: 1, duration: .55, ease: 'power3.out' }, '-=.4')
+                .to('#hstats', { opacity: 1, duration: .55, ease: 'power3.out' }, '-=.3');
+
+            gsap.to('#hero-img', { y: '18%', ease: 'none', scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true } });
+            gsap.to('#hcnt', { scale: 1.1, opacity: 0, ease: 'none', scrollTrigger: { trigger: '#hero', start: 'top top', end: '50% top', scrub: true } });
+
+            gsap.utils.toArray('.sh').forEach(el => gsap.fromTo(el, { y: 36, opacity: 0 }, { y: 0, opacity: 1, duration: .85, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 86%' } }));
+            gsap.fromTo('.fw', { y: 52, opacity: 0 }, { y: 0, opacity: 1, duration: .7, stagger: .17, ease: 'power3.out', scrollTrigger: { trigger: '.cgrid', start: 'top 80%' } });
+            gsap.fromTo('.sc2', { y: 42, opacity: 0 }, { y: 0, opacity: 1, duration: .68, stagger: .12, ease: 'power3.out', scrollTrigger: { trigger: '.sgrid', start: 'top 78%' } });
+            gsap.fromTo('.fcd', { scale: .88, opacity: 0, y: 26 }, { scale: 1, opacity: 1, y: 0, duration: .6, stagger: { from: 'center', each: .1 }, ease: 'back.out(1.3)', scrollTrigger: { trigger: '.fgrid', start: 'top 76%' } });
+            gsap.fromTo('.clc', { y: 34, opacity: 0 }, { y: 0, opacity: 1, duration: .62, stagger: .13, ease: 'power3.out', scrollTrigger: { trigger: '.clgrid', start: 'top 80%' } });
+            gsap.fromTo('.nc', { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: .56, stagger: .1, ease: 'power3.out', scrollTrigger: { trigger: '#ngrid', start: 'top 82%' } });
+            gsap.fromTo('.bdg', { y: 22, opacity: 0 }, { y: 0, opacity: 1, duration: .5, stagger: .09, ease: 'power3.out', scrollTrigger: { trigger: '.bdgrow', start: 'top 85%' } });
+            gsap.fromTo('.step', { y: 22, opacity: 0 }, { y: 0, opacity: 1, duration: .6, stagger: .17, ease: 'power3.out', scrollTrigger: { trigger: '#strow', start: 'top 82%' } });
+            gsap.fromTo('.faqit', { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: .46, stagger: .09, ease: 'power3.out', scrollTrigger: { trigger: '#faqlist', start: 'top 85%' } });
+            gsap.fromTo('.cdn', { scale: .8, opacity: 0 }, { scale: 1, opacity: 1, duration: .6, stagger: .13, ease: 'elastic.out(1,.6)', scrollTrigger: { trigger: '.cdown', start: 'top 82%' } });
+            gsap.to('#ft', { opacity: 1, y: 0, duration: .9, ease: 'power3.out', scrollTrigger: { trigger: '#ft', start: 'top 90%' } });
+        }
+        initGSAP();
+
+        // Cursor
+        if (window.matchMedia('(pointer:fine)').matches) {
+            const cur = document.getElementById('cur'), curf = document.getElementById('curf');
+            let mx = 0, my = 0, fx = 0, fy = 0;
+            document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cur.style.left = mx - 5 + 'px'; cur.style.top = my - 5 + 'px'; });
+            (function af() { fx += (mx - fx - 19) * .12; fy += (my - fy - 19) * .12; curf.style.left = fx + 'px'; curf.style.top = fy + 'px'; requestAnimationFrame(af); })();
+            document.querySelectorAll('a,button,.fw,.sc2,.dvc,.clc,.faqq,.bdg,.nc').forEach(el => {
+                el.addEventListener('mouseenter', () => { cur.style.transform = 'scale(2.2)'; curf.style.transform = 'scale(1.5)'; curf.style.borderColor = 'var(--s)'; });
+                el.addEventListener('mouseleave', () => { cur.style.transform = 'scale(1)'; curf.style.transform = 'scale(1)'; curf.style.borderColor = 'rgba(123,0,255,.45)'; });
+            });
+        }
+
+        // Scroll events
+        const sbar = document.getElementById('sbar');
+        let sbarV = false;
+        window.addEventListener('scroll', () => {
+            const sy = window.scrollY, dh = document.body.scrollHeight - window.innerHeight;
+            document.getElementById('pb').style.width = (sy / dh * 100) + '%';
+            document.getElementById('nav').classList.toggle('sc', sy > 80);
+            const hH = document.getElementById('hero').offsetHeight;
+            const show = sy > hH * .58;
+            if (show !== sbarV) { sbarV = show; sbar.classList.toggle('show', show); }
+        }, { passive: true });
+
+        // Particles
+        function initParticles() {
+            const c = document.getElementById('pc'), ctx = c.getContext('2d');
+            const rs = () => { c.width = window.innerWidth; c.height = window.innerHeight; };
+            rs(); window.addEventListener('resize', rs, { passive: true });
+            const cols = ['#7B00FF', '#00E5FF', '#00FF88'];
+            class P { constructor() { this.r(); } r() { this.x = Math.random() * c.width; this.y = Math.random() * c.height; this.vx = (Math.random() - .5) * .3; this.vy = (Math.random() - .5) * .3 - .07; this.rad = Math.random() * 1.3 + .35; this.col = cols[~~(Math.random() * 3)]; this.a = Math.random() * .5 + .1; this.li = 0; this.ml = Math.random() * 260 + 170; } u() { this.x += this.vx; this.y += this.vy; this.li++; if (this.li > this.ml || this.y < -10 || this.x < -10 || this.x > c.width + 10) { this.r(); this.y = c.height + 10; } } d() { ctx.save(); ctx.globalAlpha = this.a * (1 - this.li / this.ml); ctx.beginPath(); ctx.arc(this.x, this.y, this.rad, 0, Math.PI * 2); ctx.fillStyle = this.col; ctx.shadowBlur = 6; ctx.shadowColor = this.col; ctx.fill(); ctx.restore(); } }
+            const pts = Array.from({ length: 65 }, () => { const p = new P(); p.li = Math.random() * p.ml; return p; });
+            let raf; function anim() { ctx.clearRect(0, 0, c.width, c.height); pts.forEach(p => { p.u(); p.d(); }); raf = requestAnimationFrame(anim); } anim();
+            document.addEventListener('visibilitychange', () => { if (document.hidden) cancelAnimationFrame(raf); else anim(); });
+        }
+        if ('requestIdleCallback' in window) requestIdleCallback(initParticles, { timeout: 2000 });
+        else setTimeout(initParticles, 500);
+
+        // Testimonials autoscroll
+        const tt = document.getElementById('ttrack');
+        let ts = 0, tp = false;
+        tt.addEventListener('mouseenter', () => tp = true); tt.addEventListener('mouseleave', () => tp = false);
+        (function sc() { if (!tp) { ts += .42; if (ts >= tt.scrollWidth - window.innerWidth) ts = 0; tt.parentElement.scrollLeft = ts; } requestAnimationFrame(sc); })();
+
+        // Deviants autoscroll
+        const ds = document.getElementById('dvstrip');
+        let ds2 = 0, dp = false;
+        ds.addEventListener('mouseenter', () => dp = true); ds.addEventListener('mouseleave', () => dp = false);
+        (function sc() { if (!dp) { ds2 += .55; if (ds2 >= ds.scrollWidth - ds.parentElement.clientWidth) ds2 = 0; ds.scrollLeft = ds2; } requestAnimationFrame(sc); })();
+
+        // Countdown
+        function updateCD() {
+            const n = new Date(), e = new Date(n); e.setHours(23, 59, 59, 999);
+            const diff = e - n, h = ~~(diff / 3600000), m = ~~((diff % 3600000) / 60000), s = ~~((diff % 60000) / 1000);
+            const hs = String(h).padStart(2, '0'), ms = String(m).padStart(2, '0'), ss = String(s).padStart(2, '0');
+            document.getElementById('cdh').textContent = hs; document.getElementById('cdm').textContent = ms; document.getElementById('cds').textContent = ss;
+            document.getElementById('stimer').textContent = hs + ':' + ms + ':' + ss;
+            if (typeof gsap !== 'undefined') gsap.fromTo('#cds', { scale: 1.08 }, { scale: 1, duration: .2, ease: 'power2.out' });
+        } setInterval(updateCD, 1000); updateCD();
+
+        // Confetti
+        const cfc = document.getElementById('cfc'), cctx = cfc.getContext('2d');
+        const rCfc = () => { cfc.width = window.innerWidth; cfc.height = window.innerHeight; }; rCfc(); window.addEventListener('resize', rCfc, { passive: true });
+        const cfcols = ['#7B00FF', '#00E5FF', '#00FF88', '#FF2D55']; let cfPs = [];
+        class CfP { constructor(x, y) { this.x = x; this.y = y; this.vx = (Math.random() - .5) * 11; this.vy = Math.random() * -13 - 4; this.g = .24; this.col = cfcols[~~(Math.random() * 4)]; this.sz = Math.random() * 7 + 4; this.ro = Math.random() * Math.PI * 2; this.rs = (Math.random() - .5) * .18; this.al = 1; this.life = 0; this.max = 80; } u() { this.x += this.vx; this.y += this.vy; this.vy += this.g; this.ro += this.rs; this.life++; this.al = 1 - this.life / this.max; } d() { cctx.save(); cctx.globalAlpha = this.al; cctx.translate(this.x, this.y); cctx.rotate(this.ro); cctx.fillStyle = this.col; cctx.shadowBlur = 4; cctx.shadowColor = this.col; cctx.fillRect(-this.sz / 2, -this.sz / 4, this.sz, this.sz / 2); cctx.restore(); } }
+        function spawnCf(x, y, n) { for (let i = 0; i < n; i++)cfPs.push(new CfP(x, y)); }
+        function animCf() { if (cfPs.length === 0) return; cctx.clearRect(0, 0, cfc.width, cfc.height); cfPs = cfPs.filter(p => p.life < p.max); cfPs.forEach(p => { p.u(); p.d(); }); cfc.style.display = cfPs.length > 0 ? 'block' : 'none'; requestAnimationFrame(animCf); }
+        document.getElementById('mcta').addEventListener('mouseenter', e => { cfc.style.display = 'block'; const r = e.target.getBoundingClientRect(); spawnCf(r.left + r.width / 2, r.top, 36); animCf(); });
+
+        // FAQ
+        document.querySelectorAll('.faqq').forEach(q => { q.addEventListener('click', () => { const it = q.parentElement; const wo = it.classList.contains('open'); document.querySelectorAll('.faqit').forEach(i => i.classList.remove('open')); if (!wo) it.classList.add('open'); }); });
+
+        // Exit popup
+        let exS = false;
+        document.addEventListener('mouseleave', e => { if (e.clientY <= 0 && !exS) { exS = true; document.getElementById('exitpop').classList.add('show'); if (typeof gsap !== 'undefined') gsap.fromTo('.ebox', { scale: .82, opacity: 0 }, { scale: 1, opacity: 1, duration: .45, ease: 'back.out(1.5)' }); } });
+        function cExit() { if (typeof gsap !== 'undefined') gsap.to('.ebox', { scale: .82, opacity: 0, duration: .28, onComplete: () => document.getElementById('exitpop').classList.remove('show') }); else document.getElementById('exitpop').classList.remove('show'); }
+        document.getElementById('ecls').addEventListener('click', cExit);
+        document.getElementById('exdec').addEventListener('click', e => { e.preventDefault(); cExit(); });
+        document.querySelector('.eov').addEventListener('click', cExit);
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(a => { a.addEventListener('click', e => { const h = a.getAttribute('href'); if (h === '#') return; e.preventDefault(); const t = document.querySelector(h); if (!t) return; if (typeof gsap !== 'undefined') gsap.to(window, { scrollTo: { y: t, offsetY: 80 }, duration: 1.1, ease: 'power3.inOut' }); else t.scrollIntoView({ behavior: 'smooth' }); }); });
+
+    </script>
 </body>
 
 </html>
