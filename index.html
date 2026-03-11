@@ -1,0 +1,630 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Once Human V3 — L'Éveil du Mutant | Pack OP Gratuit</title>
+    <meta name="description"
+        content="Télécharge Once Human V3. Pack OP exclusif offert. Survie post-apocalyptique next-gen. 2M+ joueurs. Rejoins l'évolution.">
+    <meta property="og:title" content="Once Human V3 — L'Éveil du Mutant">
+    <meta property="og:image" content="https://www.oncehuman.game/pc/gw/20250418171534/img/kv20260112_1f38dace.jpg">
+    <meta name="theme-color" content="#8B00FF">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div id="cur"></div>
+    <div id="curf"></div>
+    <div id="pb"></div>
+    <canvas id="pc"></canvas>
+    <canvas id="cfc"></canvas>
+    <div class="noise"></div>
+
+    <!-- ═══ NAV ═══ -->
+    <nav id="nav">
+        <div class="logo">ONCE HUMAN</div>
+        <ul class="nav-links">
+            <li><a href="#scenarios">Scénarios</a></li>
+            <li><a href="#deviants">Déviants</a></li>
+            <li><a href="#proof">Avis</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#urgency">Pack OP</a></li>
+        </ul>
+        <a href="#urgency" class="btn" style="padding:10px 24px;font-size:.72rem"><span>⚡ Jouer Gratuit</span></a>
+    </nav>
+
+    <!-- ═══ HERO ═══ -->
+    <section id="hero">
+        <!-- IMAGE OFFICIELLE HERO — KV Once Human 2026 -->
+        <div class="hero-img">
+            <img src="https://www.oncehuman.game/pc/gw/20250418171534/img/kv20260112_1f38dace.jpg"
+                alt="Once Human V3 — Monde Post-Apocalyptique" id="hero-bg-img"
+                onerror="this.src='https://r.res.easebar.com/pic/20260211/803d70ff-81dd-4df3-b4e3-73a7061dcfff.jpg'">
+        </div>
+        <div class="hero-grid"></div>
+        <div class="hero-scan"></div>
+
+        <div class="hero-content" id="hc">
+            <p class="hero-eye" id="hey">▸ MISE À JOUR — VISIONAL WHEEL S3 DISPONIBLE</p>
+            <h1 class="hero-h1" id="hh1">
+                <span class="l1">L'ÉVEIL</span>
+                <span class="l2 glitch" data-text="DU MUTANT">DU MUTANT</span>
+            </h1>
+            <p class="hero-sub" id="hsub">Le monde est brisé. Contaminé. Magnifique.<br>
+                Survie · Construction · Évolution — <strong style="color:var(--s)">Once Human V3</strong> redéfinit le
+                survival post-apo.</p>
+            <div class="hero-ctas" id="hctas">
+                <a href="#urgency" class="btn"><span>🎮 Jouer Gratuitement</span><span
+                        style="font-size:1.1rem">→</span></a>
+                <a href="#scenarios" class="btn2"><span>▷ Voir les Scénarios</span></a>
+            </div>
+        </div>
+
+        <div class="hero-stats" id="hstats">
+            <div style="text-align:center">
+                <div class="stat-n">2M+</div>
+                <div class="stat-l">Joueurs Actifs</div>
+            </div>
+            <div class="sdiv"></div>
+            <div style="text-align:center">
+                <div class="stat-n">4.8★</div>
+                <div class="stat-l">Note Steam</div>
+            </div>
+            <div class="sdiv"></div>
+            <div style="text-align:center">
+                <div class="stat-n">#1</div>
+                <div class="stat-l">Survival PC 2024</div>
+            </div>
+            <div class="sdiv"></div>
+            <div style="text-align:center">
+                <div class="stat-n">100%</div>
+                <div class="stat-l">Free to Play</div>
+            </div>
+        </div>
+        <div class="sarrow"><span>SCROLL</span>
+            <div class="sline"></div>
+        </div>
+    </section>
+
+    <!-- ═══ PROBLÈME / SOLUTION ═══ -->
+    <section id="prob" class="sec">
+        <div class="sec-inner">
+            <div class="sec-hdr">
+                <span class="tag">Pourquoi Once Human ?</span>
+                <h2>Tu en as marre des <span class="gtx">survivals génériques ?</span></h2>
+                <p>Ce que les autres jeux ne t'offrent jamais — et ce qui rend V3 impossible à poser.</p>
+            </div>
+            <div class="cards">
+                <div class="flip-w">
+                    <div class="flip">
+                        <div class="cfront"><span class="ci">😤</span>
+                            <h3 class="ct">Monde Vide & Sans Âme</h3>
+                            <p class="cd">Les survivals classiques t'offrent une carte vide, des loots répétitifs et une
+                                progression qui s'essoufle en 10h. Aucune surprise, aucun mystère.</p>
+                        </div>
+                        <div class="cback"><span class="ci">🌌</span>
+                            <h3 class="ct">Narration Organique</h3>
+                            <p class="cd">Once Human V3 génère un monde vivant avec des événements narratifs dynamiques.
+                                Chaque session révèle une nouvelle couche du mystère Stardust.</p><span
+                                class="cback-cta">↻ DÉCOUVRIR →</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flip-w">
+                    <div class="flip">
+                        <div class="cfront"><span class="ci">⚔️</span>
+                            <h3 class="ct">Combats Plats & Prévisibles</h3>
+                            <p class="cd">Le même cycle de click-looting depuis 10 ans. Les ennemis IA sont prévisibles,
+                                les boss sont des éponges à dégâts.</p>
+                        </div>
+                        <div class="cback"><span class="ci">🔬</span>
+                            <h3 class="ct">Combat Mutant Stratégique</h3>
+                            <p class="cd">Armes modulaires + pouvoirs Deviants uniques. 47 types d'ennemis avec IA
+                                adaptative. Chaque combat exige une approche différente.</p><span class="cback-cta">↻
+                                VOIR LES COMBATS →</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flip-w">
+                    <div class="flip">
+                        <div class="cfront"><span class="ci">🏚️</span>
+                            <h3 class="ct">Construction Sans Vision</h3>
+                            <p class="cd">Placer des blocs pour placer des blocs. Ta base est un simple stockage de
+                                ressources sans aucun impact sur le gameplay.</p>
+                        </div>
+                        <div class="cback"><span class="ci">🏗️</span>
+                            <h3 class="ct">Bases Tactiques & Évolutives</h3>
+                            <p class="cd">Cradle 3.0 : labo de recherche, défenses automatisées, fermes d'énergie. Ta
+                                base est ton avantage compétitif le plus puissant.</p><span class="cback-cta">↻ BUILD &
+                                CONQUER →</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ SCÉNARIOS (IMAGES OFFICIELLES) ═══ -->
+    <section id="scenarios" class="sec" style="padding:130px 60px;background:var(--bg2)">
+        <div class="sec-inner">
+            <div class="sec-hdr">
+                <span class="tag">Scénarios Officiels</span>
+                <h2>Des mondes <span class="gtx">uniques à conquérir</span></h2>
+                <p>Chaque scénario est un univers complet avec ses propres règles, ses mystères et ses boss légendaires.
+                </p>
+            </div>
+            <!-- 4 images officielles extraites du site oncehuman.game -->
+            <div class="scen-grid">
+                <div class="scen-card">
+                    <img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-jbbq_ff311c2b.jpg"
+                        alt="Scénario Once Human — Endless Dream"
+                        onerror="this.src='https://r.res.easebar.com/pic/20260302/ea157404-a533-49ea-8e12-9478ea208536.jpg'">
+                    <div class="scen-card-overlay">
+                        <span class="scen-tag">▸ Scénario 01</span>
+                        <h3 class="scen-name">ENDLESS DREAM</h3>
+                        <p class="scen-desc">Nalcott envahie par un brouillard de cauchemar. Purifiez la brume, éliminez
+                            la source des ténèbres.</p>
+                    </div>
+                    <span class="scen-badge">🔥 ACTIF</span>
+                </div>
+                <div class="scen-card">
+                    <img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-yzkh_1cb0640d.jpg"
+                        alt="Scénario Once Human — The Way of Winter"
+                        onerror="this.src='https://r.res.easebar.com/pic/20260226/c5b46a57-b2af-4c37-ba95-9b4d7c2168c7.jpg'">
+                    <div class="scen-card-overlay">
+                        <span class="scen-tag">▸ Scénario 02</span>
+                        <h3 class="scen-name">THE WAY OF WINTER</h3>
+                        <p class="scen-desc">Des déserts arides aux montagnes glacées du Nord — nouveaux adversaires,
+                            alliés inattendus.</p>
+                    </div>
+                    <span class="scen-badge">❄️ SAISONNIER</span>
+                </div>
+                <div class="scen-card">
+                    <img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-ngxl_13adb5bb.jpg"
+                        alt="Scénario Once Human — Prismverse's Clash"
+                        onerror="this.src='https://r.res.easebar.com/pic/20260119/1d2b69e9-4629-4a02-90ed-47e65e737cec.jpeg'">
+                    <div class="scen-card-overlay">
+                        <span class="scen-tag">▸ Scénario 03</span>
+                        <h3 class="scen-name">PRISMVERSE'S CLASH</h3>
+                        <p class="scen-desc">Mayflies contre Rosetta : choisissez votre camp. La rivalité pour les Prism
+                            Deviations va tout faire basculer.</p>
+                    </div>
+                    <span class="scen-badge">⚔️ PVP</span>
+                </div>
+                <div class="scen-card">
+                    <img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-yzyz_9eed6351.jpg"
+                        alt="Scénario Once Human — Evolution's Call"
+                        onerror="this.src='https://r.res.easebar.com/pic/20260217/05ff4028-c01a-424c-a161-29ba420fddcd.jpg'">
+                    <div class="scen-card-overlay">
+                        <span class="scen-tag">▸ Scénario 04</span>
+                        <h3 class="scen-name">EVOLUTION'S CALL</h3>
+                        <p class="scen-desc">Les zones frontières deviennent des champs de bataille. Ton Warband
+                            t'appelle à la lutte pour la survie.</p>
+                    </div>
+                    <span class="scen-badge">🏆 RANKED</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ DÉVIANTS (IMAGES OFFICIELLES) ═══ -->
+    <section id="deviants" class="sec">
+        <div class="sec-inner">
+            <div class="dev-intro">
+                <div class="dev-intro-text">
+                    <span class="tag">Créatures & Déviants</span>
+                    <h2>Des entités <span class="gtx">au-delà du réel</span></h2>
+                    <p style="margin-bottom:20px">Il existe sur cette planète quelque chose d'inexplicable — les <strong
+                            style="color:var(--s)">Déviations</strong>. Elles défient la logique et possèdent des
+                        pouvoirs surnaturels au-delà de la vie, du temps et de la thermodynamique.</p>
+                    <p>Capture-les. Fusionne-les. Envoie-les au combat. Le Visional Wheel S3 t'offre les pouvoirs des
+                        aberrants eux-mêmes — pétrifie tes ennemis ou incinère-les avec les flammes du Scorcher.</p>
+                    <a href="#urgency" class="btn" style="margin-top:32px;display:inline-flex"><span>🧬 Capturer les
+                            Déviants</span></a>
+                </div>
+                <!-- Image officielle Deviant 1 -->
+                <div class="dev-intro-img">
+                    <img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-1_759a48d4.png"
+                        alt="Deviation — Once Human"
+                        onerror="this.src='https://r.res.easebar.com/pic/20260302/ea157404-a533-49ea-8e12-9478ea208536.jpg'">
+                </div>
+            </div>
+
+            <!-- Strip des 5 déviants officiels -->
+            <div class="dev-strip" id="devstrip">
+                <div class="dev-item">
+                    <img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-1_759a48d4.png" alt="Deviant 1">
+                    <div class="dev-item-name">DÉVIANT ALPHA</div>
+                </div>
+                <div class="dev-item">
+                    <img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-2_b501c895.png" alt="Deviant 2">
+                    <div class="dev-item-name">SCORCHER</div>
+                </div>
+                <div class="dev-item">
+                    <img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-3_04f56fbc.png" alt="Deviant 3">
+                    <div class="dev-item-name">WATCHER</div>
+                </div>
+                <div class="dev-item">
+                    <img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-4_9ed4f43b.png" alt="Deviant 4">
+                    <div class="dev-item-name">ABYSSAL</div>
+                </div>
+                <div class="dev-item">
+                    <img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-5_0ff2a3c3.png" alt="Deviant 5">
+                    <div class="dev-item-name">PRISM SHADE</div>
+                </div>
+                <!-- Duplicate for infinite loop -->
+                <div class="dev-item">
+                    <img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-1_759a48d4.png"
+                        alt="Deviant 1 dup">
+                    <div class="dev-item-name">DÉVIANT ALPHA</div>
+                </div>
+                <div class="dev-item">
+                    <img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-2_b501c895.png"
+                        alt="Deviant 2 dup">
+                    <div class="dev-item-name">SCORCHER</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ PREUVES SOCIALES ═══ -->
+    <section id="proof" class="sec">
+        <div class="sec-hdr" style="padding:0 60px;margin-bottom:60px">
+            <span class="tag">Communauté</span>
+            <h2>2 millions de joueurs <span class="gtx">ne mentent pas</span></h2>
+        </div>
+
+        <div style="overflow:hidden;position:relative">
+            <div class="ttrack" id="ttrack">
+                <div class="tcard">
+                    <div class="tstars">★★★★★</div>
+                    <p class="ttxt">« V3 a tout changé. Le système Deviant est addictif, les events de faction sont
+                        épiques. Je pensais pas rester plus de 2h — ça fait 3 semaines que j'y joue tous les soirs. »
+                    </p>
+                    <div class="tauthor">
+                        <div class="tavatar">KR</div>
+                        <div>
+                            <div class="taname">KryptoRavenX</div>
+                            <div class="tarank">🎖 Rang S — Serveur EU-West</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tcard">
+                    <div class="tstars">★★★★★</div>
+                    <p class="ttxt">« Meilleur survival F2P de l'année. La direction artistique post-apo est insane. Mes
+                        viewers ont tous téléchargé après mon premier stream V3. »</p>
+                    <div class="tauthor">
+                        <div class="tavatar">NX</div>
+                        <div>
+                            <div class="taname">NovaxStream</div>
+                            <div class="tarank">📺 Streamer 180K — Twitch</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tcard">
+                    <div class="tstars">★★★★★</div>
+                    <p class="ttxt">« J'ai refait ma base 4 fois pour optimiser les défenses. Le système de crafting est
+                        si profond que t'as toujours quelque chose à améliorer. C'est mon nouveau Rust en mieux. »</p>
+                    <div class="tauthor">
+                        <div class="tavatar">ZP</div>
+                        <div>
+                            <div class="taname">ZephyrPro99</div>
+                            <div class="tarank">🏆 Top 0.1% Construction</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tcard">
+                    <div class="tstars">★★★★★</div>
+                    <p class="ttxt">« Les zones de contamination V3 sont sublimes. On sent vraiment le travail des devs.
+                        Et les optimisations GPU ? Enfin un survival qui tourne à 120fps. »</p>
+                    <div class="tauthor">
+                        <div class="tavatar">ML</div>
+                        <div>
+                            <div class="taname">MirroLune_FR</div>
+                            <div class="tarank">🌟 Testeur Bêta Officiel</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tcard">
+                    <div class="tstars">★★★★★</div>
+                    <p class="ttxt">« Le PvP en faction est insane. On a mené un raid 12 contre 30 grâce à une stratégie
+                        de base pensée. Aucun autre jeu ne donne ces sensations. »</p>
+                    <div class="tauthor">
+                        <div class="tavatar">DR</div>
+                        <div>
+                            <div class="taname">DarkRaider_EU</div>
+                            <div class="tarank">⚔️ Leader de Faction Top 5</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actualités officielles comme preuves (images du site) -->
+        <div class="news-grid" id="newsgrid">
+            <div class="news-card">
+                <img src="https://r.res.easebar.com/pic/20260302/ea157404-a533-49ea-8e12-9478ea208536.jpg"
+                    alt="Dev Blog Tech System" onerror="this.style.height='140px'">
+                <div class="news-card-body">
+                    <div class="news-card-tag">Dev Blog</div>
+                    <div class="news-card-title">Refonte Complète du Système Tech — Avril 2026</div>
+                </div>
+            </div>
+            <div class="news-card">
+                <img src="https://r.res.easebar.com/pic/20260226/c5b46a57-b2af-4c37-ba95-9b4d7c2168c7.jpg"
+                    alt="Version 2.3.3 Update" onerror="this.style.height='140px'">
+                <div class="news-card-body">
+                    <div class="news-card-tag">Mise à Jour</div>
+                    <div class="news-card-title">Patch V2.3.3 — Nouvelles Optimisations</div>
+                </div>
+            </div>
+            <div class="news-card">
+                <img src="https://r.res.easebar.com/pic/20260119/1d2b69e9-4629-4a02-90ed-47e65e737cec.jpeg"
+                    alt="Visional Wheel S3" onerror="this.style.height='140px'">
+                <div class="news-card-body">
+                    <div class="news-card-tag">Visional Wheel</div>
+                    <div class="news-card-title">Aberrant Progeny S3 — Maintenant Disponible</div>
+                </div>
+            </div>
+            <div class="news-card">
+                <img src="https://r.res.easebar.com/pic/20260217/05ff4028-c01a-424c-a161-29ba420fddcd.jpg"
+                    alt="New Year Shadow Pavilion" onerror="this.style.height='140px'">
+                <div class="news-card-body">
+                    <div class="news-card-tag">Événement</div>
+                    <div class="news-card-title">Shadow Pavilion — Récompenses Exclusives</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pbadges">
+            <div class="pbadge"><span style="font-size:1.5rem">🏆</span>
+                <div>
+                    <div class="pbv">Best Survival 2024</div>
+                    <div class="pbl">Gaming Awards</div>
+                </div>
+            </div>
+            <div class="pbadge"><span style="font-size:1.5rem">🎮</span>
+                <div>
+                    <div class="pbv">4.8 / 5</div>
+                    <div class="pbl">Steam — 47K Avis</div>
+                </div>
+            </div>
+            <div class="pbadge"><span style="font-size:1.5rem">📦</span>
+                <div>
+                    <div class="pbv">2M+ Downloads</div>
+                    <div class="pbl">En 6 Semaines</div>
+                </div>
+            </div>
+            <div class="pbadge"><span style="font-size:1.5rem">🔥</span>
+                <div>
+                    <div class="pbv">#1 Trending</div>
+                    <div class="pbl">Twitch FR — 3 Semaines</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ FEATURES + CLASSES ═══ -->
+    <section id="features" class="sec">
+        <div class="sec-inner">
+            <div class="sec-hdr">
+                <span class="tag">Visional Wheel S3 — Nouveautés</span>
+                <h2>Tout ce que <span class="gtx">V3 apporte</span></h2>
+                <p>La mise à jour la plus massive de l'histoire d'Once Human. Plus de contenu. Plus de profondeur. Plus
+                    de chaos.</p>
+            </div>
+            <div class="fgrid">
+                <div class="fc big">
+                    <div class="fic">🌩️</div>
+                    <h3 class="ft">ZONES STARDUST CONTAMINÉES V3</h3>
+                    <p class="fd2">Nouvelles zones dynamiques de contamination Level 6 avec weather system procédural.
+                        Tornades de spores, orages magnétiques, rifts dimensionnels. Chaque visite est unique. Les
+                        ressources rares et les boss légendaires ne spawn que dans ces zones extrêmes — pour les
+                        survivants qui osent y entrer.</p>
+                    <span class="ftag">⚡ Exclusif V3</span>
+                </div>
+                <div class="fc">
+                    <div class="fic">🧬</div>
+                    <h3 class="ft">ARBRE DEVIANT ÉTENDU</h3>
+                    <p class="fd2">+23 nouveaux pouvoirs Deviants. Système de fusion : combine 2 pouvoirs pour créer une
+                        capacité hybride. 1800+ combinaisons possibles.</p><span class="ftag">🔬 Nouveau</span>
+                </div>
+                <div class="fc">
+                    <div class="fic">🏰</div>
+                    <h3 class="ft">CRADLE 3.0 — BASE ÉVOLUÉE</h3>
+                    <p class="fd2">Construction modulaire avancée. Tes bâtiments évoluent selon tes ressources. Défenses
+                        IA autonomes. Laboratoire Tier 5.</p><span class="ftag">🏗️ Refonte</span>
+                </div>
+                <div class="fc">
+                    <div class="fic">⚔️</div>
+                    <h3 class="ft">FACTIONS & GUERRE OUVERTE</h3>
+                    <p class="fd2">Raids PvP planifiés, alliances diplomatiques, trahisons. La carte politique évolue
+                        chaque semaine.</p><span class="ftag">🌐 Multi</span>
+                </div>
+                <div class="fc">
+                    <div class="fic">🎯</div>
+                    <h3 class="ft">ARMES MODULAIRES</h3>
+                    <p class="fd2">340+ recettes. 6 mods actifs simultanément par arme. Chaque build est une signature
+                        unique.</p><span class="ftag">🔧 Profond</span>
+                </div>
+                <div class="fc">
+                    <div class="fic">🎨</div>
+                    <h3 class="ft">DIRECTION ARTISTIQUE POST-APO</h3>
+                    <p class="fd2">Cycle jour/nuit cinématique. Effets volumétriques next-gen. Bande-son adaptative
+                        exclusive.</p><span class="ftag">🌟 Visuel</span>
+                </div>
+            </div>
+
+            <!-- CLASSES OFFICIELLES (images site) -->
+            <div style="text-align:center;margin:70px 0 36px">
+                <span class="tag">Classes de Personnage</span>
+                <h2 style="font-family:var(--fd);font-size:clamp(1.6rem,3.5vw,2.5rem);font-weight:900">Choisis ton <span
+                        class="gtx">évolution</span></h2>
+            </div>
+            <div class="class-strip">
+                <div class="class-card">
+                    <img src="https://www.oncehuman.game/pc/gw/20250418171534/img/zhiye_lh1_968083c7.png"
+                        alt="Classe Once Human — Attaque"
+                        onerror="this.src='https://r.res.easebar.com/pic/20260306/32ab8e2c-f4ff-4035-82ce-e5f99892622f.jpg'">
+                    <div class="class-card-ov">
+                        <div class="class-number">CLASS 01</div>
+                        <div class="class-name">ASSAUT</div>
+                        <div class="class-desc">Dominance offensive. Armes lourdes, pouvoirs destructeurs, zone control
+                            absolu.</div>
+                    </div>
+                </div>
+                <div class="class-card">
+                    <img src="https://www.oncehuman.game/pc/gw/20250418171534/img/zhiye_lh2_24acaa85.png"
+                        alt="Classe Once Human — Support"
+                        onerror="this.src='https://r.res.easebar.com/pic/20260304/754c842e-f9f7-439f-bda9-b4918fcb403d.jpg'">
+                    <div class="class-card-ov">
+                        <div class="class-number">CLASS 02</div>
+                        <div class="class-name">NEXUS</div>
+                        <div class="class-desc">Soutien tactique, amplification des alliés, commandement de faction.
+                        </div>
+                    </div>
+                </div>
+                <div class="class-card">
+                    <img src="https://www.oncehuman.game/pc/gw/20250418171534/img/zhiye_lh3_266702db.png"
+                        alt="Classe Once Human — Infiltration"
+                        onerror="this.src='https://r.res.easebar.com/pic/20260302/2eb658ff-09bc-46bf-8658-db04e6cfae05.jpg'">
+                    <div class="class-card-ov">
+                        <div class="class-number">CLASS 03</div>
+                        <div class="class-name">PHANTOM</div>
+                        <div class="class-desc">Infiltration, piégeage, guerrilla. L'ennemi ne te voit jamais venir.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ URGENCE ═══ -->
+    <section id="urgency" class="sec">
+        <div class="ubg"></div>
+        <div class="u-inner">
+            <span class="tag">⚠️ Offre Limitée</span>
+            <h2>Pack <span class="gtx">OP Exclusif</span> — Expire Dans :</h2>
+            <p class="udesc">Télécharge Once Human V3 maintenant et déverrouille automatiquement le Pack Éveil Mutant.
+                Valeur totale : 49,99€ — offert aux 10 000 premiers.</p>
+
+            <div class="cdwrap">
+                <div class="cdu">
+                    <div class="cdn" id="cdh">23</div>
+                    <div class="cdl">Heures</div>
+                </div>
+                <div class="cdsep">:</div>
+                <div class="cdu">
+                    <div class="cdn" id="cdm">47</div>
+                    <div class="cdl">Minutes</div>
+                </div>
+                <div class="cdsep">:</div>
+                <div class="cdu">
+                    <div class="cdn" id="cds">00</div>
+                    <div class="cdl">Secondes</div>
+                </div>
+            </div>
+
+            <div class="uoffer">
+                <p style="font-family:var(--fd);font-size:.92rem;letter-spacing:.1em;color:var(--a);margin-bottom:6px">
+                    🎁 PACK ÉVEIL MUTANT — INCLUS AVEC LE TÉLÉCHARGEMENT</p>
+                <ul class="olist">
+                    <li>Skin Exclusif "Apex Mutant" (Armure Chromée)</li>
+                    <li>Arme Légendaire : Fusil Stardust Mk.III</li>
+                    <li>Pack Ressources Départ (×500 matériaux rares)</li>
+                    <li>Accès Serveur Premium PvE Prioritaire</li>
+                    <li>Badge Vétéran V3 (profil + chat)</li>
+                    <li>30 jours de Battle Pass Gratuit</li>
+                </ul>
+            </div>
+
+            <a href="https://adl.easebar.com/d/g/oncehuman/c/gwpc" target="_blank" class="btn" id="mcta"
+                style="font-size:1.05rem;padding:20px 60px">
+                <span>⚡ Télécharger Once Human V3 — GRATUIT</span>
+            </a>
+            <p style="margin-top:18px;font-size:.78rem;color:var(--tm);letter-spacing:.04em">✓ Jeu 100% Gratuit
+                &nbsp;·&nbsp; ✓ Aucune CB requise &nbsp;·&nbsp; ✓ Pack OP offert &nbsp;·&nbsp; ✓ 4.8★ Steam</p>
+        </div>
+    </section>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer id="ft">
+        <div style="max-width:1200px;margin:0 auto">
+            <div class="ftop">
+                <div>
+                    <div class="logo" style="font-size:1.5rem">ONCE HUMAN</div>
+                    <p class="ftag2">Le survival post-apocalyptique qui redéfinit les standards. Visional Wheel S3
+                        disponible maintenant.</p>
+                </div>
+                <div class="flcol">
+                    <h4>Jeu</h4>
+                    <ul>
+                        <li><a href="https://adl.easebar.com/d/g/oncehuman/c/gwpc" target="_blank">Télécharger PC</a>
+                        </li>
+                        <li><a href="#">Patch Notes</a></li>
+                        <li><a href="#">Roadmap 2026</a></li>
+                        <li><a href="#">Status Serveurs</a></li>
+                    </ul>
+                </div>
+                <div class="flcol">
+                    <h4>Communauté</h4>
+                    <ul>
+                        <li><a href="#">Discord Officiel</a></li>
+                        <li><a href="#">Reddit</a></li>
+                        <li><a href="#">Twitch</a></li>
+                        <li><a href="#">YouTube</a></li>
+                    </ul>
+                </div>
+                <div class="flcol">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Centre d'Aide</a></li>
+                        <li><a href="#">Signaler un Bug</a></li>
+                        <li><a href="#">Presse & Médias</a></li>
+                        <li><a href="#">Co-Dev Feedback</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="fbot">
+                <p class="fcopy">© 2026 Once Human — NetEase Games / Starry Studio. Tous droits réservés.</p>
+                <div class="fleg"><a
+                        href="https://protocol.unisdk.easebar.com/release/latest_v475.html">Confidentialité</a><a
+                        href="https://protocol.unisdk.easebar.com/release/latest_v487.html">CGU</a><a
+                        href="#">Cookies</a></div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ═══ EXIT POPUP ═══ -->
+    <div id="epop">
+        <div class="eov"></div>
+        <div class="ecnt">
+            <button class="ecls" id="ecls">✕</button>
+            <p style="font-size:2.2rem;margin-bottom:10px">⚠️</p>
+            <h2 class="egtitle gtx">NE PARTEZ PAS SANS VOTRE PACK OP !</h2>
+            <p class="esub">Le Pack Éveil Mutant (valeur 49,99€) n'est disponible <strong style="color:var(--a)">que
+                    pour les 10 000 premiers</strong>. Il vous reste une place.</p>
+            <a href="https://adl.easebar.com/d/g/oncehuman/c/gwpc" target="_blank" class="btn"
+                style="width:100%;justify-content:center;margin-bottom:14px"><span>🎮 Récupérer Mon Pack —
+                    GRATUIT</span></a>
+            <a href="#" id="edecl"
+                style="font-size:.78rem;color:var(--tm);cursor:none;text-decoration:none;display:block">Non merci, je
+                préfère jouer sans avantage</a>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
