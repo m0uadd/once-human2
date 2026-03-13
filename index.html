@@ -489,11 +489,13 @@
             font-size: .57rem;
             letter-spacing: .28em;
             text-transform: uppercase;
-            color: var(--a);
-            padding: 5px 13px;
-            border: 1px solid rgba(0, 255, 136, .25);
+            color: #FFFFFF;
+            padding: 5px 14px;
+            background: rgba(0, 255, 136, .12);
+            border: 1px solid rgba(0, 255, 136, .5);
             border-radius: 2px;
-            margin-bottom: 18px
+            margin-bottom: 18px;
+            text-shadow: 0 0 14px rgba(0, 255, 136, .6)
         }
 
         .sec {
@@ -608,21 +610,23 @@
             display: flex;
             align-items: center;
             gap: 7px;
-            padding: 6px 14px;
-            background: rgba(0, 255, 136, .07);
-            border: 1px solid rgba(0, 255, 136, .2);
+            padding: 6px 16px;
+            background: rgba(5, 5, 14, .72);
+            border: 1px solid rgba(255, 255, 255, .18);
             border-radius: 20px;
             font-family: var(--fo);
-            font-size: .56rem;
-            letter-spacing: .13em;
-            color: var(--a);
-            white-space: nowrap
+            font-size: .58rem;
+            letter-spacing: .14em;
+            color: #FFFFFF;
+            white-space: nowrap;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, .8);
+            backdrop-filter: blur(8px)
         }
 
         .hbdg-mode {
-            background: rgba(0, 229, 255, .07);
-            border-color: rgba(0, 229, 255, .3);
-            color: var(--s)
+            background: rgba(0, 229, 255, .15);
+            border-color: rgba(0, 229, 255, .5);
+            color: #FFFFFF
         }
 
         @media(max-width:700px) {
@@ -2224,6 +2228,183 @@
                 padding-right: 16px
             }
         }
+
+        /* ── AUDIO PLAYER (YouTube backend) ── */
+        #audioplayer {
+            position: fixed;
+            bottom: 70px;
+            left: 22px;
+            z-index: 950;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(8, 8, 18, .90);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(123, 0, 255, .35);
+            border-radius: 6px;
+            padding: 10px 16px;
+            box-shadow: 0 4px 28px rgba(123, 0, 255, .2);
+            font-family: var(--fo);
+            user-select: none;
+            transition: opacity .3s, transform .3s;
+        }
+
+        #audioplayer.hidden {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(8px)
+        }
+
+        .ap-play {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--grad);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--gp);
+            flex-shrink: 0;
+            transition: transform .2s
+        }
+
+        .ap-play:hover {
+            transform: scale(1.1)
+        }
+
+        .ap-play svg {
+            width: 13px;
+            height: 13px;
+            fill: #fff;
+            pointer-events: none
+        }
+
+        .ap-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px
+        }
+
+        .ap-title {
+            font-size: .52rem;
+            font-weight: 700;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: var(--tx);
+            white-space: nowrap
+        }
+
+        .ap-sub {
+            font-size: .46rem;
+            letter-spacing: .1em;
+            color: var(--tm);
+            white-space: nowrap
+        }
+
+        .ap-bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+            height: 18px
+        }
+
+        .ap-bar {
+            width: 2px;
+            background: var(--grad);
+            border-radius: 1px;
+            transform-origin: bottom
+        }
+
+        .ap-playing .ap-bar:nth-child(1) {
+            animation: bar1 .7s ease-in-out infinite
+        }
+
+        .ap-playing .ap-bar:nth-child(2) {
+            animation: bar2 .9s ease-in-out infinite .1s
+        }
+
+        .ap-playing .ap-bar:nth-child(3) {
+            animation: bar3 .6s ease-in-out infinite .2s
+        }
+
+        .ap-playing .ap-bar:nth-child(4) {
+            animation: bar1 .8s ease-in-out infinite .15s
+        }
+
+        .ap-playing .ap-bar:nth-child(5) {
+            animation: bar3 .75s ease-in-out infinite .05s
+        }
+
+        .ap-vol {
+            display: flex;
+            align-items: center;
+            gap: 7px
+        }
+
+        .ap-vol-icon {
+            font-size: .68rem;
+            color: var(--tm);
+            cursor: pointer;
+            width: 14px;
+            text-align: center
+        }
+
+        .ap-vol input[type=range] {
+            -webkit-appearance: none;
+            width: 70px;
+            height: 2px;
+            background: rgba(123, 0, 255, .3);
+            border-radius: 2px;
+            cursor: pointer;
+            outline: none
+        }
+
+        .ap-vol input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--p2);
+            box-shadow: 0 0 6px var(--p)
+        }
+
+        @keyframes bar1 {
+
+            0%,
+            100% {
+                height: 4px
+            }
+
+            50% {
+                height: 14px
+            }
+        }
+
+        @keyframes bar2 {
+
+            0%,
+            100% {
+                height: 8px
+            }
+
+            50% {
+                height: 5px
+            }
+        }
+
+        @keyframes bar3 {
+
+            0%,
+            100% {
+                height: 11px
+            }
+
+            50% {
+                height: 3px
+            }
+        }
     </style>
 </head>
 
@@ -2260,13 +2441,12 @@
         <div style="display:flex;align-items:center;gap:12px">
             <div class="lang-drop" id="langDrop">
                 <button class="ldrop-btn" id="ldropBtn" onclick="toggleLangDrop()">
-                    <span id="ldropLabel">FR</span>
+                    <span id="ldropLabel">EN</span>
                     <span class="carr">&#9660;</span>
                 </button>
                 <div class="ldrop-panel" id="ldropPanel">
-                    <button class="lopt active" data-lang="fr" onclick="pickLang('fr')">FR &mdash;
-                        Fran&ccedil;ais</button>
-                    <button class="lopt" data-lang="en" onclick="pickLang('en')">EN &mdash; English</button>
+                    <button class="lopt" data-lang="fr" onclick="pickLang('fr')">FR &mdash; Fran&ccedil;ais</button>
+                    <button class="lopt active" data-lang="en" onclick="pickLang('en')">EN &mdash; English</button>
                     <button class="lopt" data-lang="de" onclick="pickLang('de')">DE &mdash; Deutsch</button>
                     <button class="lopt" data-lang="it" onclick="pickLang('it')">IT &mdash; Italiano</button>
                     <button class="lopt" data-lang="rm" onclick="pickLang('rm')">RM &mdash; Rumantsch</button>
@@ -3846,7 +4026,7 @@
         });
         window.addEventListener('DOMContentLoaded', () => {
             let saved = 'en';
-            try { saved = localStorage.getItem('oh_lang5') || 'fr'; } catch (e) { }
+            try { saved = localStorage.getItem('oh_lang5') || 'en'; } catch (e) { }
             setLang(saved);
         });
 
@@ -3965,6 +4145,130 @@
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(a => { a.addEventListener('click', e => { const h = a.getAttribute('href'); if (h === '#') return; e.preventDefault(); const t = document.querySelector(h); if (!t) return; if (typeof gsap !== 'undefined') gsap.to(window, { scrollTo: { y: t, offsetY: 80 }, duration: 1.1, ease: 'power3.inOut' }); else t.scrollIntoView({ behavior: 'smooth' }); }); });
 
+    </script>
+
+    <!-- ═══ AUDIO PLAYER — Once Human Radio OST ═══ -->
+    <!-- Hidden YouTube IFrame Player -->
+    <div id="ytContainer"
+        style="position:fixed;bottom:-9999px;left:-9999px;width:1px;height:1px;pointer-events:none;z-index:-1">
+        <div id="ytPlayer"></div>
+    </div>
+
+    <div id="audioplayer" class="hidden">
+        <button class="ap-play" id="apPlay" onclick="toggleAudio()" title="Play/Pause">
+            <svg id="apPlayIcon" viewBox="0 0 24 24">
+                <polygon points="5,3 19,12 5,21" />
+            </svg>
+        </button>
+        <div class="ap-info">
+            <div class="ap-title">Once Human Radio</div>
+            <div class="ap-sub" id="apSub">In-Game OST &bull; Ambient</div>
+        </div>
+        <div class="ap-bars" id="apBars">
+            <div class="ap-bar" style="height:6px"></div>
+            <div class="ap-bar" style="height:10px"></div>
+            <div class="ap-bar" style="height:4px"></div>
+            <div class="ap-bar" style="height:13px"></div>
+            <div class="ap-bar" style="height:7px"></div>
+        </div>
+        <div class="ap-vol">
+            <span class="ap-vol-icon" id="apVolIcon" onclick="toggleMute()">&#9646;&#9646;</span>
+            <input type="range" id="apVol" min="0" max="100" step="2" value="30" oninput="setVol(this.value)">
+        </div>
+    </div>
+
+    <!-- YouTube IFrame API -->
+    <script src="https://www.youtube.com/iframe_api" defer></script>
+    <script>
+        // ━━ ONCE HUMAN RADIO — YouTube IFrame Player ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        var ytPlayer, isPlaying = false, isMuted = false, prevVol = 30;
+        // Once Human Full Radio Music — GamerSoundtrack (YouTube)
+        var YT_VIDEO_ID = 'jfKfPfyJRdk';
+
+        function onYouTubeIframeAPIReady() {
+            ytPlayer = new YT.Player('ytPlayer', {
+                videoId: YT_VIDEO_ID,
+                playerVars: {
+                    autoplay: 1,
+                    controls: 0,
+                    disablekb: 1,
+                    fs: 0,
+                    modestbranding: 1,
+                    rel: 0,
+                    playsinline: 1,
+                    origin: window.location.origin
+                },
+                events: {
+                    onReady: function (e) {
+                        e.target.setVolume(30);
+                        e.target.playVideo();
+
+                        // Fallback: start on first interaction if blocked
+                        var startAudio = function () {
+                            if (!isPlaying && ytPlayer) {
+                                ytPlayer.playVideo();
+                            }
+                        };
+                        document.addEventListener('click', startAudio, { once: true });
+                        document.addEventListener('keydown', startAudio, { once: true });
+
+                        // Show player widget
+                        setTimeout(function () {
+                            document.getElementById('audioplayer').classList.remove('hidden');
+                        }, 1800);
+                    },
+                    onStateChange: function (e) {
+                        if (e.data === YT.PlayerState.PLAYING) {
+                            isPlaying = true;
+                            document.getElementById('apPlayIcon').innerHTML = '<rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/>';
+                            document.getElementById('apBars').classList.add('ap-playing');
+                        } else if (e.data === YT.PlayerState.PAUSED) {
+                            isPlaying = false;
+                            document.getElementById('apPlayIcon').innerHTML = '<polygon points="5,3 19,12 5,21"/>';
+                            document.getElementById('apBars').classList.remove('ap-playing');
+                        } else if (e.data === YT.PlayerState.ENDED) {
+                            // Loop: restart
+                            ytPlayer.seekTo(0);
+                            ytPlayer.playVideo();
+                        }
+                    }
+                }
+            });
+        }
+
+        window.toggleAudio = function () {
+            if (!ytPlayer) return;
+            if (!isPlaying) {
+                ytPlayer.playVideo();
+                isPlaying = true;
+                document.getElementById('apPlayIcon').innerHTML = '<rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/>';
+                document.getElementById('apBars').classList.add('ap-playing');
+            } else {
+                ytPlayer.pauseVideo();
+                isPlaying = false;
+                document.getElementById('apPlayIcon').innerHTML = '<polygon points="5,3 19,12 5,21"/>';
+                document.getElementById('apBars').classList.remove('ap-playing');
+            }
+        };
+
+        window.setVol = function (v) {
+            prevVol = +v;
+            if (ytPlayer) ytPlayer.setVolume(+v);
+            isMuted = +v == 0;
+            document.getElementById('apVolIcon').innerHTML = +v === 0 ? '&#9646;&#9646;' : '&#9646;&#9646;';
+        };
+
+        window.toggleMute = function () {
+            var inp = document.getElementById('apVol');
+            if (!isMuted) {
+                inp.value = 0; setVol(0);
+                if (ytPlayer) ytPlayer.mute();
+            } else {
+                inp.value = prevVol || 30; setVol(prevVol || 30);
+                if (ytPlayer) ytPlayer.unMute();
+            }
+            isMuted = !isMuted;
+        };
     </script>
 </body>
 
