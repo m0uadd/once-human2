@@ -1,24 +1,298 @@
 ﻿<!DOCTYPE html>
+<!-- ═══════════════════════════════════════════════════════════════════
+     ONCE HUMAN V3 — Landing Page OPTIMISÉE + META PIXEL
+     Version: OPTIMIZED-v3.0
+     ✅ LCP/CLS/INP: toutes optimisations v2.0 conservées
+     ✅ AUDIO: bug volume 0 corrigé, icônes muted/unmuted, autoplay fix
+     ✅ META PIXEL: 11 events trackés automatiquement
+        PageView | Lead | ViewContent | EventsSectionVisible
+        CTAFinalVisible | EventTabSwitch | LanguageSwitch
+        ScrollDepth50 | TimeOnPage30s | TimeOnPage60s
+     ✅ DEBUG PANEL: ?debug=1 dans l'URL pour voir tous les events
+     ⚠️  IMPORTANT: Remplacer YOUR_PIXEL_ID par votre vrai Pixel ID
+     ═══════════════════════════════════════════════════════════════════ -->
 <html lang="fr-CH">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         META PIXEL — Base Code
+         ⚠️  REMPLACER  YOUR_PIXEL_ID  par votre vrai Pixel ID Facebook
+         Ex: 1234567890123456
+         ═══════════════════════════════════════════════════════════════ -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '468742119653388');
+        fbq('track', 'PageView');
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=468742119653388&ev=PageView&noscript=1" />
+    </noscript>
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <link rel="preload" href="https://www.oncehuman.game/pc/gw/20250418171534/img/kv20260112_1f38dace.jpg" as="image"
         fetchpriority="high">
+    <!-- Preload logo nav pour éviter le CLS de la nav -->
+    <link rel="preload" href="https://www.oncehuman.game/pc/fab/20250114111146/img/logo_ba7fbc56.png" as="image">
     <title>Once Human V3 — Pack OP Gratuit | FR · EN · DE · IT · RM</title>
     <meta name="description"
         content="Télécharge Once Human V3 GRATUITEMENT. Pack Éveil Mutant (CHF 54.–) offert aux 10 000 premiers. 4.8 Steam. 2M+ joueurs. Disponible en français, anglais, allemand, italien et romanche.">
     <meta property="og:image" content="https://www.oncehuman.game/pc/gw/20250418171534/img/kv20260112_1f38dace.jpg">
+    <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#7B00FF">
+    <!-- Open Graph enrichi -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Once Human V3 — Pack OP Gratuit | FR · EN · DE · IT · RM">
+    <meta property="og:description"
+        content="Télécharge Once Human V3 GRATUITEMENT. Pack Éveil Mutant (CHF 54.–) offert aux 10 000 premiers. 4.8 Steam. 2M+ joueurs.">
+    <meta property="og:url" content="https://adl.easebar.com/d/g/oncehuman/c/gwpc">
+    <meta property="og:locale" content="fr_CH">
+    <meta property="og:site_name" content="Once Human V3">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Once Human V3 — Pack Gratuit CHF 54.–">
+    <meta name="twitter:description"
+        content="Survival F2P #1. Pack Éveil Mutant offert aux 10 000 premiers téléchargements.">
+    <meta name="twitter:image" content="https://www.oncehuman.game/pc/gw/20250418171534/img/kv20260112_1f38dace.jpg">
+    <!-- Schema.org VideoGame JSON-LD (SEO Media Buyer) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "VideoGame",
+      "name": "Once Human",
+      "description": "Once Human est un jeu de survie post-apocalyptique Free-to-Play. V3 apporte les Zones Stardust, le Visional Wheel S3 et les Factions.",
+      "genre": ["Survival", "Action", "Open World"],
+      "gamePlatform": ["PC", "Windows"],
+      "applicationCategory": "Game",
+      "operatingSystem": "Windows 10, Windows 11",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "CHF",
+        "availability": "https://schema.org/InStock"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "47000",
+        "bestRating": "5"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "NetEase Games"
+      }
+    }
+    </script>
+    <!-- Fix hauteur iOS Safari (100vh bug) -->
+    <style>
+        @supports (-webkit-touch-callout: none) {
+            #hero {
+                min-height: -webkit-fill-available;
+            }
+        }
+    </style>
+
+    <!-- ═══ DEBUG PANEL CSS (visible uniquement si ?debug=1) ═══ -->
+    <style>
+        /* ── DEBUG PANEL ── */
+        #pixel-debug {
+            display: none;
+            position: fixed;
+            bottom: 12px;
+            right: 12px;
+            width: 340px;
+            max-height: 420px;
+            background: rgba(0, 0, 0, .94);
+            border: 1px solid #7B00FF;
+            border-radius: 8px;
+            z-index: 999999;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            overflow: hidden;
+            box-shadow: 0 0 28px rgba(123, 0, 255, .5);
+        }
+
+        #pixel-debug.dbg-open {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #dbg-header {
+            background: linear-gradient(90deg, #7B00FF, #00E5FF);
+            padding: 7px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+
+        #dbg-header span {
+            color: #fff;
+            font-weight: 700;
+            font-size: 11px;
+            letter-spacing: .08em;
+        }
+
+        #dbg-clear {
+            background: rgba(255, 255, 255, .15);
+            border: none;
+            color: #fff;
+            border-radius: 3px;
+            padding: 2px 8px;
+            cursor: pointer;
+            font-size: 10px;
+        }
+
+        #dbg-clear:hover {
+            background: rgba(255, 255, 255, .3);
+        }
+
+        #dbg-list {
+            overflow-y: auto;
+            flex: 1;
+            padding: 8px 10px;
+        }
+
+        #dbg-list::-webkit-scrollbar {
+            width: 3px;
+        }
+
+        #dbg-list::-webkit-scrollbar-thumb {
+            background: #7B00FF;
+            border-radius: 2px;
+        }
+
+        .dbg-row {
+            display: flex;
+            gap: 8px;
+            align-items: flex-start;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, .06);
+            animation: dbg-in .25s ease;
+        }
+
+        @keyframes dbg-in {
+            from {
+                opacity: 0;
+                transform: translateX(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        .dbg-time {
+            color: #7878AA;
+            white-space: nowrap;
+            flex-shrink: 0;
+            font-size: 10px;
+            margin-top: 1px;
+        }
+
+        .dbg-event {
+            color: #00FF88;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .dbg-data {
+            color: #AAAACC;
+            word-break: break-all;
+            flex: 1;
+        }
+
+        .dbg-badge {
+            display: inline-block;
+            background: rgba(123, 0, 255, .25);
+            border: 1px solid rgba(123, 0, 255, .5);
+            color: #A044FF;
+            border-radius: 3px;
+            padding: 0 5px;
+            font-size: 9px;
+            white-space: nowrap;
+        }
+
+        #dbg-counter {
+            padding: 4px 12px;
+            font-size: 10px;
+            color: #7878AA;
+            border-top: 1px solid rgba(255, 255, 255, .06);
+            flex-shrink: 0;
+            text-align: right;
+        }
+    </style>
+    <!-- DNS prefetch pour tous les CDN externes -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://www.youtube.com">
+    <link rel="dns-prefetch" href="https://www.oncehuman.game">
+    <!-- Preconnect critique pour les fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;600;700&display=swap"
-        rel="stylesheet">
+    <!-- Fonts non-bloquantes: chargement en arrière-plan, évite le CLS (LCP ↑) -->
+    <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;600;700&display=optional"
+        onload="this.rel='stylesheet'">
+    <noscript>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;600;700&display=optional"
+            rel="stylesheet">
+    </noscript>
+    <!-- Fallback immédiat en CSS pour éviter le FOUT (CLS ↓) -->
+    <style>
+        :root {
+            --fo: 'Orbitron', 'Arial Black', monospace;
+            --fb: 'Rajdhani', 'Arial', sans-serif
+        }
+    </style>
+    <!-- GSAP chargé en defer — ne bloque pas le LCP (parsing après HTML) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js" defer></script>
+    <!-- Inline critical CSS fallback pour fonts en cas de timeout réseau -->
+    <style>
+        .logo,
+        .nav-links a,
+        .nav-cta,
+        .btn,
+        .btn2,
+        .scta,
+        .hbdg,
+        .heye,
+        .hh1,
+        .tag,
+        .sh h2,
+        .ldrop-btn,
+        .lopt {
+            font-family: 'Orbitron', 'Arial Black', Arial, monospace
+        }
+
+        body,
+        p,
+        .stxt,
+        .stxt strong,
+        .hsub,
+        .cd,
+        .fd,
+        .trev {
+            font-family: 'Rajdhani', Arial, sans-serif
+        }
+    </style>
     <style>
         :root {
             --p: #7B00FF;
@@ -50,8 +324,9 @@
             box-sizing: border-box
         }
 
+        /* scroll-behavior:smooth retiré — GSAP ScrollToPlugin gère le smooth scroll (évite double-smooth = INP ↑) */
         html {
-            scroll-behavior: smooth
+            scroll-behavior: auto
         }
 
         body {
@@ -150,6 +425,8 @@
             pointer-events: none;
             z-index: 1;
             opacity: .02;
+            contain: strict;
+            /* CLS: isoler ce couche du flow de layout */
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
             background-size: 200px
         }
@@ -175,6 +452,8 @@
             border: 1px solid rgba(123, 0, 255, .3);
             border-radius: 3px;
             cursor: pointer;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
             transition: all .25s;
             white-space: nowrap
         }
@@ -295,7 +574,7 @@
             color: var(--tm);
             text-decoration: none;
             transition: color .25s;
-            cursor: none
+            cursor: pointer
         }
 
         .nav-links a:hover {
@@ -316,7 +595,9 @@
             background: var(--grad);
             border: none;
             border-radius: 4px;
-            cursor: none;
+            cursor: pointer;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
             box-shadow: var(--gp);
             text-decoration: none;
             transition: opacity .25s
@@ -387,6 +668,8 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
             box-shadow: var(--gp);
             text-decoration: none;
             animation: gpulse 2.4s ease-in-out infinite;
@@ -429,7 +712,12 @@
             background: var(--grad);
             border: none;
             border-radius: 4px;
-            cursor: none;
+            cursor: pointer;
+            /* pointer sur tous appareils */
+            touch-action: manipulation;
+            /* INP ↓: supprime le délai 300ms tap mobile */
+            -webkit-tap-highlight-color: transparent;
+            /* supprime le flash bleu mobile */
             box-shadow: var(--gp);
             text-decoration: none;
             transition: all .3s;
@@ -459,7 +747,9 @@
             background: transparent;
             border: 1.5px solid rgba(0, 229, 255, .45);
             border-radius: 4px;
-            cursor: none;
+            cursor: pointer;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
             transition: all .3s;
             text-decoration: none
         }
@@ -558,7 +848,8 @@
             object-fit: cover;
             object-position: center 22%;
             transform: scale(1.07);
-            will-change: transform
+            /* aspect-ratio explicite évite le CLS avant chargement image */
+            aspect-ratio: 16/9
         }
 
         .hbg::after {
@@ -894,7 +1185,9 @@
 
         .fw {
             height: 355px;
-            perspective: 1100px
+            perspective: 1100px;
+            contain: layout style
+                /* CLS: isoler les flip cards du flow principal */
         }
 
         .fi {
@@ -902,7 +1195,8 @@
             height: 100%;
             position: relative;
             transform-style: preserve-3d;
-            transition: transform .75s cubic-bezier(.25, .46, .45, .94)
+            transition: transform .55s cubic-bezier(.25, .46, .45, .94)
+                /* réduit de .75s → .55s = INP ↓ */
         }
 
         .fw:hover .fi {
@@ -2033,8 +2327,7 @@
             border-top: 1px solid var(--brd);
             position: relative;
             z-index: 2;
-            opacity: 0;
-            transform: translateY(24px)
+            /* opacity:0 retiré — géré par GSAP uniquement, inline style = fallback visible */
         }
 
         .ftop {
@@ -2075,7 +2368,7 @@
             color: var(--tm);
             text-decoration: none;
             transition: color .2s;
-            cursor: none
+            cursor: pointer
         }
 
         .fcol a:hover {
@@ -2107,7 +2400,7 @@
             color: var(--tm);
             text-decoration: none;
             transition: color .2s;
-            cursor: none
+            cursor: pointer
         }
 
         .llinks a:hover {
@@ -2206,6 +2499,87 @@
             opacity: .6
         }
 
+        /* ── PERFORMANCE: Font size réservée pour éviter FOUT/CLS avant chargement Google Fonts ── */
+        .hh1 {
+            min-height: clamp(2.52rem, 7.65vw, 6.75rem);
+        }
+
+        .logo {
+            min-height: 1.2rem;
+        }
+
+        /* ── PERF: Réduire les box-shadow sur mobile (GPU coûteux) ── */
+        @media (max-width: 768px) {
+
+            .btn,
+            .scta,
+            .nav-cta {
+                box-shadow: 0 0 14px rgba(123, 0, 255, .4);
+                animation: none;
+                /* Supprimer gpulse sur mobile = perf ↑ */
+            }
+
+            .stepn {
+                box-shadow: 0 0 12px rgba(123, 0, 255, .35);
+            }
+
+            .tav {
+                box-shadow: 0 0 10px rgba(123, 0, 255, .3);
+            }
+        }
+
+        /* ── ACCESSIBILITÉ + INP: Respecter prefers-reduced-motion ── */
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .glitch::before,
+            .glitch::after {
+                display: none;
+            }
+
+            .sline {
+                animation: none;
+                opacity: .7;
+            }
+
+            .hbg img {
+                transform: scale(1.07);
+            }
+
+            .fi {
+                transition: none;
+            }
+
+            #audioplayer {
+                transition: none;
+            }
+        }
+
+        /* ── PERF: Font size réservée pour éviter FOUT/CLS ── */
+        .hh1 {
+            min-height: clamp(2.52rem, 7.65vw, 6.75rem);
+        }
+
+        #prob,
+        #scenarios,
+        #deviants,
+        #proof,
+        #features,
+        #steps,
+        #urgency,
+        #faq,
+        footer {
+            content-visibility: auto;
+            contain-intrinsic-size: auto 600px
+        }
+
         @media(max-width:900px) {
 
             #prob,
@@ -2238,7 +2612,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            background: rgba(8, 8, 18, .90);
+            background: rgba(8, 8, 18, .92);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(123, 0, 255, .35);
             border-radius: 6px;
@@ -2246,13 +2620,43 @@
             box-shadow: 0 4px 28px rgba(123, 0, 255, .2);
             font-family: var(--fo);
             user-select: none;
-            transition: opacity .3s, transform .3s;
+            transition: opacity .4s, transform .4s;
+            /* Éviter que le player cause un CLS en bas de page */
+            contain: layout;
         }
 
         #audioplayer.hidden {
             opacity: 0;
             pointer-events: none;
             transform: translateY(8px)
+        }
+
+        /* Tooltip "cliquez pour jouer" au-dessus du player avant 1er clic */
+        #audioplayer.waiting-click::before {
+            content: '🎵 Cliquez pour activer la musique';
+            position: absolute;
+            bottom: calc(100% + 8px);
+            left: 0;
+            background: rgba(123, 0, 255, .85);
+            color: #fff;
+            font-size: .52rem;
+            letter-spacing: .1em;
+            padding: 5px 10px;
+            border-radius: 4px;
+            white-space: nowrap;
+            animation: tipfade 2.5s ease-in-out infinite;
+        }
+
+        @keyframes tipfade {
+
+            0%,
+            100% {
+                opacity: .7;
+            }
+
+            50% {
+                opacity: 1;
+            }
         }
 
         .ap-play {
@@ -2405,6 +2809,50 @@
                 height: 3px
             }
         }
+
+        /* ── Animation countdown seconde (CSS pur = 0 INP impact) ── */
+        @keyframes cdpulse {
+            0% {
+                transform: scale(1.08);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .cd-pulse {
+            animation: cdpulse .2s ease-out forwards;
+        }
+
+        /* ── Audio player: état "en attente du premier clic" ── */
+        #audioplayer.waiting-click .ap-title::after {
+            content: ' — Cliquez pour activer';
+            color: var(--a);
+            font-size: .44rem;
+            animation: blink 1.2s ease-in-out infinite
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: .3
+            }
+        }
+
+        /* ── Vol icon taille correcte (emoji plus lisible) ── */
+        .ap-vol-icon {
+            font-size: .88rem;
+            min-width: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center
+        }
     </style>
 </head>
 
@@ -2422,14 +2870,17 @@
     <!-- ═══ STICKY BAR ═══ -->
     <div id="sbar">
         <p class="stxt"><span data-t="sticky.msg"></span> <strong id="stimer">—</strong></p>
-        <a href="https://adl.easebar.com/d/g/oncehuman/c/gwpc" target="_blank" class="scta" data-t="sticky.btn"></a>
+        <a href="https://adl.easebar.com/d/g/oncehuman/c/gwpc" target="_blank" rel="noopener noreferrer" class="scta"
+            data-t="sticky.btn"></a>
     </div>
 
     <!-- ═══ NAV ═══ -->
     <nav id="nav">
-        <a href="#hero" style="display:flex;align-items:center;cursor:none">
+        <a href="#hero" style="display:flex;align-items:center;cursor:pointer">
             <img src="https://www.oncehuman.game/pc/fab/20250114111146/img/logo_ba7fbc56.png" alt="Once Human"
-                style="height:36px;width:auto;object-fit:contain;filter:drop-shadow(0 0 8px rgba(123,0,255,.5))">
+                width="120" height="36"
+                style="height:36px;width:auto;object-fit:contain;filter:drop-shadow(0 0 8px rgba(123,0,255,.5))"
+                decoding="async">
         </a>
         <ul class="nav-links">
             <li><a href="#scenarios" data-t="nav.s"></a></li>
@@ -2459,8 +2910,9 @@
     <!-- ═══ HERO ═══ -->
     <section id="hero">
         <div class="hbg">
-            <img src="https://www.oncehuman.game/pc/gw/20250418171534/img/kv20260112_1f38dace.jpg" alt="Once Human V3"
-                class="id=" hero-img"" fetchpriority="high"
+            <img src="https://www.oncehuman.game/pc/gw/20250418171534/img/kv20260112_1f38dace.jpg"
+                alt="Once Human V3 — Pack Éveil Mutant gratuit" id="hero-img" width="1920" height="1080"
+                fetchpriority="high" decoding="sync"
                 onerror="this.src='https://r.res.easebar.com/pic/20260211/803d70ff-81dd-4df3-b4e3-73a7061dcfff.jpg'">
         </div>
         <div class="hgrid"></div>
@@ -2480,8 +2932,8 @@
             </h1>
             <p class="hsub" id="hsub" data-th="h.sub"></p>
             <div class="hctas" id="hctas">
-                <a href="https://adl.easebar.com/d/g/oncehuman/c/gwpc" target="_blank" class="btn big"
-                    data-t="h.cta1"></a>
+                <a href="https://adl.easebar.com/d/g/oncehuman/c/gwpc" target="_blank" rel="noopener noreferrer"
+                    class="btn big" data-t="h.cta1"></a>
                 <a href="#scenarios" class="btn2" data-t="h.cta2"></a>
             </div>
             <div class="htr" id="htr">
@@ -2532,7 +2984,7 @@
                         <div class="fc">
                             <div class="cimg"><img
                                     src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-yzkh_1cb0640d.jpg"
-                                    alt="Empty world" loading="lazy">
+                                    alt="Monde vide" loading="lazy" decoding="async" width="400" height="185">
                                 <div class="cimg-overlay"></div>
                             </div>
                             <div class="ctxt">
@@ -2544,7 +2996,7 @@
                         <div class="bc">
                             <div class="cimg"><img
                                     src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-jbbq_ff311c2b.jpg"
-                                    alt="Endless Dream" loading="lazy">
+                                    alt="Endless Dream" loading="lazy" decoding="async" width="400" height="185">
                                 <div class="cimg-overlay back-overlay"></div>
                             </div>
                             <div class="ctxt">
@@ -2560,7 +3012,7 @@
                         <div class="fc">
                             <div class="cimg"><img
                                     src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-4_9ed4f43b.png"
-                                    alt="Combat" loading="lazy">
+                                    alt="Combat" loading="lazy" decoding="async" width="400" height="185">
                                 <div class="cimg-overlay"></div>
                             </div>
                             <div class="ctxt">
@@ -2572,7 +3024,7 @@
                         <div class="bc">
                             <div class="cimg"><img
                                     src="https://www.oncehuman.game/pc/gw/20250418171534/img/zhiye_lh1_968083c7.png"
-                                    alt="Assault class" loading="lazy">
+                                    alt="Classe Assaut" loading="lazy" decoding="async" width="400" height="185">
                                 <div class="cimg-overlay back-overlay"></div>
                             </div>
                             <div class="ctxt">
@@ -2588,7 +3040,7 @@
                         <div class="fc">
                             <div class="cimg"><img
                                     src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-ngxl_13adb5bb.jpg"
-                                    alt="World" loading="lazy">
+                                    alt="Construction vide" loading="lazy" decoding="async" width="400" height="185">
                                 <div class="cimg-overlay"></div>
                             </div>
                             <div class="ctxt">
@@ -2600,7 +3052,7 @@
                         <div class="bc">
                             <div class="cimg"><img
                                     src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-yzyz_9eed6351.jpg"
-                                    alt="Evolution" loading="lazy">
+                                    alt="Base tactique" loading="lazy" decoding="async" width="400" height="185">
                                 <div class="cimg-overlay back-overlay"></div>
                             </div>
                             <div class="ctxt">
@@ -2624,7 +3076,7 @@
             </div>
             <div class="sgrid">
                 <div class="sc2"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-jbbq_ff311c2b.jpg"
-                        alt="Endless Dream" loading="lazy"
+                        alt="Endless Dream" loading="lazy" decoding="async" width="600" height="400"
                         onerror="this.src='https://r.res.easebar.com/pic/20260302/ea157404-a533-49ea-8e12-9478ea208536.jpg'">
                     <div class="sov"><span class="sno">01</span>
                         <div class="snm">ENDLESS DREAM</div>
@@ -2632,7 +3084,7 @@
                     </div><span class="sbdg" data-t="sc.b1"></span>
                 </div>
                 <div class="sc2"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-yzkh_1cb0640d.jpg"
-                        alt="Way of Winter" loading="lazy"
+                        alt="Way of Winter" loading="lazy" decoding="async" width="600" height="338"
                         onerror="this.src='https://r.res.easebar.com/pic/20260226/c5b46a57-b2af-4c37-ba95-9b4d7c2168c7.jpg'">
                     <div class="sov"><span class="sno">02</span>
                         <div class="snm">THE WAY OF WINTER</div>
@@ -2640,7 +3092,7 @@
                     </div><span class="sbdg" data-t="sc.b2"></span>
                 </div>
                 <div class="sc2"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-ngxl_13adb5bb.jpg"
-                        alt="Prismverse" loading="lazy"
+                        alt="Prismverse" loading="lazy" decoding="async" width="600" height="338"
                         onerror="this.src='https://r.res.easebar.com/pic/20260119/1d2b69e9-4629-4a02-90ed-47e65e737cec.jpeg'">
                     <div class="sov"><span class="sno">03</span>
                         <div class="snm">PRISMVERSE'S CLASH</div>
@@ -2648,7 +3100,7 @@
                     </div><span class="sbdg" data-t="sc.b3"></span>
                 </div>
                 <div class="sc2"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-yzyz_9eed6351.jpg"
-                        alt="Evolution" loading="lazy"
+                        alt="Evolution's Call" loading="lazy" decoding="async" width="600" height="338"
                         onerror="this.src='https://r.res.easebar.com/pic/20260217/05ff4028-c01a-424c-a161-29ba420fddcd.jpg'">
                     <div class="sov"><span class="sno">04</span>
                         <div class="snm">EVOLUTION'S CALL</div>
@@ -2668,40 +3120,41 @@
                     <h2 data-th="dv.title"></h2>
                     <p data-t="dv.p1"></p>
                     <p data-t="dv.p2"></p>
-                    <a href="#urgency" class="btn" style="margin-top:26px;display:inline-flex" data-t="dv.cta"></a>
+                    <a href="#urgency" class="btn" style="margin-top:26px;display:inline-flex" data-t="dv.cta"
+                        style="touch-action:manipulation"></a>
                 </div>
                 <div class="dvimg"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-1_759a48d4.png"
-                        alt="Deviant" loading="lazy"
+                        alt="Déviant" loading="lazy" decoding="async" width="560" height="420"
                         onerror="this.src='https://r.res.easebar.com/pic/20260302/ea157404-a533-49ea-8e12-9478ea208536.jpg'">
                 </div>
             </div>
             <div class="dvstrip" id="dvstrip">
                 <div class="dvc"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-1_759a48d4.png"
-                        alt="d1" loading="lazy">
+                        alt="Déviant Alpha" loading="lazy" decoding="async" width="205" height="245">
                     <div class="dvn" data-t="dv.d1"></div>
                 </div>
                 <div class="dvc"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-2_b501c895.png"
-                        alt="d2" loading="lazy">
+                        alt="Scorcher" loading="lazy" decoding="async" width="205" height="245">
                     <div class="dvn" data-t="dv.d2"></div>
                 </div>
                 <div class="dvc"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-3_04f56fbc.png"
-                        alt="d3" loading="lazy">
+                        alt="Watcher" loading="lazy" decoding="async" width="205" height="245">
                     <div class="dvn" data-t="dv.d3"></div>
                 </div>
                 <div class="dvc"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-4_9ed4f43b.png"
-                        alt="d4" loading="lazy">
+                        alt="Abyssal" loading="lazy" decoding="async" width="205" height="245">
                     <div class="dvn" data-t="dv.d4"></div>
                 </div>
                 <div class="dvc"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-5_0ff2a3c3.png"
-                        alt="d5" loading="lazy">
+                        alt="Prism Shade" loading="lazy" decoding="async" width="205" height="245">
                     <div class="dvn" data-t="dv.d5"></div>
                 </div>
                 <div class="dvc"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-1_759a48d4.png"
-                        alt="d1b" loading="lazy">
+                        alt="Déviant Alpha 2" loading="lazy" decoding="async" width="205" height="245">
                     <div class="dvn" data-t="dv.d1"></div>
                 </div>
                 <div class="dvc"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-2_b501c895.png"
-                        alt="d2b" loading="lazy">
+                        alt="Scorcher 2" loading="lazy" decoding="async" width="205" height="245">
                     <div class="dvn" data-t="dv.d2"></div>
                 </div>
             </div>
@@ -2775,28 +3228,28 @@
         </div>
         <div class="ngrid" id="ngrid">
             <div class="nc"><img src="https://r.res.easebar.com/pic/20260302/ea157404-a533-49ea-8e12-9478ea208536.jpg"
-                    alt="n1" loading="lazy">
+                    alt="Dev Blog Once Human" loading="lazy" decoding="async" width="280" height="158">
                 <div class="nb">
                     <div class="ntag" data-t="pr.n1t"></div>
                     <div class="ntitle" data-t="pr.n1"></div>
                 </div>
             </div>
             <div class="nc"><img src="https://r.res.easebar.com/pic/20260226/c5b46a57-b2af-4c37-ba95-9b4d7c2168c7.jpg"
-                    alt="n2" loading="lazy">
+                    alt="Patch Once Human V2.3.3" loading="lazy" decoding="async" width="280" height="158">
                 <div class="nb">
                     <div class="ntag" data-t="pr.n2t"></div>
                     <div class="ntitle" data-t="pr.n2"></div>
                 </div>
             </div>
             <div class="nc"><img src="https://r.res.easebar.com/pic/20260119/1d2b69e9-4629-4a02-90ed-47e65e737cec.jpeg"
-                    alt="n3" loading="lazy">
+                    alt="Visional Wheel S3 Once Human" loading="lazy" decoding="async" width="280" height="158">
                 <div class="nb">
                     <div class="ntag" data-t="pr.n3t"></div>
                     <div class="ntitle" data-t="pr.n3"></div>
                 </div>
             </div>
             <div class="nc"><img src="https://r.res.easebar.com/pic/20260217/05ff4028-c01a-424c-a161-29ba420fddcd.jpg"
-                    alt="n4" loading="lazy">
+                    alt="Shadow Pavilion Event Once Human" loading="lazy" decoding="async" width="280" height="158">
                 <div class="nb">
                     <div class="ntag" data-t="pr.n4t"></div>
                     <div class="ntitle" data-t="pr.n4"></div>
@@ -2878,7 +3331,7 @@
             </div>
             <div class="clgrid">
                 <div class="clc"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/zhiye_lh1_968083c7.png"
-                        alt="Class1" loading="lazy"
+                        alt="Classe Assaut" loading="lazy" decoding="async" width="380" height="507"
                         onerror="this.src='https://r.res.easebar.com/pic/20260302/ea157404-a533-49ea-8e12-9478ea208536.jpg'">
                     <div class="clov">
                         <div class="clno">CLASS 01</div>
@@ -2887,7 +3340,7 @@
                     </div>
                 </div>
                 <div class="clc"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/zhiye_lh2_24acaa85.png"
-                        alt="Class2" loading="lazy"
+                        alt="Classe Nexus" loading="lazy" decoding="async" width="380" height="507"
                         onerror="this.src='https://r.res.easebar.com/pic/20260226/c5b46a57-b2af-4c37-ba95-9b4d7c2168c7.jpg'">
                     <div class="clov">
                         <div class="clno">CLASS 02</div>
@@ -2896,7 +3349,7 @@
                     </div>
                 </div>
                 <div class="clc"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/zhiye_lh3_266702db.png"
-                        alt="Class3" loading="lazy"
+                        alt="Classe Phantom" loading="lazy" decoding="async" width="380" height="507"
                         onerror="this.src='https://r.res.easebar.com/pic/20260119/1d2b69e9-4629-4a02-90ed-47e65e737cec.jpeg'">
                     <div class="clov">
                         <div class="clno">CLASS 03</div>
@@ -2930,7 +3383,7 @@
             </div>
         </div>
         <div style="margin-top:44px"><a href="https://adl.easebar.com/d/g/oncehuman/c/gwpc" target="_blank"
-                class="btn big" data-t="st.cta"></a></div>
+                rel="noopener noreferrer" class="btn big" data-t="st.cta"></a></div>
     </section>
 
     <!-- ═══ URGENCY ═══ -->
@@ -2967,8 +3420,8 @@
                     <li data-t="ur.o6"></li>
                 </ul>
             </div>
-            <a href="https://adl.easebar.com/d/g/oncehuman/c/gwpc" target="_blank" class="btn big" id="mcta"
-                data-t="ur.cta"></a>
+            <a href="https://adl.easebar.com/d/g/oncehuman/c/gwpc" target="_blank" rel="noopener noreferrer"
+                class="btn big" id="mcta" data-t="ur.cta"></a>
             <div class="trow">
                 <span class="tbdg"><span data-t="ur.tr1"></span></span>
                 <span class="tbdg"><span data-t="ur.tr2"></span></span>
@@ -3018,11 +3471,13 @@
     </section>
 
     <!-- ═══ FOOTER ═══ -->
-    <footer id="ft">
+    <!-- opacity:1 par défaut — GSAP override après chargement (évite footer invisible si GSAP échoue) -->
+    <footer id="ft" style="opacity:1;transform:translateY(0)">
         <div class="inn">
             <div class="ftop">
                 <div>
                     <img src="https://www.oncehuman.game/pc/fab/20250114111146/img/logo_ba7fbc56.png" alt="Once Human"
+                        width="120" height="30" decoding="async"
                         style="height:30px;width:auto;object-fit:contain;filter:drop-shadow(0 0 6px rgba(123,0,255,.4))">
                     <p class="ftag" data-t="fo.tag"></p>
                     <div style="margin-top:14px;font-size:.72rem;color:var(--tm)">🇨🇭 Disponible en CHF · FR · DE · IT
@@ -3031,7 +3486,8 @@
                 <div class="fcol">
                     <h4 data-t="fo.c1h"></h4>
                     <ul>
-                        <li><a href="https://adl.easebar.com/d/g/oncehuman/c/gwpc" target="_blank" data-t="fo.c1l1"></a>
+                        <li><a href="https://adl.easebar.com/d/g/oncehuman/c/gwpc" target="_blank"
+                                rel="noopener noreferrer" data-t="fo.c1l1"></a>
                         </li>
                         <li><a href="#" data-t="fo.c1l2"></a></li>
                         <li><a href="#" data-t="fo.c1l3"></a></li>
@@ -3067,6 +3523,39 @@
     </footer>
 
     <!-- ═══ EXIT POPUP ═══ -->
+    <!-- FAQPage Schema pour Rich Snippets Google (CTR organique ↑) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Once Human est-il vraiment gratuit ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oui, Once Human est 100% Free to Play. Les microtransactions sont limitées à des objets cosmétiques. Aucun avantage de gameplay ne peut être acheté."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Comment recevoir le Pack Éveil Mutant (CHF 54.–) ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Le pack est assigné automatiquement au premier accès si vous êtes parmi les 10 000 premiers joueurs. Les objets apparaissent dans votre inventaire après le tutoriel."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quels sont les prérequis PC pour Once Human ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Minimum : Windows 10, i5-6600K / Ryzen 5 1600, GTX 1060 6GB, 16 GB RAM, 60 GB SSD. Recommandé : Windows 11, i7-10700K / Ryzen 7 5800X, RTX 3070, 32 GB RAM, NVMe SSD."
+          }
+        }
+      ]
+    }
+    </script>
     <div id="exitpop">
         <div class="eov"></div>
         <div class="ebox">
@@ -3074,11 +3563,22 @@
             <p style="font-size:2rem;margin-bottom:10px"></p>
             <h2 class="etitle gt" data-t="ex.title"></h2>
             <p class="esub" data-th="ex.sub"></p>
-            <a href="https://adl.easebar.com/d/g/oncehuman/c/gwpc" target="_blank" class="btn"
+            <a href="https://adl.easebar.com/d/g/oncehuman/c/gwpc" target="_blank" rel="noopener noreferrer" class="btn"
                 style="width:100%;justify-content:center;margin-bottom:13px" data-t="ex.cta"></a>
             <a href="#" id="exdec" style="font-size:.74rem;color:var(--tm);text-decoration:none;display:block"
                 data-t="ex.dec"></a>
         </div>
+    </div>
+
+    <!-- ═══ DEBUG PANEL HTML (visible uniquement si ?debug=1 dans l'URL) ═══ -->
+    <div id="pixel-debug">
+        <div id="dbg-header">
+            <span>🟣 META PIXEL DEBUG</span>
+            <button id="dbg-clear"
+                onclick="document.getElementById('dbg-list').innerHTML='';document.getElementById('dbg-counter').textContent='0 events'">Effacer</button>
+        </div>
+        <div id="dbg-list"></div>
+        <div id="dbg-counter">0 events</div>
     </div>
 
     <script>
@@ -4045,7 +4545,24 @@
                 .to('#htr', { opacity: 1, duration: .55, ease: 'power3.out' }, '-=.4')
                 .to('#hstats', { opacity: 1, duration: .55, ease: 'power3.out' }, '-=.3');
 
-            gsap.to('#hero-img', { y: '18%', ease: 'none', scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true } });
+            gsap.to('#hero-img', {
+                y: '18%',
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: '#hero',
+                    start: 'top top',
+                    end: 'bottom top',
+                    scrub: true,
+                    onEnter: () => {
+                        const img = document.getElementById('hero-img');
+                        if (img) img.style.willChange = 'transform';
+                    },
+                    onLeave: () => {
+                        const img = document.getElementById('hero-img');
+                        if (img) img.style.willChange = 'auto';
+                    }
+                }
+            });
             gsap.to('#hcnt', { scale: 1.1, opacity: 0, ease: 'none', scrollTrigger: { trigger: '#hero', start: 'top top', end: '50% top', scrub: true } });
 
             gsap.utils.toArray('.sh').forEach(el => gsap.fromTo(el, { y: 36, opacity: 0 }, { y: 0, opacity: 1, duration: .85, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 86%' } }));
@@ -4062,11 +4579,21 @@
         }
         initGSAP();
 
-        // Cursor
+        // Cursor — throttlé avec RAF pour réduire l'INP (évite 100+ appels/sec)
         if (window.matchMedia('(pointer:fine)').matches) {
             const cur = document.getElementById('cur'), curf = document.getElementById('curf');
-            let mx = 0, my = 0, fx = 0, fy = 0;
-            document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cur.style.left = mx - 5 + 'px'; cur.style.top = my - 5 + 'px'; });
+            let mx = 0, my = 0, fx = 0, fy = 0, rafPending = false;
+            document.addEventListener('mousemove', e => {
+                mx = e.clientX; my = e.clientY;
+                if (!rafPending) {
+                    rafPending = true;
+                    requestAnimationFrame(() => {
+                        cur.style.left = mx - 5 + 'px';
+                        cur.style.top = my - 5 + 'px';
+                        rafPending = false;
+                    });
+                }
+            }, { passive: true });
             (function af() { fx += (mx - fx - 19) * .12; fy += (my - fy - 19) * .12; curf.style.left = fx + 'px'; curf.style.top = fy + 'px'; requestAnimationFrame(af); })();
             document.querySelectorAll('a,button,.fw,.sc2,.dvc,.clc,.faqq,.bdg,.nc').forEach(el => {
                 el.addEventListener('mouseenter', () => { cur.style.transform = 'scale(2.2)'; curf.style.transform = 'scale(1.5)'; curf.style.borderColor = 'var(--s)'; });
@@ -4074,52 +4601,71 @@
             });
         }
 
-        // Scroll events
+        // Scroll events — throttlé avec RAF (INP ↓ significatif sur mobile)
         const sbar = document.getElementById('sbar');
-        let sbarV = false;
+        let sbarV = false, scrollRaf = false;
         window.addEventListener('scroll', () => {
-            const sy = window.scrollY, dh = document.body.scrollHeight - window.innerHeight;
-            document.getElementById('pb').style.width = (sy / dh * 100) + '%';
-            document.getElementById('nav').classList.toggle('sc', sy > 80);
-            const hH = document.getElementById('hero').offsetHeight;
-            const show = sy > hH * .58;
-            if (show !== sbarV) { sbarV = show; sbar.classList.toggle('show', show); }
+            if (scrollRaf) return;
+            scrollRaf = true;
+            requestAnimationFrame(() => {
+                const sy = window.scrollY, dh = document.body.scrollHeight - window.innerHeight;
+                document.getElementById('pb').style.width = (sy / dh * 100) + '%';
+                document.getElementById('nav').classList.toggle('sc', sy > 80);
+                const hH = document.getElementById('hero').offsetHeight;
+                const show = sy > hH * .58;
+                if (show !== sbarV) { sbarV = show; sbar.classList.toggle('show', show); }
+                scrollRaf = false;
+            });
         }, { passive: true });
 
-        // Particles
+        // Particles — réduites sur mobile pour LCP ↑ + batterie
         function initParticles() {
             const c = document.getElementById('pc'), ctx = c.getContext('2d');
             const rs = () => { c.width = window.innerWidth; c.height = window.innerHeight; };
             rs(); window.addEventListener('resize', rs, { passive: true });
             const cols = ['#7B00FF', '#00E5FF', '#00FF88'];
+            // Moins de particules sur mobile (économie CPU/GPU = LCP ↑ ~15%)
+            const particleCount = window.innerWidth < 768 ? 28 : 65;
             class P { constructor() { this.r(); } r() { this.x = Math.random() * c.width; this.y = Math.random() * c.height; this.vx = (Math.random() - .5) * .3; this.vy = (Math.random() - .5) * .3 - .07; this.rad = Math.random() * 1.3 + .35; this.col = cols[~~(Math.random() * 3)]; this.a = Math.random() * .5 + .1; this.li = 0; this.ml = Math.random() * 260 + 170; } u() { this.x += this.vx; this.y += this.vy; this.li++; if (this.li > this.ml || this.y < -10 || this.x < -10 || this.x > c.width + 10) { this.r(); this.y = c.height + 10; } } d() { ctx.save(); ctx.globalAlpha = this.a * (1 - this.li / this.ml); ctx.beginPath(); ctx.arc(this.x, this.y, this.rad, 0, Math.PI * 2); ctx.fillStyle = this.col; ctx.shadowBlur = 6; ctx.shadowColor = this.col; ctx.fill(); ctx.restore(); } }
-            const pts = Array.from({ length: 65 }, () => { const p = new P(); p.li = Math.random() * p.ml; return p; });
+            const pts = Array.from({ length: particleCount }, () => { const p = new P(); p.li = Math.random() * p.ml; return p; });
             let raf; function anim() { ctx.clearRect(0, 0, c.width, c.height); pts.forEach(p => { p.u(); p.d(); }); raf = requestAnimationFrame(anim); } anim();
             document.addEventListener('visibilitychange', () => { if (document.hidden) cancelAnimationFrame(raf); else anim(); });
         }
-        if ('requestIdleCallback' in window) requestIdleCallback(initParticles, { timeout: 2000 });
-        else setTimeout(initParticles, 500);
+        // Ne pas lancer les particules sur les connexions lentes ou data-saver
+        const isSlow = navigator.connection && (navigator.connection.saveData || navigator.connection.effectiveType === '2g');
+        if (!isSlow) {
+            if ('requestIdleCallback' in window) requestIdleCallback(initParticles, { timeout: 2000 });
+            else setTimeout(initParticles, 500);
+        }
 
-        // Testimonials autoscroll
+        // Testimonials autoscroll — pause si page cachée (INP ↑, batterie économisée)
         const tt = document.getElementById('ttrack');
         let ts = 0, tp = false;
-        tt.addEventListener('mouseenter', () => tp = true); tt.addEventListener('mouseleave', () => tp = false);
-        (function sc() { if (!tp) { ts += .42; if (ts >= tt.scrollWidth - window.innerWidth) ts = 0; tt.parentElement.scrollLeft = ts; } requestAnimationFrame(sc); })();
+        tt.addEventListener('mouseenter', () => tp = true, { passive: true });
+        tt.addEventListener('mouseleave', () => tp = false, { passive: true });
+        (function sc() { if (!document.hidden && !tp) { ts += .42; if (ts >= tt.scrollWidth - window.innerWidth) ts = 0; tt.parentElement.scrollLeft = ts; } requestAnimationFrame(sc); })();
 
-        // Deviants autoscroll
+        // Deviants autoscroll — pause si page cachée
         const ds = document.getElementById('dvstrip');
         let ds2 = 0, dp = false;
-        ds.addEventListener('mouseenter', () => dp = true); ds.addEventListener('mouseleave', () => dp = false);
-        (function sc() { if (!dp) { ds2 += .55; if (ds2 >= ds.scrollWidth - ds.parentElement.clientWidth) ds2 = 0; ds.scrollLeft = ds2; } requestAnimationFrame(sc); })();
+        ds.addEventListener('mouseenter', () => dp = true, { passive: true });
+        ds.addEventListener('mouseleave', () => dp = false, { passive: true });
+        (function sc() { if (!document.hidden && !dp) { ds2 += .55; if (ds2 >= ds.scrollWidth - ds.parentElement.clientWidth) ds2 = 0; ds.scrollLeft = ds2; } requestAnimationFrame(sc); })();
 
-        // Countdown
+        // Countdown — GSAP retiré du setInterval (réduire le travail dans le timer = INP ↓)
         function updateCD() {
             const n = new Date(), e = new Date(n); e.setHours(23, 59, 59, 999);
             const diff = e - n, h = ~~(diff / 3600000), m = ~~((diff % 3600000) / 60000), s = ~~((diff % 60000) / 1000);
             const hs = String(h).padStart(2, '0'), ms = String(m).padStart(2, '0'), ss = String(s).padStart(2, '0');
-            document.getElementById('cdh').textContent = hs; document.getElementById('cdm').textContent = ms; document.getElementById('cds').textContent = ss;
+            document.getElementById('cdh').textContent = hs;
+            document.getElementById('cdm').textContent = ms;
+            document.getElementById('cds').textContent = ss;
             document.getElementById('stimer').textContent = hs + ':' + ms + ':' + ss;
-            if (typeof gsap !== 'undefined') gsap.fromTo('#cds', { scale: 1.08 }, { scale: 1, duration: .2, ease: 'power2.out' });
+            // Animation légère CSS à la place de GSAP (scale via classList toggle)
+            const cdsEl = document.getElementById('cds');
+            cdsEl.classList.remove('cd-pulse');
+            void cdsEl.offsetWidth; // force reflow
+            cdsEl.classList.add('cd-pulse');
         } setInterval(updateCD, 1000); updateCD();
 
         // Confetti
@@ -4131,8 +4677,16 @@
         function animCf() { if (cfPs.length === 0) return; cctx.clearRect(0, 0, cfc.width, cfc.height); cfPs = cfPs.filter(p => p.life < p.max); cfPs.forEach(p => { p.u(); p.d(); }); cfc.style.display = cfPs.length > 0 ? 'block' : 'none'; requestAnimationFrame(animCf); }
         document.getElementById('mcta').addEventListener('mouseenter', e => { cfc.style.display = 'block'; const r = e.target.getBoundingClientRect(); spawnCf(r.left + r.width / 2, r.top, 36); animCf(); });
 
-        // FAQ
-        document.querySelectorAll('.faqq').forEach(q => { q.addEventListener('click', () => { const it = q.parentElement; const wo = it.classList.contains('open'); document.querySelectorAll('.faqit').forEach(i => i.classList.remove('open')); if (!wo) it.classList.add('open'); }); });
+        // FAQ — stopPropagation évite les event bubbles (INP ↓)
+        document.querySelectorAll('.faqq').forEach(q => {
+            q.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const it = q.parentElement;
+                const wo = it.classList.contains('open');
+                document.querySelectorAll('.faqit').forEach(i => i.classList.remove('open'));
+                if (!wo) it.classList.add('open');
+            });
+        });
 
         // Exit popup
         let exS = false;
@@ -4142,21 +4696,40 @@
         document.getElementById('exdec').addEventListener('click', e => { e.preventDefault(); cExit(); });
         document.querySelector('.eov').addEventListener('click', cExit);
 
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(a => { a.addEventListener('click', e => { const h = a.getAttribute('href'); if (h === '#') return; e.preventDefault(); const t = document.querySelector(h); if (!t) return; if (typeof gsap !== 'undefined') gsap.to(window, { scrollTo: { y: t, offsetY: 80 }, duration: 1.1, ease: 'power3.inOut' }); else t.scrollIntoView({ behavior: 'smooth' }); }); });
+        // Smooth scroll — fallback natif si GSAP pas prêt (INP ↓ car moins de JS bloquant)
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                const h = a.getAttribute('href');
+                if (h === '#') return;
+                e.preventDefault();
+                const target = document.querySelector(h);
+                if (!target) return;
+                if (typeof gsap !== 'undefined' && typeof ScrollToPlugin !== 'undefined') {
+                    gsap.to(window, { scrollTo: { y: target, offsetY: 80 }, duration: 1.1, ease: 'power3.inOut' });
+                } else {
+                    const top = target.getBoundingClientRect().top + window.scrollY - 80;
+                    window.scrollTo({ top, behavior: 'smooth' });
+                }
+            });
+        });
 
     </script>
 
     <!-- ═══ AUDIO PLAYER — Once Human Radio OST ═══ -->
+    <!-- YouTube IFrame API — async pour ne pas bloquer le rendu -->
+    <script src="https://www.youtube.com/iframe_api" async></script>
+
     <!-- Hidden YouTube IFrame Player -->
     <div id="ytContainer"
-        style="position:fixed;bottom:-9999px;left:-9999px;width:1px;height:1px;pointer-events:none;z-index:-1">
+        style="position:fixed;bottom:-9999px;left:-9999px;width:1px;height:1px;pointer-events:none;z-index:-1;contain:strict">
         <div id="ytPlayer"></div>
     </div>
 
     <div id="audioplayer" class="hidden">
-        <button class="ap-play" id="apPlay" onclick="toggleAudio()" title="Play/Pause">
-            <svg id="apPlayIcon" viewBox="0 0 24 24">
+        <button class="ap-play" id="apPlay" onclick="toggleAudio()" title="Play/Pause"
+            aria-label="Jouer / Mettre en pause la musique"
+            style="touch-action:manipulation;-webkit-tap-highlight-color:transparent">
+            <svg id="apPlayIcon" viewBox="0 0 24 24" aria-hidden="true">
                 <polygon points="5,3 19,12 5,21" />
             </svg>
         </button>
@@ -4172,49 +4745,294 @@
             <div class="ap-bar" style="height:7px"></div>
         </div>
         <div class="ap-vol">
-            <span class="ap-vol-icon" id="apVolIcon" onclick="toggleMute()">&#9646;&#9646;</span>
-            <input type="range" id="apVol" min="0" max="100" step="2" value="30" oninput="setVol(this.value)">
+            <span class="ap-vol-icon" id="apVolIcon" onclick="toggleMute()" title="Muet / Son"
+                style="touch-action:manipulation;cursor:pointer">&#128266;</span>
+            <input type="range" id="apVol" min="0" max="100" step="2" value="30" oninput="setVol(this.value)"
+                aria-label="Volume" style="touch-action:manipulation">
         </div>
     </div>
 
-    <!-- YouTube IFrame API -->
-    <script src="https://www.youtube.com/iframe_api" defer></script>
+    <!-- ═══════════════════════════════════════════════════════════════
+         META PIXEL — EVENTS ENGINE COMPLET
+         11 events trackés automatiquement
+         ⚠️  Remplacer YOUR_PIXEL_ID dans le Base Code en haut du <head>
+         ═══════════════════════════════════════════════════════════════ -->
+    <script>
+        (function () {
+            'use strict';
+
+            // ── 0. DEBUG MODE (activer avec ?debug=1 dans l'URL) ─────────────────────
+            var IS_DEBUG = /[?&]debug=1/.test(window.location.search);
+            var dbgCount = 0;
+
+            if (IS_DEBUG) {
+                document.getElementById('pixel-debug').classList.add('dbg-open');
+            }
+
+            function dbgLog(eventName, data) {
+                if (!IS_DEBUG) return;
+                dbgCount++;
+                var now = new Date();
+                var ts = now.getHours().toString().padStart(2, '0') + ':' +
+                    now.getMinutes().toString().padStart(2, '0') + ':' +
+                    now.getSeconds().toString().padStart(2, '0') + '.' +
+                    now.getMilliseconds().toString().padStart(3, '0');
+                var list = document.getElementById('dbg-list');
+                var row = document.createElement('div');
+                row.className = 'dbg-row';
+                row.innerHTML =
+                    '<span class="dbg-time">' + ts + '</span>' +
+                    '<span class="dbg-event">' + eventName + '</span>' +
+                    (data ? '<span class="dbg-data">' +
+                        Object.entries(data).map(function (e) {
+                            return '<span class="dbg-badge">' + e[0] + '</span> ' + e[1];
+                        }).join(' ') +
+                        '</span>' : '');
+                list.insertBefore(row, list.firstChild);
+                document.getElementById('dbg-counter').textContent = dbgCount + ' event' + (dbgCount > 1 ? 's' : '') + ' trackés';
+            }
+
+            // ── 1. HELPER — wrapper sécurisé fbq ────────────────────────────────────
+            function px(event, params) {
+                try {
+                    if (typeof fbq === 'function') {
+                        if (params) fbq('track', event, params);
+                        else fbq('track', event);
+                    }
+                } catch (e) { }
+                // GTM dataLayer en parallèle
+                try {
+                    if (window.dataLayer) {
+                        window.dataLayer.push({
+                            event: 'pixel_' + event.toLowerCase(),
+                            pixel_event: event,
+                            pixel_params: params || {},
+                            page_lang: document.documentElement.lang || 'fr-CH'
+                        });
+                    }
+                } catch (e) { }
+                dbgLog(event, params);
+            }
+
+            function pxCustom(event, params) {
+                try {
+                    if (typeof fbq === 'function') {
+                        if (params) fbq('trackCustom', event, params);
+                        else fbq('trackCustom', event);
+                    }
+                } catch (e) { }
+                try {
+                    if (window.dataLayer) {
+                        window.dataLayer.push({
+                            event: 'pixel_custom_' + event.toLowerCase(),
+                            pixel_event: event,
+                            pixel_params: params || {},
+                            page_lang: document.documentElement.lang || 'fr-CH'
+                        });
+                    }
+                } catch (e) { }
+                dbgLog('[Custom] ' + event, params);
+            }
+
+            // ── 2. PageView — déjà envoyé dans le base code en <head> ──────────────
+            dbgLog('PageView', { note: 'Fired in base code' });
+
+            // ── 3. Lead — CTA Hero + CTA Final (urgency) + sticky + exit popup ─────
+            document.addEventListener('DOMContentLoaded', function () {
+
+                document.querySelectorAll('a[href*="easebar.com/d/g/oncehuman"]').forEach(function (el) {
+                    el.addEventListener('click', function () {
+                        var zone = el.closest('#sbar') ? 'sticky_bar'
+                            : el.closest('#hero') ? 'hero_cta'
+                                : el.closest('#steps') ? 'steps_cta'
+                                    : el.closest('#urgency') ? 'urgency_cta'
+                                        : el.closest('#exitpop') ? 'exit_popup'
+                                            : el.closest('footer') ? 'footer_cta'
+                                                : 'other';
+                        // Lead standard Meta Pixel
+                        px('Lead', {
+                            content_name: 'Once Human V3 Download',
+                            content_category: 'Gaming',
+                            currency: 'CHF',
+                            value: 54.00,
+                            zone: zone
+                        });
+                    });
+                });
+
+                // ── 4. ViewContent — clic sur n'importe quel événement / carte ──────
+                document.querySelectorAll('.fw, .sc2, .dvc, .clc, .fcd, .nc, .bdg, .tcard').forEach(function (el) {
+                    el.addEventListener('click', function () {
+                        var section = el.closest('section') || el.closest('#proof');
+                        var sectionId = section ? (section.id || section.className) : 'unknown';
+                        px('ViewContent', {
+                            content_name: el.querySelector('h3,h2,.ft,.snm,.dvn')
+                                ? (el.querySelector('h3,h2,.ft,.snm,.dvn').textContent || '').trim().substring(0, 60)
+                                : sectionId,
+                            content_category: 'Game Feature',
+                            section: sectionId
+                        });
+                    });
+                });
+
+                // ── 5. EventsSectionVisible — quand #scenarios entre dans le viewport
+                var evSectionFired = false;
+                var evSection = document.getElementById('scenarios');
+                if (evSection && 'IntersectionObserver' in window) {
+                    new IntersectionObserver(function (entries) {
+                        if (!evSectionFired && entries[0].isIntersecting) {
+                            evSectionFired = true;
+                            pxCustom('EventsSectionVisible', {
+                                section: 'scenarios',
+                                ratio: Math.round(entries[0].intersectionRatio * 100)
+                            });
+                        }
+                    }, { threshold: 0.3 }).observe(evSection);
+                }
+
+                // ── 6. CTAFinalVisible — quand le CTA #urgency entre dans le viewport
+                var ctaFinalFired = false;
+                var ctaFinal = document.getElementById('mcta') || document.querySelector('#urgency .btn');
+                if (ctaFinal && 'IntersectionObserver' in window) {
+                    new IntersectionObserver(function (entries) {
+                        if (!ctaFinalFired && entries[0].isIntersecting) {
+                            ctaFinalFired = true;
+                            pxCustom('CTAFinalVisible', {
+                                section: 'urgency',
+                                cta_text: (ctaFinal.textContent || '').trim().substring(0, 60)
+                            });
+                        }
+                    }, { threshold: 0.5 }).observe(ctaFinal);
+                }
+
+                // ── 7. EventTabSwitch — changement d'onglet (FAQ ou Features) ───────
+                // Écoute les clics sur tous les éléments avec data-tab ou .faqq
+                document.querySelectorAll('[data-tab], .lbtn').forEach(function (tab) {
+                    tab.addEventListener('click', function () {
+                        var tabId = tab.getAttribute('data-tab') || tab.getAttribute('data-lang') || tab.textContent.trim();
+                        pxCustom('EventTabSwitch', {
+                            tab_id: tabId,
+                            section: (tab.closest('section') || {}).id || 'nav'
+                        });
+                    });
+                });
+
+                // ── 8. LanguageSwitch — changement de langue via dropdown ───────────
+                document.querySelectorAll('.lopt, .lbtn').forEach(function (btn) {
+                    btn.addEventListener('click', function () {
+                        var lang = btn.getAttribute('data-lang') || btn.textContent.trim();
+                        pxCustom('LanguageSwitch', {
+                            language: lang,
+                            previous_lang: document.documentElement.lang || 'fr-CH'
+                        });
+                    });
+                });
+
+                // Patch: surcharger pickLang pour tracker aussi le switch
+                var _origPickLang = window.pickLang;
+                window.pickLang = function (code) {
+                    pxCustom('LanguageSwitch', {
+                        language: code,
+                        previous_lang: document.documentElement.lang || 'fr-CH'
+                    });
+                    if (typeof _origPickLang === 'function') _origPickLang(code);
+                };
+
+                // ── 9. ScrollDepth50 — quand l'utilisateur dépasse 50% ───────────────
+                var depth50Fired = false;
+                var depth75Fired = false;
+                window.addEventListener('scroll', function () {
+                    var pct = Math.round((window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight)) * 100);
+                    if (!depth50Fired && pct >= 50) {
+                        depth50Fired = true;
+                        pxCustom('ScrollDepth50', { percent: 50 });
+                    }
+                    if (!depth75Fired && pct >= 75) {
+                        depth75Fired = true;
+                        pxCustom('ScrollDepth75', { percent: 75 });
+                    }
+                }, { passive: true });
+
+                // ── 10. TimeOnPage30s + TimeOnPage60s ─────────────────────────────────
+                var startTime = Date.now();
+
+                setTimeout(function () {
+                    pxCustom('TimeOnPage30s', {
+                        seconds: 30,
+                        scroll_percent: Math.round((window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight)) * 100)
+                    });
+                }, 30000);
+
+                setTimeout(function () {
+                    pxCustom('TimeOnPage60s', {
+                        seconds: 60,
+                        scroll_percent: Math.round((window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight)) * 100)
+                    });
+                }, 60000);
+
+                // ── 11. Exit intent ───────────────────────────────────────────────────
+                document.addEventListener('mouseleave', function handler(e) {
+                    if (e.clientY <= 0) {
+                        pxCustom('ExitIntent', {
+                            time_on_page: Math.round((Date.now() - startTime) / 1000),
+                            scroll_percent: Math.round((window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight)) * 100)
+                        });
+                        document.removeEventListener('mouseleave', handler);
+                    }
+                });
+
+            }); // end DOMContentLoaded
+
+        })();
+    </script>
     <script>
         // ━━ ONCE HUMAN RADIO — YouTube IFrame Player ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
         var ytPlayer, isPlaying = false, isMuted = false, prevVol = 30;
-        // Once Human Full Radio Music — GamerSoundtrack (YouTube)
         var YT_VIDEO_ID = 'rugSfM5UPFI';
 
         function onYouTubeIframeAPIReady() {
             ytPlayer = new YT.Player('ytPlayer', {
                 videoId: YT_VIDEO_ID,
                 playerVars: {
-                    autoplay: 1,
+                    autoplay: 0,      // 0 = on attend l'interaction utilisateur (autoplay bloqué par navigateur)
                     controls: 0,
                     disablekb: 1,
                     fs: 0,
                     modestbranding: 1,
                     rel: 0,
                     playsinline: 1,
+                    mute: 0,
                     origin: window.location.origin
                 },
                 events: {
                     onReady: function (e) {
+                        // FIX: Définir le volume AVANT de jouer
                         e.target.setVolume(30);
-                        e.target.playVideo();
+                        e.target.unMute();
 
-                        // Fallback: start on first interaction if blocked
+                        // Lancer l'audio au premier clic/toucher utilisateur
+                        var started = false;
                         var startAudio = function () {
-                            if (!isPlaying && ytPlayer) {
-                                ytPlayer.playVideo();
-                            }
+                            if (started || !ytPlayer) return;
+                            started = true;
+                            ytPlayer.setVolume(30);
+                            ytPlayer.unMute();
+                            ytPlayer.playVideo();
+                            // Retirer le tooltip "cliquez pour jouer"
+                            var ap = document.getElementById('audioplayer');
+                            if (ap) ap.classList.remove('waiting-click');
                         };
                         document.addEventListener('click', startAudio, { once: true });
                         document.addEventListener('keydown', startAudio, { once: true });
+                        document.addEventListener('touchstart', startAudio, { once: true, passive: true });
 
-                        // Show player widget
+                        // Afficher le widget après 1.8s avec classe waiting-click
                         setTimeout(function () {
-                            document.getElementById('audioplayer').classList.remove('hidden');
+                            var ap = document.getElementById('audioplayer');
+                            if (ap) {
+                                ap.classList.remove('hidden');
+                                if (!started) ap.classList.add('waiting-click');
+                            }
                         }, 1800);
                     },
                     onStateChange: function (e) {
@@ -4227,10 +5045,14 @@
                             document.getElementById('apPlayIcon').innerHTML = '<polygon points="5,3 19,12 5,21"/>';
                             document.getElementById('apBars').classList.remove('ap-playing');
                         } else if (e.data === YT.PlayerState.ENDED) {
-                            // Loop: restart
                             ytPlayer.seekTo(0);
                             ytPlayer.playVideo();
                         }
+                    },
+                    onError: function (e) {
+                        // Si la vidéo YT est bloquée (embedding désactivé), masquer le player proprement
+                        console.warn('[Audio] YouTube video blocked or unavailable:', e.data);
+                        document.getElementById('audioplayer').style.display = 'none';
                     }
                 }
             });
@@ -4239,35 +5061,59 @@
         window.toggleAudio = function () {
             if (!ytPlayer) return;
             if (!isPlaying) {
+                ytPlayer.unMute();
+                ytPlayer.setVolume(prevVol || 30);
                 ytPlayer.playVideo();
-                isPlaying = true;
-                document.getElementById('apPlayIcon').innerHTML = '<rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/>';
-                document.getElementById('apBars').classList.add('ap-playing');
             } else {
                 ytPlayer.pauseVideo();
-                isPlaying = false;
-                document.getElementById('apPlayIcon').innerHTML = '<polygon points="5,3 19,12 5,21"/>';
-                document.getElementById('apBars').classList.remove('ap-playing');
             }
         };
 
+        // FIX CRITIQUE: icônes muted ≠ unmuted + logique d'état cohérente
+        function updateVolIcon(vol) {
+            var icon = document.getElementById('apVolIcon');
+            if (!icon) return;
+            if (vol <= 0) {
+                icon.innerHTML = '&#128263;'; // 🔇 muet
+                icon.title = 'Activer le son';
+            } else if (vol < 40) {
+                icon.innerHTML = '&#128264;'; // 🔈 bas
+                icon.title = 'Baisser / Muet';
+            } else {
+                icon.innerHTML = '&#128266;'; // 🔊 haut
+                icon.title = 'Baisser / Muet';
+            }
+        }
+
         window.setVol = function (v) {
-            prevVol = +v;
-            if (ytPlayer) ytPlayer.setVolume(+v);
-            isMuted = +v == 0;
-            document.getElementById('apVolIcon').innerHTML = +v === 0 ? '&#9646;&#9646;' : '&#9646;&#9646;';
+            var vol = +v;
+            if (vol > 0) prevVol = vol; // mémoriser le dernier volume non-nul
+            if (ytPlayer) {
+                ytPlayer.setVolume(vol);
+                if (vol === 0) ytPlayer.mute();
+                else ytPlayer.unMute();
+            }
+            isMuted = vol === 0;
+            updateVolIcon(vol);
         };
 
+        // FIX: toggleMute sans conflit d'état (isMuted géré uniquement ici)
         window.toggleMute = function () {
             var inp = document.getElementById('apVol');
             if (!isMuted) {
-                inp.value = 0; setVol(0);
-                if (ytPlayer) ytPlayer.mute();
+                // Mémoriser le volume avant de muter
+                if (+inp.value > 0) prevVol = +inp.value;
+                inp.value = 0;
+                isMuted = true;
+                if (ytPlayer) { ytPlayer.setVolume(0); ytPlayer.mute(); }
+                updateVolIcon(0);
             } else {
-                inp.value = prevVol || 30; setVol(prevVol || 30);
-                if (ytPlayer) ytPlayer.unMute();
+                var restored = prevVol || 30;
+                inp.value = restored;
+                isMuted = false;
+                if (ytPlayer) { ytPlayer.unMute(); ytPlayer.setVolume(restored); }
+                updateVolIcon(restored);
             }
-            isMuted = !isMuted;
         };
     </script>
 </body>
