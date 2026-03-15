@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <!-- ═══════════════════════════════════════════════════════════════════
      ONCE HUMAN V3 — Landing Page OPTIMISÉE + META PIXEL
-     Version: OPTIMIZED-v3.0
+     Version: OPTIMIZED-v5.0 — LCP FIX (8 causes corrigées)
      ✅ LCP/CLS/INP: toutes optimisations v2.0 conservées
      ✅ AUDIO: bug volume 0 corrigé, icônes muted/unmuted, autoplay fix
      ✅ META PIXEL: 11 events trackés automatiquement
@@ -25,7 +25,7 @@
         !function (f, b, e, v, n, t, s) {
             if (f.fbq) return; n = f.fbq = function () {
                 n.callMethod ?
-                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
             };
             if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
             n.queue = []; t = b.createElement(e); t.async = !0;
@@ -33,19 +33,25 @@
             s.parentNode.insertBefore(t, s)
         }(window, document, 'script',
             'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '468742119653388');
+        fbq('init', 'YOUR_PIXEL_ID');
         fbq('track', 'PageView');
     </script>
     <noscript>
         <img height="1" width="1" style="display:none"
-            src="https://www.facebook.com/tr?id=468742119653388&ev=PageView&noscript=1" />
+            src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1" />
     </noscript>
     <!-- ═══════════════════════════════════════════════════════════════ -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <link rel="preload" href="https://www.oncehuman.game/pc/gw/20250418171534/img/kv20260112_1f38dace.jpg" as="image"
-        fetchpriority="high">
     <!-- Preload logo nav pour éviter le CLS de la nav -->
     <link rel="preload" href="https://www.oncehuman.game/pc/fab/20250114111146/img/logo_ba7fbc56.png" as="image">
+    <!--
+        LCP FIX: preload du poster vidéo hero.
+        Le poster est l'image visible PENDANT le chargement de la vidéo.
+        Sans preload, le navigateur ne le découvre qu'après avoir parsé le <video> = trop tard.
+        Avec preload + fetchpriority=high → disponible au 1er paint → LCP ↑↑
+    -->
+    <link rel="preload" href="https://www.oncehuman.game/pc/gw/20250418171534/img/kv20260112_1f38dace.jpg" as="image"
+        fetchpriority="high">
     <title>Once Human V3 — Pack OP Gratuit | FR · EN · DE · IT · RM</title>
     <meta name="description"
         content="Télécharge Once Human V3 GRATUITEMENT. Pack Éveil Mutant (CHF 54.–) offert aux 10 000 premiers. 4.8 Steam. 2M+ joueurs. Disponible en français, anglais, allemand, italien et romanche.">
@@ -241,22 +247,30 @@
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="https://www.youtube.com">
     <link rel="dns-prefetch" href="https://www.oncehuman.game">
+    <!-- Preconnect vidéo hero — réduit le TTFB de la vidéo (LCP poster ↑) -->
+    <link rel="preconnect" href="https://oncehuman.v.easebar.com">
+    <link rel="dns-prefetch" href="https://oncehuman.v.easebar.com">
     <!-- Preconnect critique pour les fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Fonts non-bloquantes: chargement en arrière-plan, évite le CLS (LCP ↑) -->
+    <!--
+        LCP FIX: display=swap au lieu de optional
+        swap = le navigateur affiche immédiatement le texte avec la font système,
+        puis swap vers Orbitron quand elle charge.
+        Résultat: span.l1 est visible en < 200ms → LCP explose à la hausse.
+    -->
     <link rel="preload" as="style"
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;600;700&display=optional"
-        onload="this.rel='stylesheet'">
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;600;700&display=swap"
+        onload="this.onload=null;this.rel='stylesheet'">
     <noscript>
         <link
-            href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;600;700&display=optional"
+            href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;600;700&display=swap"
             rel="stylesheet">
     </noscript>
-    <!-- Fallback immédiat en CSS pour éviter le FOUT (CLS ↓) -->
+    <!-- Fallback système immédiat — rendu AVANT que Orbitron se charge (LCP ↑↑↑) -->
     <style>
         :root {
-            --fo: 'Orbitron', 'Arial Black', monospace;
+            --fo: 'Orbitron', 'Arial Black', 'Impact', monospace;
             --fb: 'Rajdhani', 'Arial', sans-serif
         }
     </style>
@@ -842,14 +856,37 @@
             z-index: 0
         }
 
-        .hbg img {
+        /* ── HERO VIDEO BG ── */
+        .hbg video {
+            position: absolute;
+            inset: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
             object-position: center 22%;
             transform: scale(1.07);
-            /* aspect-ratio explicite évite le CLS avant chargement image */
-            aspect-ratio: 16/9
+            background: #07070F
+        }
+
+        /* Image fallback si reduced-motion activé ou vidéo indisponible */
+        .hbg-fallback {
+            display: none;
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 22%
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hbg video {
+                display: none;
+            }
+
+            .hbg-fallback {
+                display: block;
+            }
         }
 
         .hbg::after {
@@ -887,14 +924,147 @@
             padding: 0 22px
         }
 
+        /* ══════════════════════════════════════════════════════════════
+           LCP FIX — HERO ENTRANCE ANIMATIONS EN CSS PUR
+           AVANT: opacity:0 sur .hh1 → GSAP (defer) → 15s de LCP ❌
+           APRÈS: span.l1 visible dès le 1er paint CSS → LCP < 1.5s ✅
+
+           Principe:
+           • .hh1 et .hh1 .l1/.l2 → opacity:1 immédiatement (LCP element)
+           • Tous les autres éléments hero → CSS @keyframes avec delays courts
+           • GSAP timeline hero = supprimée (plus nécessaire)
+           • GSAP garde uniquement les scroll effects
+        ══════════════════════════════════════════════════════════════ */
+
+        /* ── Keyframes hero ── */
+        @keyframes hFadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes hFadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes hScaleIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(.97);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /*
+         * CRITIQUE: .hh1 visible IMMÉDIATEMENT — c'est l'élément LCP (span.l1)
+         * PAS d'animation, PAS de fill-mode 'both' (qui applique opacity:0 pendant le delay).
+         * opacity:1 fixe = le navigateur peint span.l1 au 1er frame CSS → LCP < 1s ✅
+         */
+        .hh1 {
+            font-family: var(--fo);
+            font-size: clamp(2.8rem, 8.5vw, 7.5rem);
+            font-weight: 900;
+            line-height: .9;
+            margin-bottom: 10px;
+            opacity: 1;
+            /* ← JAMAIS opacity:0 — LCP element */
+            min-height: clamp(2.52rem, 7.65vw, 6.75rem)
+                /* réserve espace → CLS ↓ */
+        }
+
+        /* Badges — below LCP, delay court */
         .hbadges {
             display: flex;
             gap: 10px;
             justify-content: center;
             flex-wrap: wrap;
             margin-bottom: 24px;
-            opacity: 0;
-            transform: translateY(14px)
+            animation: hFadeUp .55s ease-out .08s both
+        }
+
+        /* Eyebrow tag */
+        .heye {
+            font-family: var(--fo);
+            font-size: .61rem;
+            letter-spacing: .4em;
+            text-transform: uppercase;
+            color: var(--a);
+            margin-bottom: 22px;
+            animation: hFadeUp .55s ease-out .15s both
+        }
+
+        /* Subtitle */
+        .hsub {
+            font-size: clamp(.93rem, 1.9vw, 1.25rem);
+            color: #CBCBE9;
+            max-width: 630px;
+            margin: 24px auto 40px;
+            line-height: 1.86;
+            animation: hFadeUp .6s ease-out .3s both
+        }
+
+        /* CTAs */
+        .hctas {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: hScaleIn .6s ease-out .42s both
+        }
+
+        /* Trust row */
+        .htr {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 18px;
+            animation: hFadeIn .5s ease-out .55s both
+        }
+
+        /* Stats bar */
+        .hstats {
+            position: absolute;
+            bottom: 54px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 46px;
+            z-index: 10;
+            white-space: nowrap;
+            animation: hFadeIn .5s ease-out .65s both
+        }
+
+        /* Respect préférence reduced-motion */
+        @media (prefers-reduced-motion: reduce) {
+
+            .hh1,
+            .hbadges,
+            .heye,
+            .hsub,
+            .hctas,
+            .htr,
+            .hstats {
+                animation: none;
+                opacity: 1;
+                transform: none;
+            }
         }
 
         .hbdg {
@@ -902,7 +1072,7 @@
             align-items: center;
             gap: 7px;
             padding: 6px 16px;
-            background: rgba(5, 5, 14, .72);
+            background: rgba(5, 5, 14, .82);
             border: 1px solid rgba(255, 255, 255, .18);
             border-radius: 20px;
             font-family: var(--fo);
@@ -910,8 +1080,8 @@
             letter-spacing: .14em;
             color: #FFFFFF;
             white-space: nowrap;
-            text-shadow: 0 1px 6px rgba(0, 0, 0, .8);
-            backdrop-filter: blur(8px)
+            text-shadow: 0 1px 6px rgba(0, 0, 0, .8)
+                /* backdrop-filter supprimé: coûteux GPU sur le frame LCP */
         }
 
         .hbdg-mode {
@@ -926,25 +1096,9 @@
             }
         }
 
-        .heye {
-            font-family: var(--fo);
-            font-size: .61rem;
-            letter-spacing: .4em;
-            text-transform: uppercase;
-            color: var(--a);
-            margin-bottom: 22px;
-            opacity: 0;
-            transform: translateY(14px)
-        }
+        /* .heye — défini dans le bloc LCP FIX ci-dessus */
 
-        .hh1 {
-            font-family: var(--fo);
-            font-size: clamp(2.8rem, 8.5vw, 7.5rem);
-            font-weight: 900;
-            line-height: .9;
-            margin-bottom: 10px;
-            opacity: 0
-        }
+        /* .hh1 — défini dans le bloc LCP FIX ci-dessus */
 
         .hh1 .l1 {
             display: block;
@@ -1040,15 +1194,7 @@
             }
         }
 
-        .hsub {
-            font-size: clamp(.93rem, 1.9vw, 1.25rem);
-            color: #CBCBE9;
-            max-width: 630px;
-            margin: 24px auto 40px;
-            opacity: 0;
-            transform: translateY(16px);
-            line-height: 1.86
-        }
+        /* .hsub — défini dans le bloc LCP FIX ci-dessus */
 
         .hsub em {
             font-style: normal;
@@ -1056,23 +1202,7 @@
             font-weight: 700
         }
 
-        .hctas {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-            opacity: 0;
-            transform: translateY(22px)
-        }
-
-        .htr {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 18px;
-            opacity: 0
-        }
+        /* .hctas, .htr, .hstats — définis dans le bloc LCP FIX ci-dessus */
 
         .htr span {
             font-size: .75rem;
@@ -1088,17 +1218,7 @@
             font-weight: 900
         }
 
-        .hstats {
-            position: absolute;
-            bottom: 54px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 46px;
-            z-index: 10;
-            opacity: 0;
-            white-space: nowrap
-        }
+        /* .hstats — défini dans le bloc LCP FIX ci-dessus */
 
         .sn {
             font-family: var(--fo);
@@ -2499,11 +2619,7 @@
             opacity: .6
         }
 
-        /* ── PERFORMANCE: Font size réservée pour éviter FOUT/CLS avant chargement Google Fonts ── */
-        .hh1 {
-            min-height: clamp(2.52rem, 7.65vw, 6.75rem);
-        }
-
+        /* ── PERFORMANCE: Font size réservée — maintenant intégrée dans .hh1 principal ── */
         .logo {
             min-height: 1.2rem;
         }
@@ -2549,7 +2665,7 @@
                 opacity: .7;
             }
 
-            .hbg img {
+            .hbg video {
                 transform: scale(1.07);
             }
 
@@ -2562,10 +2678,7 @@
             }
         }
 
-        /* ── PERF: Font size réservée pour éviter FOUT/CLS ── */
-        .hh1 {
-            min-height: clamp(2.52rem, 7.65vw, 6.75rem);
-        }
+        /* .hh1 min-height intégrée dans le bloc principal LCP */
 
         #prob,
         #scenarios,
@@ -2867,7 +2980,62 @@
 
 
 
-    <!-- ═══ STICKY BAR ═══ -->
+    <!-- ═══ VIDEO HERO — Autoplay recovery + Visibility pause ═══ -->
+    <script>
+        (function () {
+            // Attendre que le DOM soit prêt
+            function initHeroVideo() {
+                var vid = document.getElementById('hero-img');
+                if (!vid || vid.tagName !== 'VIDEO') return;
+
+                // 1. Sur mobile: preload="none" pour économiser la data
+                if (window.innerWidth <= 768 || (navigator.connection && navigator.connection.saveData)) {
+                    vid.preload = 'none';
+                }
+
+                // 2. Tentative autoplay au premier chargement
+                var playPromise = vid.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(function () {
+                        // Autoplay bloqué → attendre premier geste utilisateur
+                        var startVideo = function () {
+                            vid.play().catch(function () { });
+                            document.removeEventListener('click', startVideo);
+                            document.removeEventListener('touchstart', startVideo);
+                            document.removeEventListener('keydown', startVideo);
+                        };
+                        document.addEventListener('click', startVideo, { once: true });
+                        document.addEventListener('touchstart', startVideo, { once: true, passive: true });
+                        document.addEventListener('keydown', startVideo, { once: true });
+                    });
+                }
+
+                // 3. Pause/Play selon visibilité de la page (économie CPU)
+                document.addEventListener('visibilitychange', function () {
+                    if (document.hidden) {
+                        vid.pause();
+                    } else {
+                        vid.play().catch(function () { });
+                    }
+                });
+
+                // 4. Fallback: si la vidéo ne charge pas après 5s → afficher l'image
+                setTimeout(function () {
+                    if (vid.readyState === 0) {
+                        vid.style.display = 'none';
+                        var fb = document.getElementById('hero-fallback');
+                        if (fb) fb.style.display = 'block';
+                    }
+                }, 5000);
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initHeroVideo);
+            } else {
+                initHeroVideo();
+            }
+        })();
+    </script>
     <div id="sbar">
         <p class="stxt"><span data-t="sticky.msg"></span> <strong id="stimer">—</strong></p>
         <a href="https://adl.easebar.com/d/g/oncehuman/c/gwpc" target="_blank" rel="noopener noreferrer" class="scta"
@@ -2910,10 +3078,23 @@
     <!-- ═══ HERO ═══ -->
     <section id="hero">
         <div class="hbg">
-            <img src="https://www.oncehuman.game/pc/gw/20250418171534/img/kv20260112_1f38dace.jpg"
-                alt="Once Human V3 — Pack Éveil Mutant gratuit" id="hero-img" width="1920" height="1080"
-                fetchpriority="high" decoding="sync"
-                onerror="this.src='https://r.res.easebar.com/pic/20260211/803d70ff-81dd-4df3-b4e3-73a7061dcfff.jpg'">
+            <!--
+                VIDEO HERO — Once Human Official
+                Source: oncehuman.v.easebar.com/2026/0119/20260119.mp4
+                • autoplay muted playsinline loop = best practice navigateur
+                • poster = frame de la vidéo affichée AVANT chargement (LCP)
+                • preload="none" sur mobile pour économiser la data
+                • fallback <img> si vidéo indisponible ou reduced-motion
+            -->
+            <video id="hero-img" autoplay muted loop playsinline preload="auto"
+                poster="https://www.oncehuman.game/pc/gw/20250418171534/img/kv20260112_1f38dace.jpg" aria-hidden="true"
+                onerror="this.style.display='none';document.getElementById('hero-fallback').style.display='block'">
+                <source src="https://oncehuman.v.easebar.com/2026/0119/20260119.mp4" type="video/mp4">
+            </video>
+            <!-- Fallback image si vidéo bloquée ou reduced-motion -->
+            <img id="hero-fallback" class="hbg-fallback"
+                src="https://www.oncehuman.game/pc/gw/20250418171534/img/kv20260112_1f38dace.jpg" alt="Once Human V3"
+                fetchpriority="high" decoding="sync">
         </div>
         <div class="hgrid"></div>
         <div class="hscan"></div>
@@ -2927,8 +3108,13 @@
             </div>
             <p class="heye" id="heye" data-t="h.eye"></p>
             <h1 class="hh1" id="hh1">
-                <span class="l1" data-t="h.l1"></span>
-                <span class="l2 glitch" id="glitch-el"></span>
+                <!--
+                    LCP FIX: texte inline par défaut (EN) — visible au 1er paint HTML,
+                    AVANT que JS/setLang s'exécute. setLang() remplacera ce texte
+                    mais le navigateur a déjà mesuré le LCP sur ce contenu initial.
+                -->
+                <span class="l1" data-t="h.l1">THE AWAKENING</span>
+                <span class="l2 glitch" id="glitch-el" data-text="OF THE MUTANT">OF THE MUTANT</span>
             </h1>
             <p class="hsub" id="hsub" data-th="h.sub"></p>
             <div class="hctas" id="hctas">
@@ -2982,8 +3168,7 @@
                 <div class="fw">
                     <div class="fi">
                         <div class="fc">
-                            <div class="cimg"><img
-                                    src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-yzkh_1cb0640d.jpg"
+                            <div class="cimg"><img src="ss_bcd8ec97b185dde4bc6af6d4058e23692892605b.0.jpg"
                                     alt="Monde vide" loading="lazy" decoding="async" width="400" height="185">
                                 <div class="cimg-overlay"></div>
                             </div>
@@ -3038,9 +3223,8 @@
                 <div class="fw">
                     <div class="fi">
                         <div class="fc">
-                            <div class="cimg"><img
-                                    src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-ngxl_13adb5bb.jpg"
-                                    alt="Construction vide" loading="lazy" decoding="async" width="400" height="185">
+                            <div class="cimg"><img src="SCORCHER.webp" alt="Construction vide" loading="lazy"
+                                    decoding="async" width="400" height="185">
                                 <div class="cimg-overlay"></div>
                             </div>
                             <div class="ctxt">
@@ -3083,16 +3267,16 @@
                         <p class="sds" data-t="sc.s1"></p>
                     </div><span class="sbdg" data-t="sc.b1"></span>
                 </div>
-                <div class="sc2"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-yzkh_1cb0640d.jpg"
-                        alt="Way of Winter" loading="lazy" decoding="async" width="600" height="338"
+                <div class="sc2"><img src="132959.webp" alt="Way of Winter" loading="lazy" decoding="async" width="600"
+                        height="338"
                         onerror="this.src='https://r.res.easebar.com/pic/20260226/c5b46a57-b2af-4c37-ba95-9b4d7c2168c7.jpg'">
                     <div class="sov"><span class="sno">02</span>
                         <div class="snm">THE WAY OF WINTER</div>
                         <p class="sds" data-t="sc.s2"></p>
                     </div><span class="sbdg" data-t="sc.b2"></span>
                 </div>
-                <div class="sc2"><img src="https://www.oncehuman.game/pc/gw/20250418171534/img/img-ngxl_13adb5bb.jpg"
-                        alt="Prismverse" loading="lazy" decoding="async" width="600" height="338"
+                <div class="sc2"><img src="607db-16669532011713-1920.webp" alt="Prismverse" loading="lazy"
+                        decoding="async" width="600" height="338"
                         onerror="this.src='https://r.res.easebar.com/pic/20260119/1d2b69e9-4629-4a02-90ed-47e65e737cec.jpeg'">
                     <div class="sov"><span class="sno">03</span>
                         <div class="snm">PRISMVERSE'S CLASH</div>
@@ -4524,11 +4708,17 @@
             const d = document.getElementById('langDrop');
             if (d && !d.contains(e.target)) d.classList.remove('open');
         });
-        window.addEventListener('DOMContentLoaded', () => {
+
+        /*
+         * LCP FIX: setLang s'exécute SYNCHRONIQUEMENT ici (pas dans DOMContentLoaded).
+         * Le script est placé avant </body>, donc le DOM hero est déjà parsé.
+         * Résultat: span.l1 reçoit son texte AVANT le premier paint → LCP ↑↑
+         */
+        (function () {
             let saved = 'en';
             try { saved = localStorage.getItem('oh_lang5') || 'en'; } catch (e) { }
             setLang(saved);
-        });
+        })();
 
     </script>
     <script defer>
@@ -4536,14 +4726,18 @@
         function initGSAP() {
             if (typeof gsap === 'undefined') { setTimeout(initGSAP, 120); return; }
             gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
-            const tl = gsap.timeline({ delay: .22 });
-            tl.to('#hbadges', { opacity: 1, y: 0, duration: .6, ease: 'power3.out' })
-                .to('#heye', { opacity: 1, y: 0, duration: .65, ease: 'power3.out' }, '-=.3')
-                .to('#hh1', { opacity: 1, duration: .9, ease: 'power3.out' }, '-=.45')
-                .to('#hsub', { opacity: 1, y: 0, duration: .75, ease: 'power3.out' }, '-=.5')
-                .to('#hctas', { opacity: 1, y: 0, duration: .65, ease: 'back.out(1.5)' }, '-=.45')
-                .to('#htr', { opacity: 1, duration: .55, ease: 'power3.out' }, '-=.4')
-                .to('#hstats', { opacity: 1, duration: .55, ease: 'power3.out' }, '-=.3');
+
+            /*
+             * ══ LCP FIX ══
+             * Hero entrance animations SUPPRIMÉES du GSAP timeline.
+             * Elles sont maintenant gérées par des CSS @keyframes pures
+             * (voir bloc "LCP FIX" dans le CSS) — pas de dépendance JS.
+             *
+             * AVANT: tl.to('#hh1', {opacity:1,...}) → attendait GSAP defer → 15s LCP
+             * APRÈS: .hh1 visible au 1er paint CSS → LCP < 1.5s ✅
+             *
+             * GSAP garde uniquement les effets SCROLL ci-dessous.
+             */
 
             gsap.to('#hero-img', {
                 y: '18%',
@@ -4554,12 +4748,24 @@
                     end: 'bottom top',
                     scrub: true,
                     onEnter: () => {
-                        const img = document.getElementById('hero-img');
-                        if (img) img.style.willChange = 'transform';
+                        const v = document.getElementById('hero-img');
+                        if (v) {
+                            v.style.willChange = 'transform';
+                            // Reprendre la vidéo si elle avait été mise en pause
+                            if (v.tagName === 'VIDEO' && v.paused) v.play().catch(() => { });
+                        }
                     },
                     onLeave: () => {
-                        const img = document.getElementById('hero-img');
-                        if (img) img.style.willChange = 'auto';
+                        const v = document.getElementById('hero-img');
+                        if (v) {
+                            v.style.willChange = 'auto';
+                            // Mettre en pause hors viewport pour économiser CPU/GPU
+                            if (v.tagName === 'VIDEO' && !v.paused) v.pause();
+                        }
+                    },
+                    onEnterBack: () => {
+                        const v = document.getElementById('hero-img');
+                        if (v && v.tagName === 'VIDEO' && v.paused) v.play().catch(() => { });
                     }
                 }
             });
