@@ -1,23 +1,7 @@
 ﻿<!DOCTYPE html>
-<!-- ═══════════════════════════════════════════════════════════════════
-     ONCE HUMAN V3 — Landing Page OPTIMISÉE + META PIXEL
-     Version: OPTIMIZED-v5.0 — LCP FIX (8 causes corrigées)
-     ✅ LCP/CLS/INP: toutes optimisations v2.0 conservées
-     ✅ AUDIO: bug volume 0 corrigé, icônes muted/unmuted, autoplay fix
-     ✅ META PIXEL: 11 events trackés automatiquement
-        PageView | Lead | ViewContent | EventsSectionVisible
-        CTAFinalVisible | EventTabSwitch | LanguageSwitch
-        ScrollDepth50 | TimeOnPage30s | TimeOnPage60s
-     ✅ DEBUG PANEL: ?debug=1 dans l'URL pour voir tous les events
-     ⚠️  IMPORTANT: Remplacer 1704167624323547 par votre vrai Pixel ID
-     ═══════════════════════════════════════════════════════════════════ -->
 <html lang="fr-CH">
 
 <head>
-    <!-- ═══════════════════════════════════════════════════════════════
-         GOOGLE TAG MANAGER — GTM-TTDB2FT7
-         Script placé le plus haut possible dans <head> (recommandation Google)
-         ═══════════════════════════════════════════════════════════════ -->
     <script>(function (w, d, s, l, i) {
             w[l] = w[l] || []; w[l].push({
                 'gtm.start':
@@ -26,15 +10,8 @@
                 j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
                     'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', 'GTM-TTDB2FT7');</script>
-    <!-- ═══════════════════════════════════════════════════════════════ -->
 
     <meta charset="UTF-8">
-
-    <!-- ═══════════════════════════════════════════════════════════════
-         META PIXEL — Base Code
-         ⚠️  REMPLACER  1704167624323547  par votre vrai Pixel ID Facebook
-         Ex: 1234567890123456
-         ═══════════════════════════════════════════════════════════════ -->
     <script>
         !function (f, b, e, v, n, t, s) {
             if (f.fbq) return; n = f.fbq = function () {
@@ -54,16 +31,8 @@
         <img height="1" width="1" style="display:none"
             src="https://www.facebook.com/tr?id=1704167624323547&ev=PageView&noscript=1" />
     </noscript>
-    <!-- ═══════════════════════════════════════════════════════════════ -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <!-- Preload logo nav pour éviter le CLS de la nav -->
     <link rel="preload" href="https://www.oncehuman.game/pc/fab/20250114111146/img/logo_ba7fbc56.png" as="image">
-    <!--
-        LCP FIX: preload du poster vidéo hero.
-        Le poster est l'image visible PENDANT le chargement de la vidéo.
-        Sans preload, le navigateur ne le découvre qu'après avoir parsé le <video> = trop tard.
-        Avec preload + fetchpriority=high → disponible au 1er paint → LCP ↑↑
-    -->
     <link rel="preload" href="https://www.oncehuman.game/pc/gw/20250418171534/img/kv20260112_1f38dace.jpg" as="image"
         fetchpriority="high">
     <title>Once Human V3 — Pack OP Gratuit | FR · EN · DE · IT · RM</title>
@@ -267,12 +236,6 @@
     <!-- Preconnect critique pour les fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!--
-        LCP FIX: display=swap au lieu de optional
-        swap = le navigateur affiche immédiatement le texte avec la font système,
-        puis swap vers Orbitron quand elle charge.
-        Résultat: span.l1 est visible en < 200ms → LCP explose à la hausse.
-    -->
     <link rel="preload" as="style"
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;600;700&display=swap"
         onload="this.onload=null;this.rel='stylesheet'">
@@ -3099,14 +3062,7 @@
     <!-- ═══ HERO ═══ -->
     <section id="hero">
         <div class="hbg">
-            <!--
-                VIDEO HERO — Once Human Official
-                Source: oncehuman.v.easebar.com/2026/0119/20260119.mp4
-                • autoplay muted playsinline loop = best practice navigateur
-                • poster = frame de la vidéo affichée AVANT chargement (LCP)
-                • preload="none" sur mobile pour économiser la data
-                • fallback <img> si vidéo indisponible ou reduced-motion
-            -->
+
             <video id="hero-img" autoplay muted loop playsinline preload="auto"
                 poster="https://www.oncehuman.game/pc/gw/20250418171534/img/kv20260112_1f38dace.jpg" aria-hidden="true"
                 onerror="this.style.display='none';document.getElementById('hero-fallback').style.display='block'">
