@@ -9,16 +9,30 @@
         CTAFinalVisible | EventTabSwitch | LanguageSwitch
         ScrollDepth50 | TimeOnPage30s | TimeOnPage60s
      ✅ DEBUG PANEL: ?debug=1 dans l'URL pour voir tous les events
-     ⚠️  IMPORTANT: Remplacer YOUR_PIXEL_ID par votre vrai Pixel ID
+     ⚠️  IMPORTANT: Remplacer 1704167624323547 par votre vrai Pixel ID
      ═══════════════════════════════════════════════════════════════════ -->
 <html lang="fr-CH">
 
 <head>
+    <!-- ═══════════════════════════════════════════════════════════════
+         GOOGLE TAG MANAGER — GTM-TTDB2FT7
+         Script placé le plus haut possible dans <head> (recommandation Google)
+         ═══════════════════════════════════════════════════════════════ -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-TTDB2FT7');</script>
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+
     <meta charset="UTF-8">
 
     <!-- ═══════════════════════════════════════════════════════════════
          META PIXEL — Base Code
-         ⚠️  REMPLACER  YOUR_PIXEL_ID  par votre vrai Pixel ID Facebook
+         ⚠️  REMPLACER  1704167624323547  par votre vrai Pixel ID Facebook
          Ex: 1234567890123456
          ═══════════════════════════════════════════════════════════════ -->
     <script>
@@ -33,12 +47,12 @@
             s.parentNode.insertBefore(t, s)
         }(window, document, 'script',
             'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', 'YOUR_PIXEL_ID');
+        fbq('init', '1704167624323547');
         fbq('track', 'PageView');
     </script>
     <noscript>
         <img height="1" width="1" style="display:none"
-            src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1" />
+            src="https://www.facebook.com/tr?id=1704167624323547&ev=PageView&noscript=1" />
     </noscript>
     <!-- ═══════════════════════════════════════════════════════════════ -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -2970,6 +2984,13 @@
 </head>
 
 <body>
+    <!-- ═══════════════════════════════════════════════════════════════
+         GOOGLE TAG MANAGER — Noscript fallback (obligatoire)
+         Placé immédiatement après <body> — recommandation Google
+         ═══════════════════════════════════════════════════════════════ -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TTDB2FT7" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- ═══════════════════════════════════════════════════════════════ -->
     <div id="cur"></div>
     <div id="curf"></div>
     <div id="pb"></div>
@@ -4961,7 +4982,7 @@
     <!-- ═══════════════════════════════════════════════════════════════
          META PIXEL — EVENTS ENGINE COMPLET
          11 events trackés automatiquement
-         ⚠️  Remplacer YOUR_PIXEL_ID dans le Base Code en haut du <head>
+         ⚠️  Remplacer 1704167624323547 dans le Base Code en haut du <head>
          ═══════════════════════════════════════════════════════════════ -->
     <script>
         (function () {
